@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 
 const Navbar = () => {
   const [showMarquee, setShowMarquee] = useState(true);
