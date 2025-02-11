@@ -43,10 +43,10 @@ const ContactUs = () => {
                 <strong>Call us</strong>
                 <br />
                 <a
-                  href="tel:+918367661141"
+                  href="tel:+91 XXXXX XXXXX"
                   className="text-decoration-underline text-dark"
                 >
-                  +91 8367661141
+                  +91 XXXXX XXXXX
                 </a>
               </div>
             </div>
