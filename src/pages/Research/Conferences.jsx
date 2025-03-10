@@ -34,7 +34,6 @@ const Conferences = () => {
 
   return (
     <>
-      <Header />
       <h1 className="text-center mt-4  ">Conferences List</h1>
       <div className="container vh-100 align-center justify-center ">
         {/* Dropdown to select which academic year's dataset to load */}
@@ -78,7 +77,6 @@ const Conferences = () => {
           </table>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

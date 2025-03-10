@@ -1,10 +1,8 @@
 import { Button, Container, Group, Text, Title } from "@mantine/core";
 import { Illustration } from "./Illustration";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import classes from "./NothingFoundBackground.module.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+
 export default function NothingFoundBackground() {
   const navigate = useNavigate();
 

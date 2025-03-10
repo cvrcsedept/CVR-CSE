@@ -34,7 +34,6 @@ const Workshops = () => {
 
   return (
     <div className="mt-4 mb-4">
-      <Header />
       <h1 className="text-center mt-4">Workshop List</h1>
       <div className="container min-vh-100 align-center justify-center ">
         {/* Dropdown to select which academic year's dataset to load */}
@@ -79,7 +78,6 @@ const Workshops = () => {
           </table>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

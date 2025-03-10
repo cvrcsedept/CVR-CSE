@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "../../styles.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
@@ -7,153 +7,112 @@ const TimeTable = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const timeTableSections = [
+    {
+      title: "B.Tech CSE",
+      semesters: [
+        "I Year II Semester - 2023-24",
+        "II Year II Semester - 2023-24",
+        "III Year I Semester - 2023-24",
+        "IV Year I Semester - 2023-24",
+      ],
+    },
+    {
+      title: "M.Tech AI",
+      semesters: [
+        "I Year I Semester - 2023-24",
+        "II Year II Semester - 2023-24",
+      ],
+    },
+  ];
+
   return (
-    <>
-      <Header />
-      <main>
-        <section className="academicSection">
-          <section className="academicContainer mt-4">
-            <div className="container">
-              <div className="row">
-                <div className="col-sm-12">
-                  <h2 className="text-center">Time Tables</h2>
-                  {/* Virtuoso - Special knowledge in a field */}
-                  {/* <hr style={{ marginLeft: "550px", color: "rgb(225, 12, 12)" }} width="10%" /> */}
-                </div>
+    <div className="bg-light min-vh-100">
+      <main className="container py-5">
+        <div className="row">
+          <div className="col-12">
+            <h1 className="display-4 text-center text-primary mb-5">
+              Time Tables
+            </h1>
+          </div>
+        </div>
+
+        {timeTableSections.map((section, sectionIndex) => (
+          <div key={sectionIndex} className="mb-5">
+            <div className="row mb-4">
+              <div className="col-12">
+                <h2 className="text-center text-secondary">
+                  {section.title} Time Tables
+                </h2>
               </div>
             </div>
-            <section
-              className="calenderItems mt-3"
-              data-aos="zoom-in"
-              data-aos-duration="1000"
-            >
-              <div className="container">
-                <div className="itemsContainer p-3">
-                  <div className="item">
-                    <div className="icon text-center">
-                      <h3>
+
+            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+              {section.semesters.map((semester, semesterIndex) => (
+                <div key={semesterIndex} className="col">
+                  <div className="card h-100 shadow-sm border-0 transform-on-hover">
+                    <div className="card-body text-center">
+                      <div className="mb-3">
                         <img
                           src="/images/CVR Logo.png"
-                          className="img-fluid"
                           alt="CVR Logo"
-                        />{" "}
-                        B.Tech CSE
-                      </h3>
+                          className="img-fluid mb-3"
+                          style={{ maxHeight: "100px", maxWidth: "150px" }}
+                        />
+                        <h5 className="card-title text-dark mb-2">
+                          {section.title}
+                        </h5>
+                      </div>
+
+                      <div className="d-grid">
+                        <a
+                          href="#"
+                          className="btn btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target={`#modal-${sectionIndex}-${semesterIndex}`}
+                        >
+                          {semester}
+                        </a>
+                      </div>
                     </div>
-                    <h4>
-                      <a className="btn form-control" href="#">
-                        I Year II Semester - 2023-24
-                      </a>
-                    </h4>
                   </div>
-                  <div className="item">
-                    <div className="icon text-center">
-                      <h3>
-                        <img
-                          src="/images/CVR Logo.png"
-                          className="img-fluid"
-                          alt="CVR Logo"
-                        />{" "}
-                        B.Tech CSE
-                      </h3>
+
+                  {/* Modal for Time Table Details */}
+                  <div
+                    className="modal fade"
+                    id={`modal-${sectionIndex}-${semesterIndex}`}
+                    tabIndex="-1"
+                  >
+                    <div className="modal-dialog modal-dialog-centered modal-lg">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5 className="modal-title">
+                            {section.title} - {semester}
+                          </h5>
+                          <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                          ></button>
+                        </div>
+                        <div className="modal-body text-center">
+                          <p>Time Table details will be uploaded soon.</p>
+                          <div className="alert alert-info" role="alert">
+                            Please check back later or contact the academic
+                            office for the most up-to-date information.
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <h4>
-                      <a className="btn form-control" href="#">
-                        II Year II Semester - 2023-24
-                      </a>
-                    </h4>
-                  </div>
-                  <div className="item">
-                    <div className="icon text-center">
-                      <h3>
-                        <img
-                          src="/images/CVR Logo.png"
-                          className="img-fluid"
-                          alt="CVR Logo"
-                        />{" "}
-                        B.Tech CSE
-                      </h3>
-                    </div>
-                    <h4>
-                      <a className="btn form-control" href="#">
-                        III Year I Semester - 2023-24
-                      </a>
-                    </h4>
-                  </div>
-                  <div className="item">
-                    <div className="icon text-center">
-                      <h3>
-                        <img
-                          src="/images/CVR Logo.png"
-                          className="img-fluid"
-                          alt="CVR Logo"
-                        />{" "}
-                        B.Tech CSE
-                      </h3>
-                    </div>
-                    <h4>
-                      <a className="btn form-control" href="#">
-                        IV Year I Semester - 2023-24
-                      </a>
-                    </h4>
                   </div>
                 </div>
-              </div>
-            </section>
-            <section
-              className="calenderItems mt-3"
-              data-aos="zoom-in"
-              data-aos-duration="2000"
-            >
-              <div className="container">
-                <div className="itemsContainer p-3">
-                  <div className="item">
-                    <div className="icon text-center">
-                      <h3>
-                        <img
-                          src="/images/CVR Logo.png"
-                          className="img-fluid"
-                          alt="CVR Logo"
-                        />{" "}
-                        M.Tech AI
-                      </h3>
-                    </div>
-                    <h4>
-                      <a className="btn form-control" href="#">
-                        I Year I Semester - 2023-24
-                      </a>
-                    </h4>
-                  </div>
-                  <div className="item">
-                    <div className="icon text-center">
-                      <h3>
-                        <img
-                          src="/images/CVR Logo.png"
-                          className="img-fluid"
-                          alt="CVR Logo"
-                        />{" "}
-                        M.Tech AI
-                      </h3>
-                    </div>
-                    <h4>
-                      <a className="btn form-control" href="#">
-                        II Year II Semester - 2023-24
-                      </a>
-                    </h4>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </section>
-          <div className="container mt-5">
-            <div className="col-lg-12">
-              <div className="col-lg-4"></div>
+              ))}
             </div>
           </div>
-        </section>
+        ))}
       </main>
-      <Footer />
-    </>
+    </div>
   );
 };
 

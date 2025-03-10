@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Footer = () => {
   useEffect(() => {
@@ -9,140 +10,226 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer>
+    <footer className="bg-muted py-5 mt-1">
       <div className="container">
-        <div className="row">
-          <div className="footer-col">
-            <h4>Major Links</h4>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
+        <div className="row g-4">
+          <div className="col-12 col-md-4 col-lg-2">
+            <h4 className="mb-3 text-light">Major Links</h4>
+            <ul className="list-unstyled">
+              <li className="mb-2">
+                <Link to="/" className="text-decoration-none text-light">
+                  Home
+                </Link>
               </li>
-              <li>
-                <Link to="/about">About</Link>
+              <li className="mb-2">
+                <Link to="/about" className="text-decoration-none text-light">
+                  About
+                </Link>
               </li>
-              <li>
-                <Link to="/contact">Contact</Link>
-              </li>
-            </ul>
-          </div>
-          <div className="footer-col">
-            <h4>Academics</h4>
-            <ul>
-              <li>
-                <Link to="/academics/objectives">Objectives</Link>
-              </li>
-              <li>
-                <Link to="/academics/academic-calender">Academic Calendar</Link>
-              </li>
-              <li>
-                <Link to="/academics/syllabus-books">Syllabus</Link>
-              </li>
-              <li>
-                <Link to="/academics/time-tables">Time Tables</Link>
+              <li className="mb-2">
+                <Link to="/contact" className="text-decoration-none text-light">
+                  Contact
+                </Link>
               </li>
             </ul>
           </div>
-          <div className="footer-col">
-            <h4>Infrastructure</h4>
-            <ul>
-              <li>
-                <Link to="/infrastructure/laboratories">Laboratories</Link>
+          <div className="col-12 col-md-4 col-lg-2">
+            <h4 className="mb-3 text-light">Academics</h4>
+            <ul className="list-unstyled">
+              <li className="mb-2">
+                <Link
+                  to="/academics/objectives"
+                  className="text-decoration-none text-light"
+                >
+                  Objectives
+                </Link>
               </li>
-              <li>
-                <Link to="/infrastructure/classrooms">Class Rooms</Link>
+              <li className="mb-2">
+                <Link
+                  to="/academics/academic-calender"
+                  className="text-decoration-none text-light"
+                >
+                  Academic Calendar
+                </Link>
               </li>
-              <li>
-                <Link to="/infrastructure/seminar-hall">Seminar Hall</Link>
+              <li className="mb-2">
+                <Link
+                  to="/academics/syllabus-books"
+                  className="text-decoration-none text-light"
+                >
+                  Syllabus
+                </Link>
               </li>
-              <li>
-                <Link to="/infrastructure/library">Library</Link>
+              <li className="mb-2">
+                <Link
+                  to="/academics/time-tables"
+                  className="text-decoration-none text-light"
+                >
+                  Time Tables
+                </Link>
               </li>
             </ul>
           </div>
-          <div className="footer-col">
-            <h4>Faculty</h4>
-            <ul>
-              <li>
-                <Link to="/faculty/teaching">Teaching</Link>
+          <div className="col-12 col-md-4 col-lg-2">
+            <h4 className="mb-3 text-light">Infrastructure</h4>
+            <ul className="list-unstyled">
+              <li className="mb-2">
+                <Link
+                  to="/infrastructure/laboratories"
+                  className="text-decoration-none text-light"
+                >
+                  Laboratories
+                </Link>
               </li>
-              <li>
-                <Link to="/faculty/non-teaching">Non - Teaching</Link>
+              <li className="mb-2">
+                <Link
+                  to="/infrastructure/classrooms"
+                  className="text-decoration-none text-light"
+                >
+                  Class Rooms
+                </Link>
               </li>
-              <li>
-                <Link to="/faculty/technicalstaff">Technical Staff</Link>
+              <li className="mb-2">
+                <Link
+                  to="/infrastructure/seminar-hall"
+                  className="text-decoration-none text-light"
+                >
+                  Seminar Hall
+                </Link>
               </li>
-              <li>
-                <Link to="/faculty/admin">Admin</Link>
+              <li className="mb-2">
+                <Link
+                  to="/infrastructure/library"
+                  className="text-decoration-none text-light"
+                >
+                  Library
+                </Link>
               </li>
             </ul>
           </div>
-          <div className="footer-col">
-            <h4>Research</h4>
-            <ul>
-              <li>
-                <Link to="/research/conferences">Conferences</Link>
+          <div className="col-12 col-md-4 col-lg-2">
+            <h4 className="mb-3 text-light">Faculty</h4>
+            <ul className="list-unstyled">
+              <li className="mb-2">
+                <Link
+                  to="/faculty/teaching"
+                  className="text-decoration-none text-light"
+                >
+                  Teaching
+                </Link>
               </li>
-              <li>
-                <Link to="/research/workshops">Workshops</Link>
+              <li className="mb-2">
+                <Link
+                  to="/faculty/non-teaching"
+                  className="text-decoration-none text-light"
+                >
+                  Non - Teaching
+                </Link>
               </li>
-              <li>
-                <Link to="/research/researchprojects">FDP's</Link>
+              <li className="mb-2">
+                <Link
+                  to="/faculty/technicalstaff"
+                  className="text-decoration-none text-light"
+                >
+                  Technical Staff
+                </Link>
               </li>
-              <li>
-                <Link to="/research/consultancy-projects">
+              <li className="mb-2">
+                <Link
+                  to="/faculty/admin"
+                  className="text-decoration-none text-light"
+                >
+                  Admin
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div className="col-12 col-md-4 col-lg-2">
+            <h4 className="mb-3 text-light">Research</h4>
+            <ul className="list-unstyled">
+              <li className="mb-2">
+                <Link
+                  to="/research/conferences"
+                  className="text-decoration-none text-light"
+                >
+                  Conferences
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link
+                  to="/research/workshops"
+                  className="text-decoration-none text-light"
+                >
+                  Workshops
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link
+                  to="/research/researchprojects"
+                  className="text-decoration-none text-light"
+                >
+                  FDP's
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link
+                  to="/research/consultancy-projects"
+                  className="text-decoration-none text-light"
+                >
                   Patents
                 </Link>
               </li>
             </ul>
           </div>
-          <div className="footer-col">
-            <h4>Student Corner</h4>
-            <ul>
-              <li>
-                <Link to="/studentcorner/e-resources">E-Resources</Link>
+          <div className="col-12 col-md-4 col-lg-2">
+            <h4 className="mb-3 text-light">Student Corner</h4>
+            <ul className="list-unstyled">
+              <li className="mb-2">
+                <Link
+                  to="/studentcorner/e-resources"
+                  className="text-decoration-none text-light"
+                >
+                  E-Resources
+                </Link>
               </li>
-              <li>
-                <Link to="/studentcorner/student-work">Student Work</Link>
+              <li className="mb-2">
+                <Link
+                  to="/studentcorner/student-work"
+                  className="text-decoration-none text-light"
+                >
+                  Student Work
+                </Link>
               </li>
-              <li>
-                <Link to="/studentcorner/gallery">Gallery</Link>
+              <li className="mb-2">
+                <Link
+                  to="/studentcorner/gallery"
+                  className="text-decoration-none text-light"
+                >
+                  Gallery
+                </Link>
               </li>
             </ul>
           </div>
-          <div className="footer-col">
-            <h4>Follow Us</h4>
-            <div className="social-links">
-              <a href="#">
+          <div className="col-12 text-center">
+            <h4 className="mb-3 text-light">Follow Us</h4>
+            <div className="d-flex justify-content-center gap-3 mb-4">
+              <a
+                href="https://www.facebook.com/p/CVR-College-of-EngineeringJNT-University-100071184711492/"
+                className="text-light"
+              >
                 <i className="fab fa-facebook-f"></i>
               </a>
-              <a href="#">
+              <a href="https://x.com/cvrcoenews" className="text-light">
                 <i className="fab fa-twitter"></i>
               </a>
-              <a href="#">
-                <i className="fab fa-instagram"></i>
-              </a>
-              <a href="#">
+              <a
+                href="https://www.linkedin.com/school/cvrcoe/posts/?feedView=all"
+                className="text-light"
+              >
                 <i className="fab fa-linkedin-in"></i>
               </a>
             </div>
-          </div>
-          <div className="footer-col">
-            <ul
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <li>
-                <h2>
-                  <a href="#" className="mt-5">
-                    Copyright © 2023 CVRCE CSEDEPT
-                  </a>
-                </h2>
-              </li>
-            </ul>
+            <p className="text-light">Copyright © 2023 CVRCE CSEDEPT</p>
           </div>
         </div>
       </div>

@@ -1,212 +1,170 @@
-import React, { useEffect } from "react";
-import "../../styles.css";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import React, { useEffect, useState } from "react";
+import * as XLSX from "xlsx";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./TeachingFaculty.css";
 
 const Teaching = () => {
+  const [faculty, setFaculty] = useState([]);
+  const [filteredFaculty, setFilteredFaculty] = useState([]);
+  const [activeDesignation, setActiveDesignation] = useState("All");
+
+  const normalizeDesignation = (designation) => {
+    return designation.toLowerCase().trim().replace(/\s+/g, ".");
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    loadExcelData();
   }, []);
+
+  const loadExcelData = async () => {
+    try {
+      const response = await fetch("/Data/faculty.xlsx");
+      const arrayBuffer = await response.arrayBuffer();
+      const workbook = XLSX.read(arrayBuffer, { type: "array" });
+      const sheetName = workbook.SheetNames[0];
+      const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+
+      const formattedData = jsonData.map((faculty) => ({
+        ...faculty,
+        normalizedDesignation: normalizeDesignation(faculty.Designation),
+      }));
+
+      setFaculty(formattedData);
+      filterFaculty("All", formattedData);
+    } catch (error) {
+      console.error("Error loading faculty data:", error);
+    }
+  };
+
+  const filterFaculty = (designation, data = faculty) => {
+    setActiveDesignation(designation);
+
+    if (designation === "All") {
+      setFilteredFaculty(data);
+      return;
+    }
+
+    const filtered = data.filter((faculty) => {
+      const normDesignation = faculty.normalizedDesignation;
+      switch (designation) {
+        case "Professor":
+          return (
+            normDesignation.includes("professor") &&
+            !normDesignation.includes("assoc")
+          );
+        case "Associate Professor":
+          return normDesignation.includes("assoc.prof");
+        case "Senior Assistant Professor":
+          return normDesignation.includes("sr.asst.prof.");
+        case "Assistant Professor":
+          return normDesignation.includes("asst.prof.");
+        default:
+          return true;
+      }
+    });
+
+    setFilteredFaculty(filtered);
+  };
+
+  const designationOptions = [
+    "All",
+    "Professor",
+    "Associate Professor",
+    "Senior Assistant Professor",
+    "Assistant Professor",
+  ];
+
   return (
-    <>
-      <Header />
-      <main>
-        <section className="facStrength">
-          <div className="container">
-            <div className="row">
-              <div className="col-sm-12 mt-4">
-                <h2 className="text-center">Teaching Faculty</h2>
-                {/* Virtuoso - Special knowledge in a field */}
-                {/* <hr style={{ marginLeft: "550px", color: "rgb(225, 12, 12)" }} width="10%" /> */}
-              </div>
-            </div>
-            <div className="row" data-aos="fade-up" data-aos-duration="1000">
-              <div className="col-12 col-sm-6 col-md-4 col-lg-3 mt-3">
-                <div className="our-team">
-                  <div className="picture">
-                    <img
-                      className="img-fluid"
-                      src="/images/Afroz 1.jpeg"
-                      alt="Afroz"
-                    />
-                  </div>
-                  <div className="team-content">
-                    <h3 className="name">Mr. Suhail Afroz</h3>
-                    <h4 className="title">Associate Professor</h4>
-                    <h4 className="title">Joined CVR in the year 2007.</h4>
-                    <a
-                      className="btn"
-                      href="#"
-                      style={{ textDecoration: "none" }}
-                    >
-                      <h4 className="title text-right">View Profile</h4>
-                    </a>
-                  </div>
-                  <ul className="social">
-                    <li>
-                      <a href="#" aria-hidden="true">
-                        <i className="fa-brands fa-facebook-f"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" aria-hidden="true">
-                        <i className="fa-brands fa-twitter"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" aria-hidden="true">
-                        <i className="fa-brands fa-google-plus-g"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" aria-hidden="true">
-                        <i className="fa-brands fa-linkedin-in"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="col-12 col-sm-6 col-md-4 col-lg-3 mt-3">
-                <div className="our-team">
-                  <div className="picture">
-                    <img
-                      className="img-fluid"
-                      src="/images/Afroz 2.jpeg"
-                      alt="Afroz"
-                    />
-                  </div>
-                  <div className="team-content">
-                    <h3 className="name">Mr. Suhail Afroz</h3>
-                    <h4 className="title">Associate Professor</h4>
-                    <h4 className="title">Joined CVR in the year 2007.</h4>
-                    <a
-                      className="btn"
-                      href="#"
-                      style={{ textDecoration: "none" }}
-                    >
-                      <h4 className="title text-right">View Profile</h4>
-                    </a>
-                  </div>
-                  <ul className="social">
-                    <li>
-                      <a href="#" aria-hidden="true">
-                        <i className="fa-brands fa-facebook-f"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" aria-hidden="true">
-                        <i className="fa-brands fa-twitter"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" aria-hidden="true">
-                        <i className="fa-brands fa-google-plus-g"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" aria-hidden="true">
-                        <i className="fa-brands fa-linkedin-in"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="col-12 col-sm-6 col-md-4 col-lg-3 mt-3">
-                <div className="our-team">
-                  <div className="picture">
-                    <img
-                      className="img-fluid"
-                      src="/images/Afroz 3.jpeg"
-                      alt="Afroz"
-                    />
-                  </div>
-                  <div className="team-content">
-                    <h3 className="name">Mr. Suhail Afroz</h3>
-                    <h4 className="title">Associate Professor</h4>
-                    <h4 className="title">Joined CVR in the year 2007.</h4>
-                    <a
-                      className="btn"
-                      href="#"
-                      style={{ textDecoration: "none" }}
-                    >
-                      <h4 className="title text-right">View Profile</h4>
-                    </a>
-                  </div>
-                  <ul className="social">
-                    <li>
-                      <a href="#" aria-hidden="true">
-                        <i className="fa-brands fa-facebook-f"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" aria-hidden="true">
-                        <i className="fa-brands fa-twitter"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" aria-hidden="true">
-                        <i className="fa-brands fa-google-plus-g"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" aria-hidden="true">
-                        <i className="fa-brands fa-linkedin-in"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="col-12 col-sm-6 col-md-4 col-lg-3 mt-3">
-                <div className="our-team">
-                  <div className="picture">
-                    <img
-                      className="img-fluid"
-                      src="/images/Afroz 1.jpeg"
-                      alt="Afroz"
-                    />
-                  </div>
-                  <div className="team-content">
-                    <h3 className="name">Mr. Suhail Afroz</h3>
-                    <h4 className="title">Associate Professor</h4>
-                    <h4 className="title">Joined CVR in the year 2007.</h4>
-                    <a
-                      className="btn"
-                      href="#"
-                      style={{ textDecoration: "none" }}
-                    >
-                      <h4 className="title text-right">View Profile</h4>
-                    </a>
-                  </div>
-                  <ul className="social">
-                    <li>
-                      <a href="#" aria-hidden="true">
-                        <i className="fa-brands fa-facebook-f"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" aria-hidden="true">
-                        <i className="fa-brands fa-twitter"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" aria-hidden="true">
-                        <i className="fa-brands fa-google-plus-g"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" aria-hidden="true">
-                        <i className="fa-brands fa-linkedin-in"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+    <div className="teaching-faculty-wrapper">
+      {/* Hero Section */}
+      <div className="faculty-hero position-relative">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-lg-8 mx-auto text-center text-white">
+              <h1 className="display-4 mb-3 faculty-title">
+                Our Distinguished Faculty
+              </h1>
+              <p className="lead mb-4">
+                Dedicated Educators Shaping Future Innovators
+              </p>
             </div>
           </div>
-        </section>
-      </main>
-      <Footer />
-    </>
+        </div>
+      </div>
+
+      {/* Faculty Filter and Grid */}
+      <div className="faculty-content container py-5">
+        {/* Dropdown Filter */}
+        <div className="row mb-4">
+          <div className="col-12 text-center">
+            <div className="dropdown">
+              <button
+                className="btn btn-primary dropdown-toggle"
+                type="button"
+                id="facultyDesignationDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {activeDesignation} Faculty
+              </button>
+              <ul
+                className="dropdown-menu"
+                aria-labelledby="facultyDesignationDropdown"
+              >
+                {designationOptions.map((designation, index) => (
+                  <li key={index}>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => filterFaculty(designation)}
+                    >
+                      {designation} Faculty
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Faculty Grid */}
+        <div className="row g-4">
+          {filteredFaculty.length > 0 ? (
+            filteredFaculty.map((member, index) => (
+              <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div className="faculty-card">
+                  <div className="faculty-card-inner">
+                    <div className="faculty-image-wrapper">
+                      <img
+                        src={`/images/CVR Logo.png`}
+                        alt={member["Name of the Staff Member "]}
+                        className="faculty-image"
+                        onError={(e) => {
+                          e.target.src = "/images/default-avatar.png";
+                        }}
+                      />
+                    </div>
+                    <div className="faculty-details">
+                      <h4 className="faculty-name">
+                        {member["Name of the Staff Member "]}
+                      </h4>
+                      <p className="faculty-designation">
+                        {member.Designation}
+                      </p>
+                      <p className="faculty-join-date">Joined: {member.DOJ}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="col-12 text-center">
+              <p className="text-muted">No faculty members found.</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 

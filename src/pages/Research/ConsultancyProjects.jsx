@@ -73,7 +73,6 @@ const ConsultancyProjects = () => {
 
   return (
     <div>
-      <Header />
       <h1 className="text-center mt-4">Patent List</h1>
       <div className="container min-vh-100 align-center justify-center">
         <label>Select Academic Year: </label>
@@ -125,7 +124,6 @@ const ConsultancyProjects = () => {
           </table>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

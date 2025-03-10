@@ -1,8 +1,8 @@
+import Home from "./pages/Home";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NothingFoundPage from "./pages/NothingFoundPage";
@@ -31,7 +31,7 @@ import {
 const App = () => {
   return (
     <Router>
-      {/* <Header /> */}
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -68,6 +68,7 @@ const App = () => {
         {/* 404 Route */}
         <Route path="*" element={<NothingFoundPage />} />
       </Routes>
+      <Footer />
     </Router>
   );
 };

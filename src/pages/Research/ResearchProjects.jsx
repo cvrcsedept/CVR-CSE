@@ -34,7 +34,6 @@ const ResearchProjects = () => {
 
   return (
     <div>
-      <Header />
       <h1 className="text-center mt-4">FDP List</h1>
       <div className="container min-vh-100 align-center justify-center ">
         {/* Dropdown to select which academic year's dataset to load */}
@@ -77,7 +76,6 @@ const ResearchProjects = () => {
           </table>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
