@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
+import BackToTopButton from "../../components/BackToTopButton";
 
 const Workshops = () => {
   useEffect(() => {
@@ -76,6 +77,8 @@ const Workshops = () => {
           </table>
         </div>
       </div>
+
+      <BackToTopButton />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import BackToTopButton from "../../components/BackToTopButton";
 const Objectives = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -242,6 +243,8 @@ const Objectives = () => {
 
         {renderSection("Program Specific Outcomes", psoData, "bg-info")}
       </main>
+
+      <BackToTopButton />
     </div>
   );
 };

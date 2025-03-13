@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
+import BackToTopButton from "../../components/BackToTopButton";
 
 import "./TechnicalStaff.css";
 
@@ -62,11 +63,7 @@ const NonTeaching = () => {
     setFilteredStaff(filtered);
   };
 
-  const designationOptions = [
-    "All",
-    "Sr. Programmer",
-    "Programmer"
-  ];
+  const designationOptions = ["All", "Sr. Programmer", "Programmer"];
 
   return (
     <div className="teaching-faculty-wrapper">
@@ -144,8 +141,12 @@ const NonTeaching = () => {
                       <p className="faculty-designation">
                         {member["Designation"]}
                       </p>
-                      <p className="faculty-join-date">Joined: {member["DOJ"]}</p>
-                      <p className="faculty-id">ID: {member["College ID No."]}</p>
+                      <p className="faculty-join-date">
+                        Joined: {member["DOJ"]}
+                      </p>
+                      <p className="faculty-id">
+                        ID: {member["College ID No."]}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -158,6 +159,8 @@ const NonTeaching = () => {
           )}
         </div>
       </div>
+
+      <BackToTopButton />
     </div>
   );
 };

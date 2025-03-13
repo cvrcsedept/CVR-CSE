@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import BackToTopButton from "../../components/BackToTopButton";
 
 const StudentWork = () => {
   useEffect(() => {
@@ -22,6 +23,8 @@ const StudentWork = () => {
         quality of life Provide opportunity to citizens to provide innovative
         solutions to India's daunting problems
       </p>
+
+      <BackToTopButton />
     </div>
   );
 };

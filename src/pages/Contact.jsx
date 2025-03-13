@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
+import BackToTopButton from "../components/BackToTopButton";
 // Animation variants
 const fadeIn = {
   hidden: { opacity: 0 },
@@ -629,6 +630,8 @@ const Contact = () => {
             </div>
           </motion.div>
         </div>
+
+        <BackToTopButton />
       </section>
       <style jsx>{`
         .contact-page {

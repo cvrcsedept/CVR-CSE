@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
+import BackToTopButton from "../../components/BackToTopButton";
 
 import "./Non-teaching.css";
 
@@ -121,6 +122,8 @@ const NonTeaching = () => {
           )}
         </div>
       </div>
+
+      <BackToTopButton />
     </div>
   );
 };

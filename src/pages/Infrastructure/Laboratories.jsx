@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import BackToTopButton from "../../components/BackToTopButton";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Laboratories = () => {
   const [selectedLab, setSelectedLab] = useState(null);
-  const [activeFilter, setActiveFilter] = useState('All');
+  const [activeFilter, setActiveFilter] = useState("All");
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -15,399 +16,442 @@ const Laboratories = () => {
       name: "Mobile Application Development Lab-1 ",
       image: "/images/civil/104-inside.jpg",
       title: "Mobile Application Development Lab ",
-      description: "The Lenovo Desktop-VO6ECHF with an Intel Core i5, 8GB RAM, and 500GB SSD is perfect for efficient mobile app development.",
+      description:
+        "The Lenovo Desktop-VO6ECHF with an Intel Core i5, 8GB RAM, and 500GB SSD is perfect for efficient mobile app development.",
       icon: "bi-phone",
       color: "dark",
       location: "CB 104",
-      category: "App development"
+      category: "App development",
     },
     {
       name: "Mobile Application Development Lab-2 ",
       image: "/images/civil/104-inside.jpg",
       title: "Mobile Application Development Lab ",
-      description: "The Lenovo Desktop-VO6ECHF with an Intel Core i5, 8GB RAM, and 500GB SSD is perfect for efficient mobile app development.",
+      description:
+        "The Lenovo Desktop-VO6ECHF with an Intel Core i5, 8GB RAM, and 500GB SSD is perfect for efficient mobile app development.",
       icon: "bi-phone",
       color: "dark",
       location: "CB 105",
-      category: "App development"
+      category: "App development",
     },
     {
       name: "Iot and CC lab-1",
       image: "/images/civil/203-inside.jpg",
       title: "IOT and CC lab",
-      description: "The system with an Intel i3, 8GB RAM, and 500GB SSD is perfect for running IoT and Cloud Computing applications, handling tasks and experiments efficiently.",
+      description:
+        "The system with an Intel i3, 8GB RAM, and 500GB SSD is perfect for running IoT and Cloud Computing applications, handling tasks and experiments efficiently.",
       icon: "bi-cloud",
       color: "dark",
       location: "CB 203",
-      category: "IOT"
+      category: "IOT",
     },
     {
       name: "Iot and CC lab-2",
       image: "/images/civil/203-inside.jpg",
       title: "IOT and CC lab",
-      description: "The system with an Intel i3, 8GB RAM, and 500GB SSD is perfect for running IoT and Cloud Computing applications, handling tasks and experiments efficiently.",
+      description:
+        "The system with an Intel i3, 8GB RAM, and 500GB SSD is perfect for running IoT and Cloud Computing applications, handling tasks and experiments efficiently.",
       icon: "bi-cloud",
       color: "dark",
       location: "CB 204",
-      category: "IOT"
+      category: "IOT",
     },
     {
       name: "Software engineering lab-1 ",
       image: "/images/civil/c3a-inside.jpg",
       title: "Software engineering laboratory",
-      description: "The Acer Veriton M200 with a Pentium Dual Core 4.01 GHz processor, 8GB RAM, 1TB HDD, and 18.5 LED monitor is ideal for software engineering, offering solid performance",
+      description:
+        "The Acer Veriton M200 with a Pentium Dual Core 4.01 GHz processor, 8GB RAM, 1TB HDD, and 18.5 LED monitor is ideal for software engineering, offering solid performance",
       icon: "bi-code-slash",
       color: "dark",
       location: "CB C3A",
-      category: "Design"
+      category: "Design",
     },
     {
       name: "Software engineering lab-2 ",
       image: "/images/civil/c3b-inside.jpg",
       title: "Software engineering laboratory",
-      description: "The Acer Veriton M200 with a Pentium Dual Core 4.01 GHz processor, 8GB RAM, 1TB HDD, and 18.5 LED monitor is ideal for software engineering, offering solid performance.",
+      description:
+        "The Acer Veriton M200 with a Pentium Dual Core 4.01 GHz processor, 8GB RAM, 1TB HDD, and 18.5 LED monitor is ideal for software engineering, offering solid performance.",
       icon: "bi-code-slash",
       color: "dark",
       location: "CB C3B",
-      category: "Design"
+      category: "Design",
     },
     {
       name: "DB and Algorithms lab-1 ",
       image: "/images/laboratories/111 CB.JPG",
       title: "DB and Algorithms lab",
-      description: "The system with an Intel i3, 8GB RAM, and 500GB SSD is perfect for running algorithms tasks, paired with Dell peripherals and a Samsung monitor.",
+      description:
+        "The system with an Intel i3, 8GB RAM, and 500GB SSD is perfect for running algorithms tasks, paired with Dell peripherals and a Samsung monitor.",
       icon: "bi-code-slash",
       color: "dark",
       location: "CB  111",
-      category: "Algorithms"
+      category: "Algorithms",
     },
     {
       name: "DB and Algorithms lab-2 ",
       image: "/images/laboratories/112 CB.JPG",
       title: "DB and Algorithms lab",
-      description: "The system with an Intel i3, 8GB RAM, and 500GB SSD is perfect for running algorithms tasks, paired with Dell peripherals and a Samsung monitor.",
+      description:
+        "The system with an Intel i3, 8GB RAM, and 500GB SSD is perfect for running algorithms tasks, paired with Dell peripherals and a Samsung monitor.",
       icon: "bi-code-slash",
       color: "dark",
       location: "CB 112",
-      category: "Algorithms"
+      category: "Algorithms",
     },
     {
       name: "Data Visualization lab-I",
       image: "/images/civil/cbc2a-inside.jpg",
       title: "Data Visualization lab",
-      description: "Advanced Java development envThe system with 8GB RAM, 1TB HDD, and an 18.5 Acer monitor is well-suited for data visualization tasks, paired with Acer keyboard and mouse.",
+      description:
+        "Advanced Java development envThe system with 8GB RAM, 1TB HDD, and an 18.5 Acer monitor is well-suited for data visualization tasks, paired with Acer keyboard and mouse.",
       icon: "bi-bar-chart-line-fill",
       color: "primary",
       location: "CBC2A",
-      category: "Data Science"
+      category: "Data Science",
     },
     {
       name: "Data Visualization lab-II",
       image: "/images/civil/cbc2b-inside.jpg",
       title: "Data Visualization lab",
-      description: "The system with 8GB RAM, 1TB HDD, and an 18.5 Acer monitor is well-suited for data visualization tasks, paired with Acer keyboard and mouse.",
+      description:
+        "The system with 8GB RAM, 1TB HDD, and an 18.5 Acer monitor is well-suited for data visualization tasks, paired with Acer keyboard and mouse.",
       icon: "bi-bar-chart-line-fill",
       color: "primary",
       location: "CBC2B",
-      category: "Data Science"
+      category: "Data Science",
     },
     {
       name: "Java laboratory-1",
       image: "/images/laboratories/309CM.JPG",
       title: "Java laboratory",
-      description: "The 32 systems with Intel Core i5 8th Gen, 16GB RAM, 1TB/2TB HDD, and LED monitors are ideal for Java development, offering powerful performance and connectivity.",
+      description:
+        "The 32 systems with Intel Core i5 8th Gen, 16GB RAM, 1TB/2TB HDD, and LED monitors are ideal for Java development, offering powerful performance and connectivity.",
       icon: "bi-code",
       color: "warning",
       location: "CM 309",
-      category: "Programming"
+      category: "Programming",
     },
     {
       name: "Java laboratory-2",
       image: "/images/laboratories/310 CM.JPG",
       title: "Java laboratory",
-      description: "The 32 systems with Intel Core i5 8th Gen, 16GB RAM, 1TB/2TB HDD, and LED monitors are ideal for Java development, offering powerful performance and connectivity.",
+      description:
+        "The 32 systems with Intel Core i5 8th Gen, 16GB RAM, 1TB/2TB HDD, and LED monitors are ideal for Java development, offering powerful performance and connectivity.",
       icon: "bi-code",
       color: "warning",
       location: "CM 310",
-      category: "Programming"
+      category: "Programming",
     },
     {
       name: "Full Stack Development lab-1",
       image: "/images/civil/19-inside.jpg",
       title: "Full Stack development lab",
-      description: "The system with an Intel i5 12th Gen processor, 8GB RAM, and 512GB SSD is perfect for full-stack development, offering strong performance for coding and testing.",
+      description:
+        "The system with an Intel i5 12th Gen processor, 8GB RAM, and 512GB SSD is perfect for full-stack development, offering strong performance for coding and testing.",
       icon: "bi-code",
       color: "warning",
       location: "Lib 2FA",
-      category: "Web Development"
+      category: "Web Development",
     },
     {
       name: "Full Stack Development lab-2",
       image: "/images/lib/20-inside.jpg",
       title: "Full Stack development lab",
-      description: "The system with an Intel i5 12th Gen processor, 8GB RAM, and 512GB SSD is perfect for full-stack development, offering strong performance for coding and testing.",
+      description:
+        "The system with an Intel i5 12th Gen processor, 8GB RAM, and 512GB SSD is perfect for full-stack development, offering strong performance for coding and testing.",
       icon: "bi-code",
       color: "warning",
       location: "Lib 2FB",
-      category: "Web Development"
+      category: "Web Development",
     },
     {
       name: "CAD lab 1",
       image: "/images/laboratories/315 A FB.JPG",
       title: "CAD lab",
-      description: "The system with an Intel G6405 CPU, 8GB RAM, 250GB SSD, 22 Samsung LED monitor, and Logitech keyboard/mouse is ideal for CAD applications, offering reliable performance and efficient design capabilities.",
+      description:
+        "The system with an Intel G6405 CPU, 8GB RAM, 250GB SSD, 22 Samsung LED monitor, and Logitech keyboard/mouse is ideal for CAD applications, offering reliable performance and efficient design capabilities.",
       icon: "bi-code",
       color: "warning",
       location: "FB 315A",
-      category: "Design"
+      category: "Design",
     },
     {
       name: "CAD lab 2",
       image: "/images/laboratories/315 A FB.JPG",
       title: "CAD lab",
-      description: "The system with an Intel G6405 CPU, 8GB RAM, 250GB SSD, 22 Samsung LED monitor, and Logitech keyboard/mouse is ideal for CAD applications, offering reliable performance and efficient design capabilities.",
+      description:
+        "The system with an Intel G6405 CPU, 8GB RAM, 250GB SSD, 22 Samsung LED monitor, and Logitech keyboard/mouse is ideal for CAD applications, offering reliable performance and efficient design capabilities.",
       icon: "bi-code",
       color: "warning",
       location: "FB 315B",
-      category: "Design"
+      category: "Design",
     },
     {
       name: "CAD lab 3",
       image: "/images/laboratories/318 FB.JPG",
       title: "CAD lab",
-      description: "The system with an Intel G6405 CPU, 8GB RAM, 250GB SSD, 22 Samsung LED monitor, and Logitech keyboard/mouse is ideal for CAD applications, offering reliable performance and efficient design capabilities.Comprehensive Full stack  development lab with 34 Acer computers for advanced database management and implementation.",
+      description:
+        "The system with an Intel G6405 CPU, 8GB RAM, 250GB SSD, 22 Samsung LED monitor, and Logitech keyboard/mouse is ideal for CAD applications, offering reliable performance and efficient design capabilities.Comprehensive Full stack  development lab with 34 Acer computers for advanced database management and implementation.",
       icon: "bi-code",
       color: "warning",
       location: "FB 318",
-      category: "Design"
+      category: "Design",
     },
     {
       name: "CAD lab 4",
       image: "/images/fb/319-inside.jpg",
       title: "CAD lab",
-      description: "The system with an Intel G6405 CPU, 8GB RAM, 250GB SSD, 22 Samsung LED monitor, and Logitech keyboard/mouse is ideal for CAD applications, offering reliable performance and efficient design capabilities.",
+      description:
+        "The system with an Intel G6405 CPU, 8GB RAM, 250GB SSD, 22 Samsung LED monitor, and Logitech keyboard/mouse is ideal for CAD applications, offering reliable performance and efficient design capabilities.",
       icon: "bi-code",
       color: "warning",
       location: "FB 319",
-      category: "Design"
+      category: "Design",
     },
     {
       name: "CAD lab 5",
       image: "/images/laboratories/315 A FB.JPG",
       title: "CAD lab",
-      description: "The system with an Intel G6405 CPU, 8GB RAM, 250GB SSD, 22 Samsung LED monitor, and Logitech keyboard/mouse is ideal for CAD applications, offering reliable performance and efficient design capabilities.",
+      description:
+        "The system with an Intel G6405 CPU, 8GB RAM, 250GB SSD, 22 Samsung LED monitor, and Logitech keyboard/mouse is ideal for CAD applications, offering reliable performance and efficient design capabilities.",
       icon: "bi-code",
       color: "warning",
       location: "CM 204A",
-      category: "Design"
+      category: "Design",
     },
     {
       name: "CAD lab 6",
       image: "/images/laboratories/315 A FB.JPG",
       title: "CAD lab",
-      description: "The system with an Intel G6405 CPU, 8GB RAM, 250GB SSD, 22 Samsung LED monitor, and Logitech keyboard/mouse is ideal for CAD applications, offering reliable performance and efficient design capabilities.",
+      description:
+        "The system with an Intel G6405 CPU, 8GB RAM, 250GB SSD, 22 Samsung LED monitor, and Logitech keyboard/mouse is ideal for CAD applications, offering reliable performance and efficient design capabilities.",
       icon: "bi-code",
       color: "warning",
       location: "CM 204B",
-      category: "Design"
+      category: "Design",
     },
     {
       name: "Data Structures lab-1",
       image: "/images/laboratories/207 FB.JPG",
       title: "Data structures lab 1",
-      description: "The Fingers Power Tower C8 with 8GB RAM, 500GB SSD, Intel Pentium Gold G7400, and a 22 Samsung LED monitor is perfect for data structures tasks, offering solid performance and efficiency.",
+      description:
+        "The Fingers Power Tower C8 with 8GB RAM, 500GB SSD, Intel Pentium Gold G7400, and a 22 Samsung LED monitor is perfect for data structures tasks, offering solid performance and efficiency.",
       icon: "bi-code-square",
       color: "danger",
       location: "FB 204",
-      category: "Programming"
+      category: "Programming",
     },
     {
       name: "Data Structures lab-2",
       image: "/images/laboratories/207 FB.JPG",
       title: "Data structures lab 1",
-      description: "The Fingers Power Tower C8 with 8GB RAM, 500GB SSD, Intel Pentium Gold G7400, and a 22 Samsung LED monitor is perfect for data structures tasks, offering solid performance and efficiency.",
+      description:
+        "The Fingers Power Tower C8 with 8GB RAM, 500GB SSD, Intel Pentium Gold G7400, and a 22 Samsung LED monitor is perfect for data structures tasks, offering solid performance and efficiency.",
       icon: "bi-code-square",
       color: "danger",
       location: "FB 205",
-      category: "Programming"
+      category: "Programming",
     },
     {
       name: "Data Structures lab-3",
       image: "/images/laboratories/304 FB.JPG",
       title: "Data structures lab 1",
-      description: "The Fingers Power Tower C8 with 8GB RAM, 500GB SSD, Intel Pentium Gold G7400, and a 22 Samsung LED monitor is perfect for data structures tasks, offering solid performance and efficiency.",
+      description:
+        "The Fingers Power Tower C8 with 8GB RAM, 500GB SSD, Intel Pentium Gold G7400, and a 22 Samsung LED monitor is perfect for data structures tasks, offering solid performance and efficiency.",
       icon: "bi-code-square",
       color: "danger",
       location: "FB 304",
-      category: "Programming"
+      category: "Programming",
     },
     {
       name: "Data Structures lab-4",
       image: "/images/laboratories/304 FB.JPG",
       title: "Data structures lab 1",
-      description: "The Fingers Power Tower C8 with 8GB RAM, 500GB SSD, Intel Pentium Gold G7400, and a 22 Samsung LED monitor is perfect for data structures tasks, offering solid performance and efficiency.",
+      description:
+        "The Fingers Power Tower C8 with 8GB RAM, 500GB SSD, Intel Pentium Gold G7400, and a 22 Samsung LED monitor is perfect for data structures tasks, offering solid performance and efficiency.",
       icon: "bi-code-square",
       color: "danger",
       location: "FB 305",
-      category: "Programming"
+      category: "Programming",
     },
     {
       name: "Data Structures lab-5",
       image: "/images/laboratories/207 FB.JPG",
       title: "Data structures lab 1",
-      description: "The Fingers Power Tower C8 with 8GB RAM, 500GB SSD, Intel Pentium Gold G7400, and a 22 Samsung LED monitor is perfect for data structures tasks, offering solid performance and efficiency.",
+      description:
+        "The Fingers Power Tower C8 with 8GB RAM, 500GB SSD, Intel Pentium Gold G7400, and a 22 Samsung LED monitor is perfect for data structures tasks, offering solid performance and efficiency.",
       icon: "bi-code-square",
       color: "danger",
       location: "CM 109",
-      category: "Programming"
+      category: "Programming",
     },
     {
       name: "ELCS lab 1",
       image: "/images/laboratories/ELCS Lab 1 113 FB.JPG",
       title: "ELCS lab",
-      description: "The Samsung PC with 8GB RAM, 500GB SSD, and a 22 LED monitor is well-suited for English Language and ELCS lab activities.",
+      description:
+        "The Samsung PC with 8GB RAM, 500GB SSD, and a 22 LED monitor is well-suited for English Language and ELCS lab activities.",
       icon: "bi-graph-up",
       color: "secondary",
       location: "FB 113",
-      category: "Communication"
+      category: "Communication",
     },
     {
       name: "ELCS lab 2",
       image: "/images/laboratories/ELCS Lab 1 113 FB.JPG",
       title: "Data Science Center",
-      description: "The Samsung PC with 8GB RAM, 500GB SSD, and a 22 LED monitor is well-suited for English Language and ELCS lab activities.",
+      description:
+        "The Samsung PC with 8GB RAM, 500GB SSD, and a 22 LED monitor is well-suited for English Language and ELCS lab activities.",
       icon: "bi-graph-up",
       color: "secondary",
       location: "CB C3A and C3B Cellar",
-      category: "Communication"
+      category: "Communication",
     },
     {
       name: "ELCS lab 3",
       image: "/images/fb/114-inside.jpg",
       title: "Data Science Center",
-      description: "The Samsung PC with 8GB RAM, 500GB SSD, and a 22 LED monitor is well-suited for English Language and ELCS lab activities.",
+      description:
+        "The Samsung PC with 8GB RAM, 500GB SSD, and a 22 LED monitor is well-suited for English Language and ELCS lab activities.",
       icon: "bi-graph-up",
       color: "secondary",
       location: "FB 114",
-      category: "Communication"
+      category: "Communication",
     },
     {
       name: "Python Programming and Interfacing Lab - 1",
       image: "/images/laboratories/ELCS Lab 1 113 FB.JPG",
       title: "Data Science Center",
-      description: "Specialized lab with 100 Acer systems for enhancing English language communication and professional skills.",
+      description:
+        "Specialized lab with 100 Acer systems for enhancing English language communication and professional skills.",
       icon: "bi-graph-up",
       color: "secondary",
       location: "FB 207",
-      category: "Communication"
+      category: "Communication",
     },
     {
       name: "Python Programming and Interfacing Lab - 2",
       image: "/images/fb/308-inside.jpg",
       title: "Data Science Center",
-      description: "The Acer Veriton M200 with Pentium Gold G5420, 1TB HDD, and a 20 LED monitor is ideal for Python programming, offering reliable performance for coding tasks.",
+      description:
+        "The Acer Veriton M200 with Pentium Gold G5420, 1TB HDD, and a 20 LED monitor is ideal for Python programming, offering reliable performance for coding tasks.",
       icon: "bi-graph-up",
       color: "secondary",
       location: "FB 308",
-      category: "Programming"
+      category: "Programming",
     },
     {
       name: "Python Programming and Interfacing Lab - 3",
       image: "/images/laboratories/ELCS Lab 1 113 FB.JPG",
       title: "Data Science Center",
-      description: "The Acer Veriton M200 with Pentium Gold G5420, 1TB HDD, and a 20 LED monitor is ideal for Python programming, offering reliable performance for coding tasks.",
+      description:
+        "The Acer Veriton M200 with Pentium Gold G5420, 1TB HDD, and a 20 LED monitor is ideal for Python programming, offering reliable performance for coding tasks.",
       icon: "bi-graph-up",
       color: "secondary",
       location: "FB 208",
-      category: "Programming"
+      category: "Programming",
     },
     {
       name: "Python Programming and Interfacing Lab - 4",
       image: "/images/laboratories/ELCS Lab 1 113 FB.JPG",
       title: "Data Science Center",
-      description: "The Acer Veriton M200 with Pentium Gold G5420, 1TB HDD, and a 20 LED monitor is ideal for Python programming, offering reliable performance for coding tasks.",
+      description:
+        "The Acer Veriton M200 with Pentium Gold G5420, 1TB HDD, and a 20 LED monitor is ideal for Python programming, offering reliable performance for coding tasks.",
       icon: "bi-graph-up",
       color: "secondary",
       location: "CM 209",
-      category: "Programming"
+      category: "Programming",
     },
     {
       name: "Python Programming and Interfacing Lab - 5",
       image: "/images/laboratories/ELCS Lab 1 113 FB.JPG",
       title: "Data Science Center",
-      description: "The Acer Veriton M200 with Pentium Gold G5420, 1TB HDD, and a 20 LED monitor is ideal for Python programming, offering reliable performance for coding tasks.",
+      description:
+        "The Acer Veriton M200 with Pentium Gold G5420, 1TB HDD, and a 20 LED monitor is ideal for Python programming, offering reliable performance for coding tasks.",
       icon: "bi-graph-up",
       color: "secondary",
       location: "CB 110",
-      category: "Programming"
+      category: "Programming",
     },
     {
       name: "PG Lab (M. Tech. - AI)",
       image: "/images/civil/202-inside.jpg",
       title: "PG lab",
-      description: "Specialized lab with 100 Acer systems for enhancing English language communication and professional skills.",
+      description:
+        "Specialized lab with 100 Acer systems for enhancing English language communication and professional skills.",
       icon: "bi-graph-up",
       color: "secondary",
       location: "CB 202",
-      category: "AI"
+      category: "AI",
     },
     {
       name: "Computer Center",
       image: "/images/laboratories/Computer Centre.JPG",
       title: "Research Resource Center",
-      description: "Dedicated research space with 65 Acer systems for in-depth exploration of academic and technological resources.",
+      description:
+        "Dedicated research space with 65 Acer systems for in-depth exploration of academic and technological resources.",
       icon: "bi-pc-display",
       color: "dark",
       location: "MB 202",
-      category: "Research"
+      category: "Research",
     },
     {
       name: "Research Laboratory - 1 (New Cellar)",
       image: "/images/laboratories/CBC1.JPG",
       title: "Research Resource Center",
-      description: "Dedicated research space with 65 Acer systems for in-depth exploration of academic and technological resources.",
+      description:
+        "Dedicated research space with 65 Acer systems for in-depth exploration of academic and technological resources.",
       icon: "bi-pc-display",
       color: "dark",
       location: "CB C1",
-      category: "Research"
+      category: "Research",
     },
     {
       name: "Research Laboratory - 2",
       image: "/images/laboratories/Computer Centre.JPG",
       title: "Research Resource Center",
-      description: "Dedicated research space with 65 Acer systems for in-depth exploration of academic and technological resources.",
+      description:
+        "Dedicated research space with 65 Acer systems for in-depth exploration of academic and technological resources.",
       icon: "bi-pc-display",
       color: "dark",
       location: "CB 103",
-      category: "Research"
+      category: "Research",
     },
     {
       name: "Projects lab - 1",
       image: "/images/laboratories/Computer Centre.JPG",
       title: "Projects lab",
-      description: "Dedicated research space with 65 Acer systems for in-depth exploration of academic and technological resources.",
+      description:
+        "Dedicated research space with 65 Acer systems for in-depth exploration of academic and technological resources.",
       icon: "bi-pc-display",
       color: "dark",
       location: "CM 304A",
-      category: "Research"
+      category: "Research",
     },
     {
       name: "Projects lab - 2",
       image: "/images/laboratories/Computer Centre.JPG",
       title: "Projects lab",
-      description: "Dedicated research space with 65 Acer systems for in-depth exploration of academic and technological resources.",
+      description:
+        "Dedicated research space with 65 Acer systems for in-depth exploration of academic and technological resources.",
       icon: "bi-pc-display",
       color: "dark",
       location: "CM 304B",
-      category: "Research"
+      category: "Research",
     },
   ];
 
-  const categories = ['All', ...new Set(laboratories.map(lab => lab.category))];
+  const categories = [
+    "All",
+    ...new Set(laboratories.map((lab) => lab.category)),
+  ];
 
-  const filteredLaboratories = activeFilter === 'All' 
-    ? laboratories 
-    : laboratories.filter(lab => lab.category === activeFilter);
+  const filteredLaboratories =
+    activeFilter === "All"
+      ? laboratories
+      : laboratories.filter((lab) => lab.category === activeFilter);
 
   const handleLabClick = (lab) => {
     setSelectedLab(lab);
@@ -424,11 +468,15 @@ const Laboratories = () => {
                 Department Laboratories
               </h1>
               <p className="lead opacity-75 mb-0">
-                Cutting-edge technological spaces designed to transform academic learning into real-world innovation and research excellence.
+                Cutting-edge technological spaces designed to transform academic
+                learning into real-world innovation and research excellence.
               </p>
             </div>
             <div className="col-lg-4 text-end d-none d-lg-block">
-              <i className="bi bi-laptop-fill" style={{fontSize: '10rem', opacity: 0.1, color: 'white'}}></i>
+              <i
+                className="bi bi-laptop-fill"
+                style={{ fontSize: "10rem", opacity: 0.1, color: "white" }}
+              ></i>
             </div>
           </div>
         </div>
@@ -440,7 +488,11 @@ const Laboratories = () => {
           {categories.map((category) => (
             <button
               key={category}
-              className={`btn ${activeFilter === category ? 'btn-primary' : 'btn-outline-primary'} btn-sm`}
+              className={`btn ${
+                activeFilter === category
+                  ? "btn-primary"
+                  : "btn-outline-primary"
+              } btn-sm`}
               onClick={() => setActiveFilter(category)}
             >
               {category}
@@ -454,24 +506,24 @@ const Laboratories = () => {
         <div className="row g-4">
           {filteredLaboratories.map((lab, index) => (
             <div key={index} className="col-md-6 col-lg-4">
-              <div 
+              <div
                 className="card border-0 shadow-lg hover-lift cursor-pointer position-relative overflow-hidden"
                 onClick={() => handleLabClick(lab)}
                 style={{
-                  transition: 'all 0.3s ease',
-                  transform: 'scale(1)',
-                  perspective: '1000px'
+                  transition: "all 0.3s ease",
+                  transform: "scale(1)",
+                  perspective: "1000px",
                 }}
               >
                 <div className="position-relative">
-                  <img 
-                    src={lab.image} 
-                    className="card-img-top" 
+                  <img
+                    src={lab.image}
+                    className="card-img-top"
                     alt={lab.name}
                     style={{
-                      height: '300px',
-                      objectFit: 'cover',
-                      filter: 'brightness(0.8)'
+                      height: "300px",
+                      objectFit: "cover",
+                      filter: "brightness(0.8)",
                     }}
                   />
                   <div className="card-img-overlay d-flex align-items-end p-3">
@@ -483,10 +535,10 @@ const Laboratories = () => {
                 </div>
                 <div className="card-body">
                   <div className="d-flex align-items-center mb-3">
-                    <div 
+                    <div
                       className={`bg-${lab.color}-soft p-3 rounded-circle me-3`}
                     >
-                      <i 
+                      <i
                         className={`bi ${lab.icon} text-${lab.color} fs-4`}
                       ></i>
                     </div>
@@ -509,28 +561,32 @@ const Laboratories = () => {
           <div className="modal-dialog modal-lg modal-dialog-centered">
             <div className="modal-content shadow-lg">
               <div className="modal-header border-0 pb-0">
-                <button 
-                  type="button" 
-                  className="btn-close" 
+                <button
+                  type="button"
+                  className="btn-close"
                   onClick={() => setSelectedLab(null)}
                 ></button>
               </div>
               <div className="modal-body">
                 <div className="row align-items-center">
                   <div className="col-md-6">
-                    <img 
-                      src={selectedLab.image} 
-                      className="img-fluid rounded-3 shadow-lg" 
+                    <img
+                      src={selectedLab.image}
+                      className="img-fluid rounded-3 shadow-lg"
                       alt={selectedLab.name}
                     />
                   </div>
                   <div className="col-md-6">
-                    <span className="badge bg-primary mb-3">{selectedLab.category}</span>
+                    <span className="badge bg-primary mb-3">
+                      {selectedLab.category}
+                    </span>
                     <h2 className="h3 mb-3">{selectedLab.name}</h2>
                     <h4 className="text-muted mb-3">{selectedLab.title}</h4>
                     <p className="lead text-muted">{selectedLab.description}</p>
                     <div className="d-flex align-items-center">
-                      <i className={`bi ${selectedLab.icon} text-primary me-3 fs-2`}></i>
+                      <i
+                        className={`bi ${selectedLab.icon} text-primary me-3 fs-2`}
+                      ></i>
                       <div>
                         <strong>Location:</strong> {selectedLab.location}
                       </div>
@@ -542,6 +598,8 @@ const Laboratories = () => {
           </div>
         </div>
       )}
+
+      <BackToTopButton />
     </div>
   );
 };

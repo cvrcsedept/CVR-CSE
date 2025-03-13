@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import * as XLSX from "xlsx";
 import NumberLoader from "../components/NumberLoader";
 import "../styles.css";
-
+import BackToTopButton from "../components/BackToTopButton";
 const Home = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -491,6 +491,7 @@ const Home = () => {
           </div>
         </section>
       </main>
+      <BackToTopButton />
     </>
   );
 };

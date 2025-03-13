@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import BackToTopButton from "../../components/BackToTopButton";
 
 const Classrooms = () => {
   const [activeSection, setActiveSection] = useState(null);
@@ -136,6 +137,8 @@ const Classrooms = () => {
           ))}
         </div>
       </div>
+
+      <BackToTopButton />
     </div>
   );
 };

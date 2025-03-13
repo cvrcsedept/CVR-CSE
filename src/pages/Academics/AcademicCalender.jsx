@@ -1,17 +1,43 @@
 import React, { useEffect } from "react";
 import "../../styles.css";
+import BackToTopButton from "../../components/BackToTopButton";
+
 const AcademicCalendar = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const academicPrograms = [
-    { title: "B.Tech ", year: "I Year - 2023-24",url:"/Data/academic-calender/1-1.pdf" },
-    { title: "B.Tech ", year: "II Year - 2023-24",url:"/Data/academic-calender/2-2.pdf" },
-    { title: "B.Tech", year: "III Year - 2023-24",url:"/Data/academic-calender/3-3.pdf" },
-    { title: "B.Tech ", year: "IV Year - 2023-24",url:"/Data/academic-calender/4-4.pdf" },
-    { title: "M.Tech ", year: "I Year - 2023-24",url:"/Data/academic-calender/m-tech-1-1.pdf" },
-    { title: "M.Tech ", year: "II Year - 2023-24",url:"/Data/academic-calender/mtech-2-2.pdf" },
+    {
+      title: "B.Tech ",
+      year: "I Year - 2023-24",
+      url: "/Data/academic-calender/1-1.pdf",
+    },
+    {
+      title: "B.Tech ",
+      year: "II Year - 2023-24",
+      url: "/Data/academic-calender/2-2.pdf",
+    },
+    {
+      title: "B.Tech",
+      year: "III Year - 2023-24",
+      url: "/Data/academic-calender/3-3.pdf",
+    },
+    {
+      title: "B.Tech ",
+      year: "IV Year - 2023-24",
+      url: "/Data/academic-calender/4-4.pdf",
+    },
+    {
+      title: "M.Tech ",
+      year: "I Year - 2023-24",
+      url: "/Data/academic-calender/m-tech-1-1.pdf",
+    },
+    {
+      title: "M.Tech ",
+      year: "II Year - 2023-24",
+      url: "/Data/academic-calender/mtech-2-2.pdf",
+    },
   ];
 
   return (
@@ -57,6 +83,8 @@ const AcademicCalendar = () => {
           </div>
         </section>
       </main>
+
+      <BackToTopButton />
     </div>
   );
 };

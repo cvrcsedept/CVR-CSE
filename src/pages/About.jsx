@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
+import BackToTopButton from "../components/BackToTopButton";
 // Enhanced animation variants
 const slideUp = {
   hidden: { opacity: 0, y: 50 },
@@ -655,6 +656,8 @@ const About = () => {
             </div>
           </div>
         </section>
+
+        <BackToTopButton />
       </div>
       <style jsx>{`
         .about-page {

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "../../styles.css";
+import BackToTopButton from "../../components/BackToTopButton";
 
 const Gallery = () => {
   useEffect(() => {
@@ -8,6 +9,8 @@ const Gallery = () => {
   return (
     <>
       <div></div>
+
+      <BackToTopButton />
     </>
   );
 };

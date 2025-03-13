@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import BackToTopButton from "../../components/BackToTopButton";
 
 const TimeTable = () => {
   useEffect(() => {
@@ -110,6 +111,8 @@ const TimeTable = () => {
           </div>
         ))}
       </main>
+
+      <BackToTopButton />
     </div>
   );
 };

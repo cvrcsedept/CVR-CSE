@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
+import BackToTopButton from "../../components/BackToTopButton";
 
 import "./Admin.css";
 
@@ -30,12 +31,14 @@ const Admin = () => {
 
       const formattedData = jsonData.map((staffMember) => ({
         ...staffMember,
-        normalizedDesignation: normalizeDesignation(staffMember.Designation || ""),
+        normalizedDesignation: normalizeDesignation(
+          staffMember.Designation || ""
+        ),
       }));
 
       setStaff(formattedData);
       setFilteredStaff(formattedData); // Initially show all staff
-      
+
       // Log formatted data to verify
       console.log("Formatted data:", formattedData);
     } catch (error) {
@@ -60,18 +63,23 @@ const Admin = () => {
     const filtered = data.filter((member) => {
       // Make sure Designation exists before normalizing
       const memberDesignation = member.Designation || "";
-      const normalizedMemberDesignation = normalizeDesignation(memberDesignation);
-      
+      const normalizedMemberDesignation =
+        normalizeDesignation(memberDesignation);
+
       // Log for debugging
       console.log("Comparing:", {
         memberDesignation,
         normalizedMemberDesignation,
         normalizedSelectedDesignation,
-        match: normalizedMemberDesignation.includes(normalizedSelectedDesignation)
+        match: normalizedMemberDesignation.includes(
+          normalizedSelectedDesignation
+        ),
       });
-      
+
       // Simple string matching instead of switch case
-      return normalizedMemberDesignation.includes(normalizedSelectedDesignation);
+      return normalizedMemberDesignation.includes(
+        normalizedSelectedDesignation
+      );
     });
 
     console.log("Filtered results:", filtered);
@@ -82,7 +90,7 @@ const Admin = () => {
     "All",
     "Sr. System Admin.",
     "System Admin.",
-    "Asst. System Admin."
+    "Asst. System Admin.",
   ];
 
   return (
@@ -92,9 +100,7 @@ const Admin = () => {
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-8 mx-auto text-center text-white">
-              <h1 className="display-4 mb-3 faculty-title">
-                Our Admin Staff
-              </h1>
+              <h1 className="display-4 mb-3 faculty-title">Our Admin Staff</h1>
               <p className="lead mb-4">
                 Dedicated Admin staff Supporting Our Institution
               </p>
@@ -116,7 +122,7 @@ const Admin = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                {activeDesignation} 
+                {activeDesignation}
               </button>
               <ul
                 className="dropdown-menu"
@@ -128,7 +134,7 @@ const Admin = () => {
                       className="dropdown-item"
                       onClick={() => filterStaff(designation)}
                     >
-                      {designation} 
+                      {designation}
                     </button>
                   </li>
                 ))}
@@ -147,7 +153,9 @@ const Admin = () => {
                     <div className="faculty-image-wrapper">
                       <img
                         src={`/images/CVR Logo.png`}
-                        alt={member["Name of the Staff Member"] || "Staff Member"}
+                        alt={
+                          member["Name of the Staff Member"] || "Staff Member"
+                        }
                         className="faculty-image"
                         onError={(e) => {
                           e.target.src = "/images/default-avatar.png";
@@ -161,8 +169,12 @@ const Admin = () => {
                       <p className="faculty-designation">
                         {member["Designation"] || "No Designation"}
                       </p>
-                      <p className="faculty-join-date">Joined: {member["DOJ"] || "N/A"}</p>
-                      <p className="faculty-id">ID: {member["College ID No."] || "N/A"}</p>
+                      <p className="faculty-join-date">
+                        Joined: {member["DOJ"] || "N/A"}
+                      </p>
+                      <p className="faculty-id">
+                        ID: {member["College ID No."] || "N/A"}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -175,6 +187,8 @@ const Admin = () => {
           )}
         </div>
       </div>
+
+      <BackToTopButton />
     </div>
   );
 };

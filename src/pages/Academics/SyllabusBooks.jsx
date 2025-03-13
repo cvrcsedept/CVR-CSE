@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import BackToTopButton from "../../components/BackToTopButton";
 
 const SyllabusBooks = () => {
   useEffect(() => {
@@ -126,6 +127,8 @@ const SyllabusBooks = () => {
           </div>
         ))}
       </main>
+
+      <BackToTopButton />
     </div>
   );
 };

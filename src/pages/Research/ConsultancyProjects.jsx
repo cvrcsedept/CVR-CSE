@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as XLSX from "xlsx";
+import BackToTopButton from "../../components/BackToTopButton";
+
 const ConsultancyProjects = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -122,6 +124,7 @@ const ConsultancyProjects = () => {
           </table>
         </div>
       </div>
+      <BackToTopButton />
     </div>
   );
 };
