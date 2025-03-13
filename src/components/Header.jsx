@@ -195,7 +195,7 @@ const Navbar = () => {
               style={{ maxWidth: "100%", height: "60px" }}
             />
             <span
-              className="navbar-text text-white mb-1 "
+              className="navbar-text text-white d-none d-md-block "
               style={{
                 fontSize: "1.45rem",
                 fontWeight: "bold",
@@ -205,7 +205,7 @@ const Navbar = () => {
                 paddingTop: "1rem",
               }}
             >
-              Computer Science and Engineering
+              Department of Computer Science and Engineering
             </span>
           </Link>
           <button
