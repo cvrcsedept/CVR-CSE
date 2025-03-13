@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import * as XLSX from "xlsx";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
 const ConsultancyProjects = () => {
   useEffect(() => {
     window.scrollTo(0, 0);

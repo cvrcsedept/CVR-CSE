@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
 
 const Conferences = () => {
   useEffect(() => {

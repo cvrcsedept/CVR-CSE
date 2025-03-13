@@ -139,7 +139,7 @@ const Laboratories = () => {
       icon: "bi-code",
       color: "warning",
       location: "Lib 2FA",
-      category: "Programming"
+      category: "Web Development"
     },
     {
       name: "Full Stack Development lab-2",
@@ -384,7 +384,7 @@ const Laboratories = () => {
     {
       name: "Projects lab - 1",
       image: "/images/laboratories/Computer Centre.JPG",
-      title: "Research Resource Center",
+      title: "Projects lab",
       description: "Dedicated research space with 65 Acer systems for in-depth exploration of academic and technological resources.",
       icon: "bi-pc-display",
       color: "dark",
@@ -394,7 +394,7 @@ const Laboratories = () => {
     {
       name: "Projects lab - 2",
       image: "/images/laboratories/Computer Centre.JPG",
-      title: "Research Resource Center",
+      title: "Projects lab",
       description: "Dedicated research space with 65 Acer systems for in-depth exploration of academic and technological resources.",
       icon: "bi-pc-display",
       color: "dark",

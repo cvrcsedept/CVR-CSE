@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NothingFoundPage from "./pages/NothingFoundPage";
+import Publications from "./pages/Research/publications";
 
 import {
   AcademicCalender,
@@ -51,6 +52,7 @@ const App = () => {
         <Route path="/studentcorner/gallery" element={<Gallery />} />
         <Route path="/studentcorner/student-work" element={<StudentWork />} />
         <Route path="/research/conferences" element={<Conferences />} />
+        <Route path="/research/publications" element={<Publications />} /> 
         <Route
           path="/research/consultancy-projects"
           element={<ConsultancyProjects />}

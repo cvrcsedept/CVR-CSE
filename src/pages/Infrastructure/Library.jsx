@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
 
 const Library = () => {
   const [activeSection, setActiveSection] = useState(null);
@@ -58,8 +56,9 @@ const Library = () => {
               Scholarly Resource Center
             </h1>
             <p className="lead text-muted mb-4">
-              A sophisticated knowledge ecosystem designed to inspire intellectual 
-              curiosity, support rigorous research, and provide cutting-edge academic resources.
+              A sophisticated knowledge ecosystem designed to inspire
+              intellectual curiosity, support rigorous research, and provide
+              cutting-edge academic resources.
             </p>
             <div className="d-flex align-items-center">
               <div
@@ -69,7 +68,8 @@ const Library = () => {
                 <i className="fa-solid fa-landmark"></i>
               </div>
               <p className="mb-0 text-muted">
-                Empowering academic excellence through comprehensive knowledge resources.
+                Empowering academic excellence through comprehensive knowledge
+                resources.
               </p>
             </div>
           </div>

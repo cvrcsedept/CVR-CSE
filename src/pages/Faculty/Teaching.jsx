@@ -74,6 +74,7 @@ const Teaching = () => {
     "Senior Assistant Professor",
     "Assistant Professor",
   ];
+  
 
   return (
     <div className="teaching-faculty-wrapper">
@@ -106,7 +107,7 @@ const Teaching = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                {activeDesignation} Faculty
+                {activeDesignation} 
               </button>
               <ul
                 className="dropdown-menu"
@@ -135,14 +136,21 @@ const Teaching = () => {
                 <div className="faculty-card">
                   <div className="faculty-card-inner">
                     <div className="faculty-image-wrapper">
-                      <img
-                        src={`/images/CVR Logo.png`}
-                        alt={member["Name of the Staff Member "]}
-                        className="faculty-image"
-                        onError={(e) => {
-                          e.target.src = "/images/default-avatar.png";
-                        }}
-                      />
+                    <img
+                      src={`/images/TeachingFacultyImages/${member.Image}.jpg`}
+                      onError={(e) => {
+                        e.target.onerror = null; // Prevent infinite loop
+                        if (e.target.src.endsWith('.jpg')) {
+                          e.target.src = `/images/TeachingFacultyImages/${member.Image}.jpeg`;
+                        } else if (e.target.src.endsWith('.jpeg')) {
+                          e.target.src = `/images/TeachingFacultyImages/${member.Image}.png`;
+                        } else {
+                          e.target.src = '/images/TeachingFacultyImages/default-avatar.png';
+                        }
+                      }}
+                      alt={member["Name of the Staff Member "]}
+                      className="faculty-image"
+                    />
                     </div>
                     <div className="faculty-details">
                       <h4 className="faculty-name">
