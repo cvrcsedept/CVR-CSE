@@ -176,98 +176,95 @@ const Home = () => {
   return (
     <>
       <main>
-        <div className="container-fluid p-0 ">
-          <section
-            className="carouselSection"
-            style={{ height: "85vh", width: "100vw" }}
-          >
+        <div className="container-fluid p-0">
+          <section className="carouselSection">
             <div
-              className="container-fluid"
-              style={{ height: "85vh", width: "100vw", margin: "-12px" }}
+              id="carouselA"
+              className="carousel slide shadow-lg"
+              data-bs-ride="carousel"
+              style={{
+                height: "85vh",
+                width: "100%",
+                maxWidth: "100vw",
+              }}
             >
-              <div
-                id="carouselA"
-                className="carousel slide shadow-lg rounded"
-                data-bs-ride="carousel"
-                style={{ height: "85vh", width: "100vw" }}
-              >
-                <div className="carousel-indicators">
-                  {images.map((_, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      data-bs-target="#carouselA"
-                      data-bs-slide-to={index}
-                      className={index === 0 ? "active" : ""}
-                      aria-current={index === 0 ? "true" : "false"}
-                      aria-label={`Slide ${index + 1}`}
-                    ></button>
-                  ))}
-                </div>
-                <div
-                  className="carousel-inner"
-                  style={{
-                    height: "85vh",
-                    width: "100vw",
-                  }}
-                >
-                  {images.map((image, index) => (
-                    <div
-                      key={index}
-                      className={`carousel-item ${index === 0 ? "active" : ""}`}
-                      style={{ height: "85vh", width: "100vw" }}
-                    >
-                      <img
-                        src={image.src}
-                        className="d-block w-100"
-                        alt={image.alt}
-                        style={{
-                          height: "85vh",
-                          width: "100vw",
-                          objectFit: "cover",
-                          objectPosition: "center",
-                        }}
-                      />
-                      <div className="carousel-caption">
-                        <h5>{image.title}</h5>
-                        <p>{image.caption}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <button
-                  className="carousel-control-prev"
-                  type="button"
-                  data-bs-target="#carouselA"
-                  data-bs-slide="prev"
-                >
-                  <span
-                    className="carousel-control-prev-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span className="visually-hidden">Previous</span>
-                </button>
-                <button
-                  className="carousel-control-next"
-                  type="button"
-                  data-bs-target="#carouselA"
-                  data-bs-slide="next"
-                >
-                  <span
-                    className="carousel-control-next-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span className="visually-hidden">Next</span>
-                </button>
+              <div className="carousel-indicators">
+                {images.map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    data-bs-target="#carouselA"
+                    data-bs-slide-to={index}
+                    className={index === 0 ? "active" : ""}
+                    aria-current={index === 0 ? "true" : "false"}
+                    aria-label={`Slide ${index + 1}`}
+                  ></button>
+                ))}
               </div>
+              <div
+                className="carousel-inner"
+                style={{
+                  height: "100%",
+                  width: "100%",
+                }}
+              >
+                {images.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`carousel-item ${index === 0 ? "active" : ""}`}
+                    style={{ height: "100%" }}
+                  >
+                    <img
+                      src={image.src}
+                      className="d-block w-100"
+                      alt={image.alt}
+                      style={{
+                        height: "85vh",
+                        width: "100%",
+                        objectFit: "cover",
+                        objectPosition: "center",
+                      }}
+                    />
+                    <div className="carousel-caption d-flex flex-column justify-content-end">
+                      <h5 className="caption-title">{image.title}</h5>
+                      <p className="caption-text">{image.caption}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                className="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselA"
+                data-bs-slide="prev"
+              >
+                <span
+                  className="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span className="visually-hidden">Previous</span>
+              </button>
+              <button
+                className="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselA"
+                data-bs-slide="next"
+              >
+                <span
+                  className="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span className="visually-hidden">Next</span>
+              </button>
             </div>
           </section>
         </div>
+
         <section className="headMessageSection">
           <div className="container mt-3">
             <div className="row">
-              <div className="col-md-12 p-5">
+              <div className="col-12 p-3 p-md-5">
                 <h2 className="text-center text-uppercase">
                   Message by Head of the Department
                 </h2>
@@ -276,24 +273,30 @@ const Home = () => {
 
             <div className="row">
               <div
-                className="col-md-6"
+                className="col-12 col-md-6 mb-4 mb-md-0"
                 data-aos="fade-right"
                 data-aos-duration="1000"
               >
                 <img
                   src="/images/hod.jpg"
-                  className="img-fluid rounded"
+                  className="img-fluid rounded mx-auto d-block"
                   alt=""
-                  style={{ border: "3px solid #203476" }}
+                  style={{
+                    border: "3px solid #203476",
+                    maxWidth: "100%",
+                    maxHeight: "400px",
+                  }}
                 />
               </div>
-              <div className="col-md-6 hodmsg">
+              <div className="col-12 col-md-6 hodmsg">
                 <div
                   className="msghoddiv"
                   data-aos="fade-left"
                   data-aos-duration="1000"
                 >
-                  <p className="h3">Dr. A Vani Vathsala (Professor and HOD)</p>
+                  <p className="h3 text-center text-md-start">
+                    Dr. A Vani Vathsala (Professor and HOD)
+                  </p>
                   <p className="msghodp">
                     The Computer Science and Engineering department was started
                     in the year 2001 with an intake of 60 B.Tech. students and
@@ -317,7 +320,7 @@ const Home = () => {
           </div>
         </section>
 
-        <section className="recogSection">
+        <section className="recogSection py-4">
           <div
             className="recogContainer"
             data-aos="zoom-in"
@@ -398,6 +401,7 @@ const Home = () => {
             </div>
           </div>
         </section>
+
         <section className="facStrength faculty-content py-5">
           <div className="container mt-5">
             <div className="row mb-4">
@@ -410,12 +414,11 @@ const Home = () => {
 
             <div
               id="facultyCarousel"
-              style={{ height: "70vh" }}
               className="carousel slide"
               data-bs-ride="carousel"
               data-bs-interval="3000"
             >
-              <div className="carousel-inner" style={{ height: "75vh" }}>
+              <div className="carousel-inner" style={{ minHeight: "350px" }}>
                 {Array(Math.ceil(filteredFaculty.length / 3))
                   .fill()
                   .map((_, slideIndex) => (
@@ -425,23 +428,22 @@ const Home = () => {
                         slideIndex === 0 ? "active" : ""
                       }`}
                     >
-                      <div className="row g-4">
+                      <div className="row g-4 justify-content-center">
                         {filteredFaculty
                           .slice(slideIndex * 3, slideIndex * 3 + 3)
                           .map((member, index) => (
-                            <div key={index} className="col-md-4">
-                              <div
-                                className="faculty-card"
-                                style={{ height: "65vh" }}
-                              >
-                                <div
-                                  className="faculty-card-inner"
-                                  style={{ height: "60vh" }}
-                                >
+                            <div
+                              key={index}
+                              className="col-12 col-sm-6 col-md-4 mb-4"
+                            >
+                              <div className="faculty-card h-100">
+                                <div className="faculty-card-inner d-flex flex-column h-100">
                                   <div
                                     className="faculty-image-wrapper center-block"
                                     style={{
-                                      height: "45vh",
+                                      height: "auto",
+                                      maxHeight: "350px",
+                                      overflow: "hidden",
                                     }}
                                   >
                                     <img
@@ -459,18 +461,21 @@ const Home = () => {
                                         }
                                       }}
                                       alt={member["Name of the Staff Member "]}
-                                      className="faculty-image"
-                                      style={{ height: "60vh" }}
+                                      className="faculty-image img-fluid w-100"
+                                      style={{
+                                        objectFit: "cover",
+                                        aspectRatio: "3/4",
+                                      }}
                                     />
                                   </div>
-                                  <div className="faculty-details">
-                                    <h4 className="faculty-name">
+                                  <div className="faculty-details p-2 mt-auto">
+                                    <h4 className="faculty-name text-center">
                                       {member["Name of the Staff Member "]}
                                     </h4>
-                                    <p className="faculty-designation">
+                                    <p className="faculty-designation text-center mb-1">
                                       {member.Designation}
                                     </p>
-                                    <p className="faculty-join-date">
+                                    <p className="faculty-join-date text-center mb-0">
                                       Joined: {member.DOJ}
                                     </p>
                                   </div>
@@ -511,6 +516,50 @@ const Home = () => {
         </section>
       </main>
       <BackToTopButton />
+
+      {/* Add this style tag to include mobile-specific CSS */}
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .carousel-caption {
+            padding-bottom: 10px;
+          }
+
+          .caption-title {
+            font-size: 18px;
+            margin-bottom: 5px;
+          }
+
+          .caption-text {
+            font-size: 14px;
+            margin-bottom: 0;
+          }
+
+          .deptStrengthContainer {
+            flex-wrap: wrap;
+            justify-content: center;
+          }
+
+          .deptStrengthItem {
+            flex: 0 0 45%;
+            margin: 5px;
+          }
+
+          .recogContainer {
+            flex-wrap: wrap;
+            justify-content: center;
+          }
+
+          .recogItem {
+            flex: 0 0 45%;
+            margin: 10px;
+            max-width: 120px;
+          }
+
+          .faculty-card {
+            margin-bottom: 20px;
+          }
+        }
+      `}</style>
     </>
   );
 };
