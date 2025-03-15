@@ -348,7 +348,7 @@ const Home = () => {
             </div>
             <div className="deptStrengthContainer">
               <div className="deptStrengthItem">
-                <span>
+                <span style={{ textAlign: "center" }}>
                   <NumberLoader
                     number={counts.ProfCount}
                     shouldLoad={shouldLoadNumbers}
@@ -357,7 +357,7 @@ const Home = () => {
                 </span>
               </div>
               <div className="deptStrengthItem">
-                <span>
+                <span style={{ textAlign: "center" }}>
                   <NumberLoader
                     number={counts.AssociateProfCount}
                     shouldLoad={shouldLoadNumbers}
@@ -366,7 +366,7 @@ const Home = () => {
                 </span>
               </div>
               <div className="deptStrengthItem">
-                <span>
+                <span style={{ textAlign: "center" }}>
                   <NumberLoader
                     number={counts.SrAsstProfCount}
                     shouldLoad={shouldLoadNumbers}
@@ -375,7 +375,7 @@ const Home = () => {
                 </span>
               </div>
               <div className="deptStrengthItem">
-                <span>
+                <span style={{ textAlign: "center" }}>
                   <NumberLoader
                     number={counts.AssistantProfCount}
                     shouldLoad={shouldLoadNumbers}
@@ -384,15 +384,15 @@ const Home = () => {
                 </span>
               </div>
               <div className="deptStrengthItem">
-                <span>
+                <span style={{ textAlign: "center" }}>
                   <NumberLoader number={23} shouldLoad={shouldLoadNumbers} />
                   <p>Programmers and Admins</p>
                 </span>
               </div>
               <div className="deptStrengthItem">
-                <span className="Dtps">
+                <span className="Office Staff" style={{ textAlign: "center" }}>
                   <NumberLoader number={5} shouldLoad={shouldLoadNumbers} />
-                  <p>DTP's</p>
+                  <p>Office Staff</p>
                 </span>
               </div>
             </div>
