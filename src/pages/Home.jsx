@@ -1,21 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as XLSX from "xlsx";
 import NumberLoader from "../components/NumberLoader";
-import "../styles.css";
 import BackToTopButton from "../components/BackToTopButton";
+import "../styles.css";
+
 const Home = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  
   const [shouldLoadNumbers, setShouldLoadNumbers] = useState(false);
   const deptStrengthRef = useRef(null);
-  const [facultyData, setFacultyData] = useState([]);
+  const [faculty, setFaculty] = useState([]);
+  const [filteredFaculty, setFilteredFaculty] = useState([]);
   const [counts, setCounts] = useState({
     ProfCount: 0,
     AssistantProfCount: 0,
     SrAsstProfCount: 0,
     AssociateProfCount: 0,
   });
+
+  const normalizeDesignation = (designation) => {
+    return designation.toLowerCase().trim().replace(/\s+/g, ".");
+  };
+  
   useEffect(() => {
     const fetchAndProcessExcelData = async () => {
       try {
@@ -48,9 +56,7 @@ const Home = () => {
               : row[5] || "N/A",
         }));
 
-        // console.log("Raw Faculty Data:", formattedData);
-
-        const normalizeDesignation = (designation) => {
+        const normalizeDesignationForCounting = (designation) => {
           return designation
             .replace(/[^a-zA-Z. ]/g, "") // Remove unwanted symbols (&, ,)
             .replace(/\s+/g, " ") // Normalize spaces
@@ -60,11 +66,10 @@ const Home = () => {
 
         const countData = formattedData.reduce(
           (acc, faculty) => {
-            let designation = normalizeDesignation(faculty.designation);
-            let name = faculty.name;
+            let designation = normalizeDesignationForCounting(faculty.designation);
             if (
               designation.includes("professor") ||
-              designation.includes("Emeritus")
+              designation.includes("emeritus")
             ) {
               acc.ProfCount += 1;
             } else if (designation.includes("assoc.prof")) {
@@ -79,13 +84,9 @@ const Home = () => {
           },
           {
             ProfCount: 0,
-            ProfNames: [],
             AssociateProfCount: 0,
-            AssociateProfNames: [],
             SrAsstProfCount: 0,
-            SrAsstProfNames: [],
             AssistantProfCount: 0,
-            AssistantProfNames: [],
           }
         );
 
@@ -97,48 +98,34 @@ const Home = () => {
     };
     fetchAndProcessExcelData();
   }, []);
+  
+  // Fetch faculty data exactly like in Teaching.jsx
   useEffect(() => {
-    const fetchExcelData = async () => {
-      try {
-        const response = await fetch("/Data/faculty.xlsx");
-
-        if (!response.ok) {
-          throw new Error(
-            `Failed to load faculty.xlsx: HTTP ${response.status}`
-          );
-        }
-
-        const data = await response.arrayBuffer();
-        const workbook = XLSX.read(data, { type: "array", cellDates: true });
-
-        if (!workbook.SheetNames.length)
-          throw new Error("No sheets found in Excel file.");
-
-        const sheetName = workbook.SheetNames[0];
-        const sheet = workbook.Sheets[sheetName];
-
-        const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-        if (!jsonData.length) throw new Error("Excel sheet is empty.");
-
-        const formattedData = jsonData.slice(1, 16).map((row) => ({
-          empId: row[1] || "N/A",
-          name: row[2] || "Unknown",
-          designation: row[3] || "Unknown",
-          email: row[4] || "N/A",
-          doj:
-            row[5] instanceof Date
-              ? row[5].toLocaleDateString("en-GB")
-              : row[5] || "N/A",
-        }));
-
-        setFacultyData(formattedData);
-      } catch (error) {
-        console.error("Error loading Excel file:", error.message);
-      }
-    };
-
-    fetchExcelData();
+    loadExcelData();
   }, []);
+
+  const loadExcelData = async () => {
+    try {
+      const response = await fetch("/Data/faculty.xlsx");
+      const arrayBuffer = await response.arrayBuffer();
+      const workbook = XLSX.read(arrayBuffer, { type: "array" });
+      const sheetName = workbook.SheetNames[0];
+      const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+
+      const formattedData = jsonData.map((faculty) => ({
+        ...faculty,
+        normalizedDesignation: normalizeDesignation(faculty.Designation),
+        // Add image property assuming it's based on the faculty's name or ID
+        image: faculty.Name?.split(' ').join('').toLowerCase() || 'default',
+      }));
+
+      setFaculty(formattedData);
+      // Get first 15 faculty members for carousel display
+      setFilteredFaculty(formattedData.slice(0, 15));
+    } catch (error) {
+      console.error("Error loading faculty data:", error);
+    }
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -414,90 +401,76 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <section className="facStrength">
-          <div className="container mt-5">
-            <div className="row">
-              <div className="col-sm-12">
-                <h2 className="text-center text-uppercase">
-                  Department Virtuoso
-                </h2>
-              </div>
-            </div>
+        {/* Updated Faculty Carousel Section using TeachingFaculty cards */}
+<section className="facStrength faculty-content py-5">
+  <div className="container mt-5">
+    <div className="row mb-4">
+      <div className="col-sm-12">
+        <h2 className="text-center text-uppercase">
+          Department Virtuoso
+        </h2>
+      </div>
+    </div>
 
-            <div
-              id="facultyCarousel"
-              className="carousel slide"
-              data-bs-ride="carousel"
-              data-bs-interval="3000"
+    <div
+      id="facultyCarousel "
+      className="carousel slide"
+      data-bs-ride="carousel"
+      data-bs-interval="3000"
+    >
+      <div className="carousel-inner 30vh">
+        {/* Create groups of 3 faculty members per slide */}
+        {Array(Math.ceil(filteredFaculty.length / 3))
+          .fill()
+          .map((_, slideIndex) => (
+            <div 
+              key={slideIndex} 
+              className={`carousel-item ${slideIndex === 0 ? 'active' : ''}`}
             >
-              <div className="carousel-inner">
-                {facultyData
-                  .reduce((acc, item, index) => {
-                    if (index % 3 === 0) acc.push([]);
-                    acc[acc.length - 1].push(item);
-                    return acc;
-                  }, [])
-                  .map((group, i) => (
-                    <div
-                      className={`carousel-item ${i === 0 ? "active" : ""}`}
-                      key={i}
-                    >
-                      <div className="container">
-                        <div className="row">
-                          {group.map((faculty, j) => (
-                            <div className="col-md-4" key={j}>
-                              <div
-                                className="facultyCard"
-                                data-aos="fade-up"
-                                data-aos-duration="1500"
-                              >
-                                <img
-                                  src={`/images/CVR Logo.png`}
-                                  width={120}
-                                  height={120}
-                                  alt={faculty.name}
-                                  className="img"
-                                />
-                                <div className="facultyCardInfo">
-                                  <h3 className="facultyCardTitle">
-                                    {faculty.name}
-                                  </h3>
-                                  <p className="facultyCardPosition">
-                                    {faculty.designation}
-                                  </p>
-                                  <p className="facultyCardDoj">
-                                    DOJ: {faculty.doj}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          ))}
+              <div className="row g-4">
+                {filteredFaculty
+                  .slice(slideIndex * 3, slideIndex * 3 + 3)
+                  .map((member, index) => (
+                    <div key={index} className="col-md-4">
+                      <div className="faculty-card">
+                        <div className="faculty-card-inner">
+                          <div className="faculty-image-wrapper">
+                          <img
+                            src={`/images/TeachingFacultyImages/${member.Image}.jpg`}
+                            onError={(e) => {
+                              e.target.onerror = null; // Prevent infinite loop
+                              if (e.target.src.endsWith('.jpg')) {
+                                e.target.src = `/images/TeachingFacultyImages/${member.Image}.jpeg`;
+                              } else if (e.target.src.endsWith('.jpeg')) {
+                                e.target.src = `/images/TeachingFacultyImages/${member.Image}.png`;
+                              } else {
+                                e.target.src = '/images/CVR Logo.png';
+                              }
+                            }}
+                            alt={member["Name of the Staff Member "]}
+                            className="faculty-image"
+                          />
+                          </div>
+                          <div className="faculty-details">
+                            <h4 className="faculty-name">
+                              {member["Name of the Staff Member "]}
+                            </h4>
+                            <p className="faculty-designation">
+                              {member.Designation}
+                            </p>
+                            <p className="faculty-join-date">Joined: {member.DOJ}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
                   ))}
               </div>
-
-              {/* Carousel Controls */}
-              <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#facultyCarousel"
-                data-bs-slide="prev"
-              >
-                <span className="carousel-control-prev-icon"></span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#facultyCarousel"
-                data-bs-slide="next"
-              >
-                <span className="carousel-control-next-icon"></span>
-              </button>
             </div>
-          </div>
-        </section>
+          ))}
+      </div>
+    </div>
+  </div>
+</section>
       </main>
       <BackToTopButton />
     </>
