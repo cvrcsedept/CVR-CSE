@@ -85,7 +85,6 @@ body {
   color: white;
 }
 
-/* Logo Animation */
 .logo-image {
   transition: transform 0.3s ease;
 }
@@ -110,7 +109,6 @@ body {
   }
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 991px) {
   .navbar {
     padding: 10px 0 !important;
@@ -882,7 +880,6 @@ footer {
   border-color: #0056b3;
 }
 
-/* ---- Faculty Info ---- */
 .faculty-info {
   margin-top: 15px;
 }
@@ -904,7 +901,6 @@ footer {
   color: #777;
 }
 
-/* ---- Animations ---- */
 @keyframes fadeIn {
   from {
     opacity: 0;

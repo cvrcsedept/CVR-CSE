@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   const [shouldLoadNumbers, setShouldLoadNumbers] = useState(false);
   const deptStrengthRef = useRef(null);
   const [faculty, setFaculty] = useState([]);
@@ -23,7 +23,7 @@ const Home = () => {
   const normalizeDesignation = (designation) => {
     return designation.toLowerCase().trim().replace(/\s+/g, ".");
   };
-  
+
   useEffect(() => {
     const fetchAndProcessExcelData = async () => {
       try {
@@ -66,7 +66,9 @@ const Home = () => {
 
         const countData = formattedData.reduce(
           (acc, faculty) => {
-            let designation = normalizeDesignationForCounting(faculty.designation);
+            let designation = normalizeDesignationForCounting(
+              faculty.designation
+            );
             if (
               designation.includes("professor") ||
               designation.includes("emeritus")
@@ -98,8 +100,7 @@ const Home = () => {
     };
     fetchAndProcessExcelData();
   }, []);
-  
-  // Fetch faculty data exactly like in Teaching.jsx
+
   useEffect(() => {
     loadExcelData();
   }, []);
@@ -115,12 +116,10 @@ const Home = () => {
       const formattedData = jsonData.map((faculty) => ({
         ...faculty,
         normalizedDesignation: normalizeDesignation(faculty.Designation),
-        // Add image property assuming it's based on the faculty's name or ID
-        image: faculty.Name?.split(' ').join('').toLowerCase() || 'default',
+        image: faculty.Name?.split(" ").join("").toLowerCase() || "default",
       }));
 
       setFaculty(formattedData);
-      // Get first 15 faculty members for carousel display
       setFilteredFaculty(formattedData.slice(0, 15));
     } catch (error) {
       console.error("Error loading faculty data:", error);
@@ -192,7 +191,6 @@ const Home = () => {
                 data-bs-ride="carousel"
                 style={{ height: "85vh", width: "100vw" }}
               >
-                {/* Carousel Indicators */}
                 <div className="carousel-indicators">
                   {images.map((_, index) => (
                     <button
@@ -238,7 +236,6 @@ const Home = () => {
                   ))}
                 </div>
 
-                {/* Carousel Controls */}
                 <button
                   className="carousel-control-prev"
                   type="button"
@@ -401,76 +398,117 @@ const Home = () => {
             </div>
           </div>
         </section>
-        {/* Updated Faculty Carousel Section using TeachingFaculty cards */}
-<section className="facStrength faculty-content py-5">
-  <div className="container mt-5">
-    <div className="row mb-4">
-      <div className="col-sm-12">
-        <h2 className="text-center text-uppercase">
-          Department Virtuoso
-        </h2>
-      </div>
-    </div>
+        <section className="facStrength faculty-content py-5">
+          <div className="container mt-5">
+            <div className="row mb-4">
+              <div className="col-sm-12">
+                <h2 className="text-center text-uppercase">
+                  Department Virtuoso
+                </h2>
+              </div>
+            </div>
 
-    <div
-      id="facultyCarousel "
-      className="carousel slide"
-      data-bs-ride="carousel"
-      data-bs-interval="3000"
-    >
-      <div className="carousel-inner 30vh">
-        {/* Create groups of 3 faculty members per slide */}
-        {Array(Math.ceil(filteredFaculty.length / 3))
-          .fill()
-          .map((_, slideIndex) => (
-            <div 
-              key={slideIndex} 
-              className={`carousel-item ${slideIndex === 0 ? 'active' : ''}`}
+            <div
+              id="facultyCarousel"
+              style={{ height: "70vh" }}
+              className="carousel slide"
+              data-bs-ride="carousel"
+              data-bs-interval="3000"
             >
-              <div className="row g-4">
-                {filteredFaculty
-                  .slice(slideIndex * 3, slideIndex * 3 + 3)
-                  .map((member, index) => (
-                    <div key={index} className="col-md-4">
-                      <div className="faculty-card">
-                        <div className="faculty-card-inner">
-                          <div className="faculty-image-wrapper">
-                          <img
-                            src={`/images/TeachingFacultyImages/${member.Image}.jpg`}
-                            onError={(e) => {
-                              e.target.onerror = null; // Prevent infinite loop
-                              if (e.target.src.endsWith('.jpg')) {
-                                e.target.src = `/images/TeachingFacultyImages/${member.Image}.jpeg`;
-                              } else if (e.target.src.endsWith('.jpeg')) {
-                                e.target.src = `/images/TeachingFacultyImages/${member.Image}.png`;
-                              } else {
-                                e.target.src = '/images/CVR Logo.png';
-                              }
-                            }}
-                            alt={member["Name of the Staff Member "]}
-                            className="faculty-image"
-                          />
-                          </div>
-                          <div className="faculty-details">
-                            <h4 className="faculty-name">
-                              {member["Name of the Staff Member "]}
-                            </h4>
-                            <p className="faculty-designation">
-                              {member.Designation}
-                            </p>
-                            <p className="faculty-join-date">Joined: {member.DOJ}</p>
-                          </div>
-                        </div>
+              <div className="carousel-inner" style={{ height: "75vh" }}>
+                {Array(Math.ceil(filteredFaculty.length / 3))
+                  .fill()
+                  .map((_, slideIndex) => (
+                    <div
+                      key={slideIndex}
+                      className={`carousel-item ${
+                        slideIndex === 0 ? "active" : ""
+                      }`}
+                    >
+                      <div className="row g-4">
+                        {filteredFaculty
+                          .slice(slideIndex * 3, slideIndex * 3 + 3)
+                          .map((member, index) => (
+                            <div key={index} className="col-md-4">
+                              <div
+                                className="faculty-card"
+                                style={{ height: "65vh" }}
+                              >
+                                <div
+                                  className="faculty-card-inner"
+                                  style={{ height: "60vh" }}
+                                >
+                                  <div
+                                    className="faculty-image-wrapper center-block"
+                                    style={{
+                                      height: "45vh",
+                                    }}
+                                  >
+                                    <img
+                                      src={`/images/TeachingFacultyImages/${member.Image}.jpg`}
+                                      onError={(e) => {
+                                        e.target.onerror = null;
+                                        if (e.target.src.endsWith(".jpg")) {
+                                          e.target.src = `/images/TeachingFacultyImages/${member.Image}.jpeg`;
+                                        } else if (
+                                          e.target.src.endsWith(".jpeg")
+                                        ) {
+                                          e.target.src = `/images/TeachingFacultyImages/${member.Image}.png`;
+                                        } else {
+                                          e.target.src = "/images/CVR Logo.png";
+                                        }
+                                      }}
+                                      alt={member["Name of the Staff Member "]}
+                                      className="faculty-image"
+                                      style={{ height: "60vh" }}
+                                    />
+                                  </div>
+                                  <div className="faculty-details">
+                                    <h4 className="faculty-name">
+                                      {member["Name of the Staff Member "]}
+                                    </h4>
+                                    <p className="faculty-designation">
+                                      {member.Designation}
+                                    </p>
+                                    <p className="faculty-join-date">
+                                      Joined: {member.DOJ}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
                       </div>
                     </div>
                   ))}
               </div>
+              <button
+                className="carousel-control-prev"
+                type="button"
+                data-bs-target="#facultyCarousel"
+                data-bs-slide="prev"
+              >
+                <span
+                  className="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span className="visually-hidden">Previous</span>
+              </button>
+              <button
+                className="carousel-control-next"
+                type="button"
+                data-bs-target="#facultyCarousel"
+                data-bs-slide="next"
+              >
+                <span
+                  className="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span className="visually-hidden">Next</span>
+              </button>
             </div>
-          ))}
-      </div>
-    </div>
-  </div>
-</section>
+          </div>
+        </section>
       </main>
       <BackToTopButton />
     </>

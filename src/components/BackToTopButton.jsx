@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaArrowUp } from "react-icons/fa"; // Keeping FontAwesome icon
+import { FaArrowUp } from "react-icons/fa";
 
 export default function BackToTopButton() {
   const [visible, setVisible] = useState(false);
@@ -17,8 +17,6 @@ export default function BackToTopButton() {
   const handleClick = () => {
     setIsClicked(true);
     window.scrollTo({ top: 0, behavior: "smooth" });
-
-    // Reset the clicked state after animation completes
     setTimeout(() => {
       setIsClicked(false);
     }, 300);
