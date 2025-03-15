@@ -108,7 +108,7 @@ const About = () => {
       title: "Industry Collaboration",
       description:
         "We maintain strong partnerships with leading technology companies.",
-      icon: "bi bi-handshake",
+      icon: "&#129309;",
       color: "#7209b7",
     },
     {

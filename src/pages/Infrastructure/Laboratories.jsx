@@ -459,12 +459,11 @@ const Laboratories = () => {
 
   return (
     <div className="bg-light">
-      {/* Hero Section */}
-      <div className="position-relative bg-primary text-white">
-        <div className="container py-5 position-relative">
+      <div className="page-header position-relative">
+        <div className="container py-3 position-relative">
           <div className="row align-items-center">
             <div className="col-lg-8">
-              <h1 className="display-4 fw-bold mb-4 text-white">
+              <h1 className="display-3 fw-bold mb-3 text-white">
                 Department Laboratories
               </h1>
               <p className="lead opacity-75 mb-0">
@@ -482,7 +481,6 @@ const Laboratories = () => {
         </div>
       </div>
 
-      {/* Laboratory Filters */}
       <div className="container py-4">
         <div className="d-flex justify-content-center flex-wrap gap-2">
           {categories.map((category) => (
@@ -501,7 +499,6 @@ const Laboratories = () => {
         </div>
       </div>
 
-      {/* Laboratories Grid */}
       <div className="container py-4">
         <div className="row g-4">
           {filteredLaboratories.map((lab, index) => (
@@ -555,7 +552,6 @@ const Laboratories = () => {
         </div>
       </div>
 
-      {/* Lab Details Modal */}
       {selectedLab && (
         <div className="modal fade show d-block" tabIndex="-1">
           <div className="modal-dialog modal-lg modal-dialog-centered">
@@ -600,6 +596,25 @@ const Laboratories = () => {
       )}
 
       <BackToTopButton />
+      <style jsx>{`
+        .page-header {
+          background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+          padding: 2rem 0;
+          color: white;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .page-header::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.3);
+        }
+      `}</style>
     </div>
   );
 };
