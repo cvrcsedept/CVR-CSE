@@ -14,7 +14,7 @@ import {
   SyllabusBooks,
   TimeTable,
 } from "./pages/Academics";
-import { Admin, NonTeaching, Teaching, TechnicalStaff } from "./pages/Faculty";
+import { Teaching, TechnicalStaff } from "./pages/Faculty";
 import {
   Classrooms,
   Laboratories,
@@ -62,8 +62,8 @@ const App = () => {
           element={<ResearchProjects />}
         />
         <Route path="/research/workshops" element={<Workshops />} />
-        <Route path="/faculty/admin" element={<Admin />} />
-        <Route path="/faculty/non-teaching" element={<NonTeaching />} />
+        {/* <Route path="/faculty/admin" element={<Admin />} /> */}
+        {/* <Route path="/faculty/non-teaching" element={<NonTeaching />} /> */}
         <Route path="/faculty/teaching" element={<Teaching />} />
         <Route path="/faculty/technicalstaff" element={<TechnicalStaff />} />
 

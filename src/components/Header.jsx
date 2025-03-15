@@ -67,9 +67,7 @@ const Navbar = () => {
       type: "dropdown",
       items: [
         { label: "Teaching", path: "/faculty/teaching" },
-        { label: "Non-Teaching", path: "/faculty/non-teaching" },
-        { label: "Admin", path: "/faculty/admin" },
-        { label: "Technical Staff", path: "/faculty/technicalstaff" },
+        { label: "Non-Teaching", path: "/faculty/technicalstaff" },
       ],
     },
     {

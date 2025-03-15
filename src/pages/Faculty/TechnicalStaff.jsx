@@ -51,10 +51,15 @@ const NonTeaching = () => {
     const filtered = data.filter((member) => {
       const normDesignation = member.normalizedDesignation;
       switch (designation) {
-        case "Sr. Programmer":
-          return normDesignation.includes("sr.programmer");
-        case "Programmer":
-          return normDesignation === "programmer";
+        case "Programmers":
+          return normDesignation.includes("programmer") || 
+                 normDesignation.includes("sr.programmer");
+        case "DTP Operators":
+          return normDesignation.includes("dtp") || 
+                 normDesignation.includes("operator");
+        case "System Admin":
+          return normDesignation.includes("system") && 
+                 normDesignation.includes("admin");
         default:
           return true;
       }
@@ -63,7 +68,8 @@ const NonTeaching = () => {
     setFilteredStaff(filtered);
   };
 
-  const designationOptions = ["All", "Sr. Programmer", "Programmer"];
+  // Updated designation options with your three categories
+  const designationOptions = ["All", "Programmers", "DTP Operators", "System Admin"];
 
   return (
     <div className="teaching-faculty-wrapper">
@@ -96,7 +102,7 @@ const NonTeaching = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                {activeDesignation} Staff
+                {activeDesignation === "All" ? "All Staff" : activeDesignation}
               </button>
               <ul
                 className="dropdown-menu"
@@ -108,7 +114,7 @@ const NonTeaching = () => {
                       className="dropdown-item"
                       onClick={() => filterStaff(designation)}
                     >
-                      {designation} Staff
+                      {designation === "All" ? "All Staff" : designation}
                     </button>
                   </li>
                 ))}
@@ -125,8 +131,8 @@ const NonTeaching = () => {
                 <div className="faculty-card">
                   <div className="faculty-card-inner">
                     <div className="faculty-image-wrapper">
-                    <img
-                        src={`/images//${member.Image}.jpg`}
+                      <img
+                        src={`/images/Fw_ non teaching pics/${member.Image}.jpg`}
                         onError={(e) => {
                           e.target.onerror = null;
                           if (e.target.src.endsWith(".jpg")) {
@@ -138,7 +144,7 @@ const NonTeaching = () => {
                               "/images/CVR Logo.png";
                           }
                         }}
-                        alt={member["Name of the Staff Member "]}
+                        alt={member["Name of the Staff Member"]}
                         className="faculty-image"
                       />
                     </div>
@@ -151,9 +157,6 @@ const NonTeaching = () => {
                       </p>
                       <p className="faculty-join-date">
                         Joined: {member["DOJ"]}
-                      </p>
-                      <p className="faculty-id">
-                        ID: {member["College ID No."]}
                       </p>
                     </div>
                   </div>
