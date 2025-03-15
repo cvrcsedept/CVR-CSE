@@ -219,8 +219,6 @@ const Home = () => {
                     ></button>
                   ))}
                 </div>
-
-                {/* Carousel Images */}
                 <div
                   className="carousel-inner"
                   style={{
@@ -313,13 +311,22 @@ const Home = () => {
                 >
                   <p className="h3">Dr. A Vani Vathsala (Professor and HOD)</p>
                   <p className="msghodp">
-                  The Computer Science and Engineering department was started in the year 2001 with an intake of 60 B.Tech. students
-                  and current intake is 600. Our department offers B.Tech in Computer Science and Engineering (CSE), B.Tech
-                  in Computer Science and Business Systems (CSBS), and M.Tech in Artificial Intelligence (AI), equipping
-                  students with industry-relevant skills and advanced knowledge for the evolving tech landscape. The department is serving as research center under JNTUH and offering
-                  Ph.D. programme in Image Processing. Department is constantly striving for capacity building and quality improvement in teaching-learning,
-                  research, and contributions through industry collaborations. Department organizes the FDPs, technical workshops and conferences at National
-                  and International level periodically.</p>
+                    The Computer Science and Engineering department was started
+                    in the year 2001 with an intake of 60 B.Tech. students and
+                    current intake is 600. Our department offers B.Tech in
+                    Computer Science and Engineering (CSE), B.Tech in Computer
+                    Science and Business Systems (CSBS), and M.Tech in
+                    Artificial Intelligence (AI), equipping students with
+                    industry-relevant skills and advanced knowledge for the
+                    evolving tech landscape. The department is serving as
+                    research center under JNTUH and offering Ph.D. programme in
+                    Image Processing. Department is constantly striving for
+                    capacity building and quality improvement in
+                    teaching-learning, research, and contributions through
+                    industry collaborations. Department organizes the FDPs,
+                    technical workshops and conferences at National and
+                    International level periodically.
+                  </p>
                 </div>
               </div>
             </div>

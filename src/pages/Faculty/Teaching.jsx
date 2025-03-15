@@ -78,7 +78,6 @@ const Teaching = () => {
 
   return (
     <div className="teaching-faculty-wrapper">
-      {/* Hero Section */}
       <div className="faculty-hero position-relative">
         <div className="container">
           <div className="row align-items-center">
@@ -94,9 +93,7 @@ const Teaching = () => {
         </div>
       </div>
 
-      {/* Faculty Filter and Grid */}
       <div className="faculty-content container py-5">
-        {/* Dropdown Filter */}
         <div className="row mb-4">
           <div className="col-12 text-center">
             <div className="dropdown">
@@ -128,7 +125,6 @@ const Teaching = () => {
           </div>
         </div>
 
-        {/* Faculty Grid */}
         <div className="row g-4">
           {filteredFaculty.length > 0 ? (
             filteredFaculty.map((member, index) => (
@@ -139,14 +135,14 @@ const Teaching = () => {
                       <img
                         src={`/images/TeachingFacultyImages/${member.Image}.jpg`}
                         onError={(e) => {
-                          e.target.onerror = null; // Prevent infinite loop
+                          e.target.onerror = null;
                           if (e.target.src.endsWith(".jpg")) {
                             e.target.src = `/images/TeachingFacultyImages/${member.Image}.jpeg`;
                           } else if (e.target.src.endsWith(".jpeg")) {
                             e.target.src = `/images/TeachingFacultyImages/${member.Image}.png`;
                           } else {
                             e.target.src =
-                              "/images/TeachingFacultyImages/default-avatar.png";
+                              "/images/TeachingFacultyImages/CVR Logo.png";
                           }
                         }}
                         alt={member["Name of the Staff Member "]}
