@@ -91,13 +91,21 @@ const NonTeaching = () => {
                 <div className="faculty-card">
                   <div className="faculty-card-inner">
                     <div className="faculty-image-wrapper">
-                      <img
-                        src={`/images/CVR Logo.png`}
-                        alt={member["Name of the Staff Member"]}
-                        className="faculty-image"
+                    <img
+                        src={`/images/TeachingFacultyImages/${member.Image}.jpg`}
                         onError={(e) => {
-                          e.target.src = "/images/default-avatar.png";
+                          e.target.onerror = null;
+                          if (e.target.src.endsWith(".jpg")) {
+                            e.target.src = `/images/TeachingFacultyImages/${member.Image}.jpeg`;
+                          } else if (e.target.src.endsWith(".jpeg")) {
+                            e.target.src = `/images/TeachingFacultyImages/${member.Image}.png`;
+                          } else {
+                            e.target.src =
+                              "/images/TeachingFacultyImages/CVR Logo.png";
+                          }
                         }}
+                        alt={member["Name of the Staff Member "]}
+                        className="faculty-image"
                       />
                     </div>
                     <div className="faculty-details">
