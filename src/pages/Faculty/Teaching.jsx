@@ -163,9 +163,7 @@ const Teaching = () => {
               </div>
             ))
           ) : (
-            <div className="col-12 text-center">
-              <p className="text-muted">No faculty members found.</p>
-            </div>
+            <div></div>
           )}
         </div>
       </div>

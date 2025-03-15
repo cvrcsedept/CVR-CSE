@@ -188,23 +188,20 @@ const Objectives = () => {
                   <h5 className="card-title mb-3">{item.title}</h5>
                   <p className="card-text text-muted">{item.description}</p>
                 </div>
-                <div className="card-footer bg-transparent border-0">
-                  <button
-                    className={`btn btn-outline-${colorClass.replace(
-                      "bg-",
-                      ""
-                    )} w-100`}
-                    data-bs-toggle="modal"
-                    data-bs-target={`#modal-${title
-                      .replace(/\s+/g, "-")
-                      .toLowerCase()}-${item.id}`}
-                  >
-                    Learn More
-                  </button>
-                </div>
+                <button
+                  className={`btn btn-outline-${colorClass.replace(
+                    "bg-",
+                    ""
+                  )} w-100`}
+                  data-bs-toggle="modal"
+                  data-bs-target={`#modal-${title
+                    .replace(/\s+/g, "-")
+                    .toLowerCase()}-${item.id}`}
+                >
+                  Learn More
+                </button>
               </div>
 
-              {/* Modal for detailed description */}
               <div
                 className="modal fade"
                 id={`modal-${title.replace(/\s+/g, "-").toLowerCase()}-${
