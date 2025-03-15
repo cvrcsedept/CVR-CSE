@@ -31,19 +31,13 @@
   height: 100%;
   text-align: center;
   transition: transform 0.6s;
-  transform-style: preserve-3d;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
 }
 
-.faculty-card:hover .faculty-card-inner {
-  transform: rotateY(10deg);
-}
-
 .faculty-image-wrapper {
   min-height: 250px;
-  /* max-height: 300px; Optional */
   height: auto;
   overflow: hidden;
 }
@@ -54,10 +48,6 @@
   object-fit: contain;
   object-position: center top;
   transition: transform 0.3s ease;
-}
-
-.faculty-card:hover .faculty-image {
-  transform: scale(1.1);
 }
 
 .faculty-details {
