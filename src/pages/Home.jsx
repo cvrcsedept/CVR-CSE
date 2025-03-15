@@ -313,12 +313,13 @@ const Home = () => {
                 >
                   <p className="h3">Dr. A Vani Vathsala (Professor and HOD)</p>
                   <p className="msghodp">
-                    The department of Computer Science and Engineering has been
-                    flourishing by leaps and bounds since its inception in 2001
-                    and has seen unprecedented growth. It currently offers four
-                    undergraduate programs and a postgraduate program. The
-                    department is a JNTUH recognized Research Centre.
-                  </p>
+                  The Computer Science and Engineering department was started in the year 2001 with an intake of 60 B.Tech. students
+                  and current intake is 600. Our department offers B.Tech in Computer Science and Engineering (CSE), B.Tech
+                  in Computer Science and Business Systems (CSBS), and M.Tech in Artificial Intelligence (AI), equipping
+                  students with industry-relevant skills and advanced knowledge for the evolving tech landscape. The department is serving as research center under JNTUH and offering
+                  Ph.D. programme in Image Processing. Department is constantly striving for capacity building and quality improvement in teaching-learning,
+                  research, and contributions through industry collaborations. Department organizes the FDPs, technical workshops and conferences at National
+                  and International level periodically.</p>
                 </div>
               </div>
             </div>
