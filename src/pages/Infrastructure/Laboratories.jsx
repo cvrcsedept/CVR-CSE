@@ -306,7 +306,7 @@ const Laboratories = () => {
         "The Samsung PC with 8GB RAM, 500GB SSD, and a 22 LED monitor is well-suited for English Language and ELCS lab activities.",
       icon: "bi-graph-up",
       color: "secondary",
-      location: "CB C3A and C3B Cellar",
+      location: "FB 114",
       category: "Communication",
     },
     {
@@ -317,7 +317,7 @@ const Laboratories = () => {
         "The Samsung PC with 8GB RAM, 500GB SSD, and a 22 LED monitor is well-suited for English Language and ELCS lab activities.",
       icon: "bi-graph-up",
       color: "secondary",
-      location: "FB 114",
+      location: "FB 207",
       category: "Communication",
     },
     {
@@ -328,7 +328,7 @@ const Laboratories = () => {
         "Specialized lab with 100 Acer systems for enhancing English language communication and professional skills.",
       icon: "bi-graph-up",
       color: "secondary",
-      location: "FB 207",
+      location: "FB 307",
       category: "Communication",
     },
     {
@@ -424,7 +424,7 @@ const Laboratories = () => {
       image: "/images/laboratories/Computer Centre.JPG",
       title: "Projects lab",
       description:
-        "Dedicated research space with 65 Acer systems for in-depth exploration of academic and technological resources.",
+        "A projects lab with Lenovo ThinkCentre Neo 50T ensures smooth performance with i5 processors, 16GB RAM, and 512GB SSDs.",
       icon: "bi-pc-display",
       color: "dark",
       location: "CM 304A",
@@ -435,7 +435,7 @@ const Laboratories = () => {
       image: "/images/laboratories/Computer Centre.JPG",
       title: "Projects lab",
       description:
-        "Dedicated research space with 65 Acer systems for in-depth exploration of academic and technological resources.",
+        "A projects lab with Lenovo ThinkCentre Neo 50T ensures smooth performance with i5 processors, 16GB RAM, and 512GB SSDs.",
       icon: "bi-pc-display",
       color: "dark",
       location: "CM 304B",

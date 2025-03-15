@@ -8,10 +8,10 @@ const Conferences = () => {
   }, []);
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [selectedYear, setSelectedYear] = useState("2023-2024"); // Default to 2023-2024
+  // const [selectedYear, setSelectedYear] = useState("2023-2024"); // Default to 2023-2024
 
   // Function to load data based on selected year
-  const fetchExcelData = async (year) => {
+  const fetchExcelData = async () => {
     try {
       const response = await fetch(`/Data/Conferences/conferences.xlsx`);
       const arrayBuffer = await response.arrayBuffer();
@@ -28,21 +28,21 @@ const Conferences = () => {
 
   // Load data when component mounts or when the year changes
   useEffect(() => {
-    fetchExcelData(selectedYear);
-  }, [selectedYear]);
+    fetchExcelData();
+  });
 
   return (
     <>
       <h1 className="text-center mt-4  ">Conferences List</h1>
       <div className="container vh-100 align-center justify-center ">
         {/* Dropdown to select which academic year's dataset to load */}
-        <label className="text">Select Academic Year: </label>
-        <select
+        {/* <label className="text">Select Academic Year: </label> */}
+        {/* <select
           value={selectedYear}
           onChange={(e) => setSelectedYear(e.target.value)}
         >
           <option value="2023-2024">2023-2024</option>
-        </select>
+        </select> */}
         <div className="container">
           {/* Workshop Data Table */}
           <table
@@ -57,7 +57,6 @@ const Conferences = () => {
                 <th>Date</th>
                 <th>Title</th>
                 <th>From</th>
-                <th>Count</th>
               </tr>
             </thead>
             <tbody>
@@ -69,11 +68,13 @@ const Conferences = () => {
                   <td>{workshop["Date"]}</td>
                   <td>{workshop["Title"]}</td>
                   <td>{workshop["From"]}</td>
-                  <td>{workshop["Count"]}</td>
                 </tr>
               ))}
             </tbody>
           </table>
+
+          <h4>Held during 2016-17 and 2017-18</h4>
+          <p>"International Conference on Rough Sets and Soft Computing in Big Data Realm (ICRSBR-2017)" from 09th to 11th November 2017 by the Department of Computer Science & Engineering, CVR College of Engineering in collaboration with ISRS.</p>
         </div>
       </div>
       <BackToTopButton />
