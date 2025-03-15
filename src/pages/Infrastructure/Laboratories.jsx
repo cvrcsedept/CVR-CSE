@@ -598,7 +598,7 @@ const Laboratories = () => {
       <BackToTopButton />
       <style jsx>{`
         .page-header {
-          background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+          background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
           padding: 2rem 0;
           color: white;
           position: relative;
