@@ -120,7 +120,7 @@ const EResources = () => {
           name: "Web Technologies",
           links: [
             { name: "GFG", url: "https://www.geeksforgeeks.org/web-technology/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=SIy5ZjoGzDQ" },
+            { name: "YouTube", url: "https://www.youtube.com/watch?v=Oh93xiKv-Jg&list=PLrjkTql3jnm8d1ddpVKifXO_fPjSKATCp" },
             { name: "NPTEL", url: "https://onlinecourses.swayam2.ac.in/nou24_cs09/preview" }
           ],
         },
@@ -128,7 +128,7 @@ const EResources = () => {
           name: "Computer Networking",
           links: [
             { name: "GFG", url: "https://www.geeksforgeeks.org/computer-network-tutorials/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=IPvYjXCs" },
+            { name: "YouTube", url: "https://www.youtube.com/watch?v=JFF2vJaN0Cw&list=PLxCzCOWd7aiGFBD2-2joCpWOLUrDLvVV_" },
             { name: "NPTEL", url: "https://archive.nptel.ac.in/courses/106/105/106105183/" }
           ],
         },
@@ -136,14 +136,14 @@ const EResources = () => {
           name: "Algorithm Design and Analysis",
           links: [{name:"Nptel", url:"https://archive.nptel.ac.in/courses/106/106/106106131/"},
             { name: "GeeksforGeeks", url: "https://www.geeksforgeeks.org/fundamentals-of-algorithms/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=rL8X2mlNHPM" }
+            { name: "YouTube", url: "https://www.youtube.com/watch?v=0IAPZzGSbME&list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O" }
           ],
         },
         {
           name: "Data Science",
           links: [{name:"Nptel", url:"https://onlinecourses.nptel.ac.in/noc21_cs69/preview"},
             { name: "GeeksforGeeks", url: "https://www.geeksforgeeks.org/data-science-tutorial/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=ua-CiDNNj30" }
+            { name: "YouTube", url: "https://www.youtube.com/watch?v=gDZ6czwuQ18&pp=ygUYZGF0YSBzY2llbmNlIGZ1bGwgY291cnNl" }
           ],
         },
         {
@@ -183,52 +183,52 @@ const EResources = () => {
         {
           name: "Artificial Intelligence and Machine Learning",
           links: [{name:"Nptel", url:"https://onlinecourses.nptel.ac.in/noc22_cs56/preview"},
-            {name:"GFG", url:"https://onlinecourses.nptel.ac.in/noc22_cs56/preview"},
-            {name:"Youtube", url:"https://onlinecourses.nptel.ac.in/noc22_cs56/preview"}
+            {name:"GFG", url:"hhttps://www.geeksforgeeks.org/aiml-introduction/"},
+            {name:"Youtube", url:"https://www.youtube.com/watch?v=uB3i-qV6VdM&list=PLxCzCOWd7aiHGhOHV-nwb0HR5US5GFKFI"}
           ],
         },
         { name: "Full Stack Development", 
           links: [{name:"Nptel",url:"https://nptel.ac.in/courses/128108025"},
-            {name:"GFG",url:"https://nptel.ac.in/courses/128108025"},
-            {name:"Youtube",url:"https://nptel.ac.in/courses/128108025"}
+            {name:"GFG",url:"hhttps://www.geeksforgeeks.org/what-is-full-stack-development/"},
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=tVzUXW6siu0&list=PLu0W_9lII9agq5TrH9XLIKQvv0iaF2X3w"}
           ] 
         },
         { name: "Cloud Computing and Devops", 
           links: [{name:"Nptel",url:"https://onlinecourses.nptel.ac.in/noc19_cs64/preview"},
-            {name:"GFG",url:"https://onlinecourses.nptel.ac.in/noc19_cs64/preview"},
-            {name:"Youtube",url:"https://onlinecourses.nptel.ac.in/noc19_cs64/preview"}
+            {name:"GFG",url:"https://www.geeksforgeeks.org/cloud-computing/"},
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=dmGybCohHsw&list=PLxCzCOWd7aiHRHVUtR-O52MsrdUSrzuy4"}
           ] },
         {
           name: "Automata Theory and Compiler Design",
           links: [{name:"Nptel",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"},
-            {name:"GFG",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"},
-            {name:"Youtube",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"}
+            {name:"GFG",url:"https://www.geeksforgeeks.org/compiler-design-tutorials/"},
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=XUsw5igq4DM&list=PLxCzCOWd7aiEKtKSIHYusizkESC42diyc"}
           ],
         },
         { name: "Crytography and Essentials of Network Security(PE-II)", 
           links: [{name:"Nptel",url:"https://archive.nptel.ac.in/courses/106/105/106105162/"},
-            {name:"GFG",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"},
-            {name:"Youtube",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"}
+            {name:"GFG",url:"https://www.geeksforgeeks.org/cryptography-and-its-types/"},
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=JoeiLuFNBc4&list=PLBlnK6fEyqRgJU3EsOYDTW7m6SUmW6kII&pp=0gcJCXcEOCosWNin"}
           ] 
         },
         {
           name: "Internet of Things(PE-II)",
           links: [{name:"Nptel",url:"https://archive.nptel.ac.in/courses/106/105/106105166/"},
-            {name:"GFG",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"},
-            {name:"Youtube",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"}
+            {name:"GFG",url:"https://www.geeksforgeeks.org/introduction-to-internet-of-things-iot-set-1/"},
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=b-fCl-UDJuo&list=PLgwJf8NK-2e6FvFUItZbGYnKiqjrlLpCb"}
           ],
         },
         {
           name: "Distributed Systems(PE-II)",
           links: [{name:"Nptel",url:"https://archive.nptel.ac.in/courses/106/106/106106168/"},
-            {name:"GFG",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"},
-            {name:"Youtube",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"}
+            {name:"GFG",url:"https://www.geeksforgeeks.org/distributed-systems-tutorial/"},
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=cQP8WApzIQQ&list=PLrw6a1wE39_tb2fErI4-WkMbsvGQk9_UB"}
           ],
         },
         { name: "Artificial Neural Networks and Graphical Models (PE-II)", 
           links: [{name:"Nptel",url:"https://nptel.ac.in/courses/117105084"},
-            {name:"GFG",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"},
-            {name:"Youtube",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"}
+            {name:"GFG",url:"https://www.geeksforgeeks.org/artificial-neural-networks-and-its-applications/"},
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=OVwEeSsSCHE&list=PLLssT5z_DsK_gyrQ_biidwvPYCRNGI3iv"}
           ] },
       ],
     },
@@ -236,51 +236,44 @@ const EResources = () => {
       year: "Fourth Year I-Semester",
       subjects: [
         { name: "Linux Programming", links: [{name:"Nptel",url:"https://archive.nptel.ac.in/courses/117/106/117106113/"},
-          {name:"GFG",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"},
-            {name:"Youtube",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"}
+          {name:"GFG",url:"https://www.geeksforgeeks.org/linux-tutorial/"},
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=sWbUDq4S6Y8&pp=ygURbGludXggZnVsbCBjb3Vyc2U%3D"}
         ] },
         {
           name: "Data Warehousing and Data Mining",
           links: [{name:"Nptel",url:"https://onlinecourses.nptel.ac.in/noc21_cs06/preview"},
-            {name:"GFG",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"},
-            {name:"Youtube",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"}
+            {name:"GFG",url:"https://www.geeksforgeeks.org/data-warehousing/"},
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=xEmrFePGjEg&list=PLmAmHQ-_5ySxFoIGmY1MJao-XYvYGxxgj"}
           ],
         },
         { name: "DEEP LEARNING (DL) (PROFESSIONAL ELECTIVE II)", links: [{name:"Nptel",url:"https://archive.nptel.ac.in/courses/106/106/106106184/"},
-          {name:"GFG",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"},
-            {name:"Youtube",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"}
+          {name:"GFG",url:"https://www.geeksforgeeks.org/deep-learning-tutorial/"},
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=6M5VXKLf4D4&list=PLEiEAq2VkUUIYQ-mMRAGilfOKyWKpHSip"}
         ] },
         { name: "VIRTUAL REALITY (VR) (PROFESSIONAL ELECTIVE II)", links: [{name:"Nptel",url:"https://archive.nptel.ac.in/courses/121/106/121106013/"},
-          {name:"GFG",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"},
-            {name:"Youtube",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"}
+          {name:"GFG",url:"https://www.geeksforgeeks.org/virtual-reality-augmented-reality-and-mixed-reality/"},
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=aNC5YMUTcQ4&list=PLbMVogVj5nJSyt80VRXYC-YrAvQuUb6dh"}
         ] },
         { name: "VISUAL PROGRAMMING (PROFESSIONAL ELECTIVE II)", links: [{name:"Youtube",url:"https://www.youtube.com/watch?v=Y8c1IHZs5qc&list=PLTd6ceoshpremSFQxYM4L0p4Q6hR-4e4J"},
-          {name:"GFG",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"},
-            {name:"Youtube",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"}
+          {name:"GFG",url:"https://www.geeksforgeeks.org/introduction-to-visual-programming-language/"},
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=DcON0hgiLrY&list=PLXuDFs_RQFwIi3WooZmGFIJMe9OIqQAT-"}
         ] },
-        {
-          name: "Web services and Cloud Computing",
-          links: [{name:"Nptel",url:"https://archive.nptel.ac.in/courses/106/105/106105167/"},
-            {name:"GFG",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"},
-            {name:"Youtube",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"}
-          ],
-        },
       ],
     },
     {
       year: "Fourth Year II-Semester",
       subjects: [
         { name: "ETHICAL HACKING - EH (PROFESSIONAL ELECTIVE IV)", links: [{name:"Nptel",url:"https://archive.nptel.ac.in/courses/106/105/106105217/"},
-          {name:"GFG",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"},
-            {name:"Youtube",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"}
+          {name:"GFG",url:"https://www.geeksforgeeks.org/introduction-to-ethical-hacking/"},
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=cKEf8H9cQGM&list=PLwO5-rumi8A4J7h4Fm92TEC00gfZUk7ls&pp=0gcJCXcEOCosWNin"}
         ] },
         { name: "BLOCK CHAIN TECHNOLOGIES - BCT (PROFESSIONAL ELECTIVE V)", links: [{name:"Nptel",url:"https://archive.nptel.ac.in/courses/106/105/106105235/"},
-          {name:"GFG",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"},
-            {name:"Youtube",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"}
+          {name:"GFG",url:"https://www.geeksforgeeks.org/blockchain-technology-introduction/"},
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=2uYuWiICCM0&list=PLsyeobzWxl7oY6tZmnZ5S7yTDxyu4zDW-&pp=0gcJCXcEOCosWNin"}
         ] },
         { name: "HUMAN COMPUTER INTERACTION - HCI", links: [{name:"Nptel",url:"https://archive.nptel.ac.in/courses/106/106/106106177/"},
-          {name:"GFG",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"},
-            {name:"Youtube",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"}
+          {name:"GFG",url:"https://www.geeksforgeeks.org/introduction-to-human-computer-interface-hci//"},
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=WW1g3UT2zww&list=PLLssT5z_DsK_nusHL_Mjt87THSTlgrsyJ"}
         ] },
       ],
     },
