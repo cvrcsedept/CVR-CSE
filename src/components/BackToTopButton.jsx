@@ -13,6 +13,30 @@ export default function BackToTopButton() {
     window.addEventListener("scroll", toggleVisibility);
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
+  useEffect(() => {
+    const styleSheet = document.createElement("style");
+    styleSheet.innerHTML = `
+      @keyframes ping-once {
+        0% {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+        }
+        70% {
+          transform: scale(1);
+          box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+        }
+        100% {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+        }
+      }
+      .animate-ping-once {
+        animation: ping-once 0.3s cubic-bezier(0, 0, 0.2, 1) 1;
+      }
+    `;
+    document.head.appendChild(styleSheet);
+    return () => document.head.removeChild(styleSheet);
+  }, []);
 
   const handleClick = () => {
     setIsClicked(true);
@@ -53,26 +77,6 @@ export default function BackToTopButton() {
           isClicked ? "translate-y-1" : ""
         }`}
       />
-
-      <style jsx>{`
-        @keyframes ping-once {
-          0% {
-            transform: scale(0.95);
-            box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
-          }
-          70% {
-            transform: scale(1);
-            box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
-          }
-          100% {
-            transform: scale(0.95);
-            box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
-          }
-        }
-        .animate-ping-once {
-          animation: ping-once 0.3s cubic-bezier(0, 0, 0.2, 1) 1;
-        }
-      `}</style>
     </button>
   );
 }
