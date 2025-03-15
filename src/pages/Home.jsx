@@ -149,7 +149,7 @@ const Home = () => {
       src: "/images/newgrouppic.jpg",
       alt: "Group Pic",
       title: "Department Strength",
-      caption: "This is the Strength of the Department",
+      caption: "A glimpse of the department's unity and excellence.",
     },
     {
       src: "/images/newcsedept.jpg",
@@ -162,14 +162,14 @@ const Home = () => {
       alt: "Projects lab",
       title: "projects Laboratory",
       caption:
-        "Projects Laboratory where students do their Mini & Major Projects",
+        "A dedicated space for students to bring their Mini & Major projects to life.",
     },
     {
       src: "/images/laboratories/ProjectsLab1.JPG",
       alt: "Full stack development  Lab",
       title: "Full stack development lab",
       caption:
-        "Full stack development lab helps in providing hands-on experience in building web applications using frontend and backend technologies, databases, and deployment tools.",
+        "Equipped for hands-on learning in web development, covering frontend, backend, databases, and deployment",
     },
   ];
 
