@@ -272,15 +272,29 @@ const TimeTable = () => {
   const mtechPrograms = [
     {
       title: "M.Tech",
-      year: "I Year - 2024-25 - R22",
-      url: "/Data/Time-Table/m-tech-1-1.pdf",
+      year: "I-I Year - 2024-25 - R22",
+      url: "/Data/Time-Table/M I YR I SEM.pdf",
       icon: "fa-solid fa-microchip",
       color: "#36b9cc",
     },
     {
       title: "M.Tech",
-      year: "II Year - 2024-25 - R22",
-      url: "/Data/Time-Table/mtech-2-2.pdf",
+      year: "I-II Year - 2024-25 - R22",
+      url: "/Data/Time-Table/M I YR II SEM.pdf",
+      icon: "fa-solid fa-microchip",
+      color: "#36b9cc",
+    },
+    {
+      title: "M.Tech",
+      year: "II-I Year - 2024-25 - R22",
+      url: "/Data/Time-Table/M II YR I SEM.pdf",
+      icon: "fa-solid fa-microscope",
+      color: "#6f42c1", 
+    },
+    {
+      title: "M.Tech",
+      year: "II-II Year - 2024-25 - R22",
+      url: "/Data/Time-Table/M II YR II SEM.pdf",
       icon: "fa-solid fa-microscope",
       color: "#6f42c1",
     },
