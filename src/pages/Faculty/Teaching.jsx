@@ -64,7 +64,11 @@ const Teaching = () => {
         case "Senior Assistant Professor":
           return normDesignation.includes("sr.asst.prof.");
         case "Assistant Professor":
-          return normDesignation.includes("asst.prof.");
+          return (
+            normDesignation.includes("asst.prof.") &&
+            !normDesignation.includes("sr.asst.prof.")
+          );
+
         default:
           return true;
       }
