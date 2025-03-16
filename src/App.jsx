@@ -21,7 +21,7 @@ import {
   SeminarHall,
   Library,
 } from "./pages/Infrastructure";
-import { EResources, Gallery, StudentWork } from "./pages/StudentCorner";
+import { EResources, Gallery } from "./pages/StudentCorner";
 import {
   Conferences,
   ConsultancyProjects,
@@ -50,9 +50,8 @@ const App = () => {
         <Route path="/infrastructure/library" element={<Library />} />
         <Route path="/studentcorner/e-resources" element={<EResources />} />
         <Route path="/studentcorner/gallery" element={<Gallery />} />
-        <Route path="/studentcorner/student-work" element={<StudentWork />} />
         <Route path="/research/conferences" element={<Conferences />} />
-        <Route path="/research/publications" element={<Publications />} /> 
+        <Route path="/research/publications" element={<Publications />} />
         <Route
           path="/research/consultancy-projects"
           element={<ConsultancyProjects />}
