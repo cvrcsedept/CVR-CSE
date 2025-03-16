@@ -6,13 +6,11 @@ const Gallery = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Array of 25 images (Using only lowercase `.jpg` to prevent array issues)
   const images = Array.from(
     { length: 25 },
     (_, i) => `/images/StudentCorner/IMG-${i + 1}.png`
   );
 
-  // Auto-scroll carousel with cleanup to prevent memory leaks
   useEffect(() => {
     setIsLoaded(true);
     const interval = setInterval(() => {
@@ -21,42 +19,38 @@ const Gallery = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Manual navigation function
   const goToSlide = (index) => {
     setActiveSlide(index);
   };
 
   return (
     <div className={`student-showcase-container ${isLoaded ? "loaded" : ""}`}>
-      {/* Animated Background */}
       <div className="animated-bg">
         <div className="bg-shape shape1"></div>
         <div className="bg-shape shape2"></div>
         <div className="bg-shape shape3"></div>
       </div>
 
-      {/* Banner */}
-      <div className="banner-container">
-        <div className="banner">
-          <h1 className="banner-title">Student Work Showcase</h1>
-          <div className="banner-decoration">
+      <div className="gallery-banner-container">
+        <div className="gallery-banner">
+          <h1 className="gallery-banner-title">Student Work Showcase</h1>
+          <div className="gallery-banner-decoration">
             <span></span>
             <span></span>
             <span></span>
           </div>
-          <p className="banner-subtitle">
+          <p className="gallery-banner-subtitle">
             Celebrating creativity and excellence in student projects
           </p>
         </div>
       </div>
 
-      {/* Custom Carousel */}
-      <div className="carousel-container">
-        <div className="carousel-inner">
+      <div className="gallery-carousel-container p-2">
+        <div className="gallery-carousel-inner mb-3">
           {images.map((img, index) => (
             <div
               key={index}
-              className={`carousel-item ${
+              className={`gallery-carousel-item ${
                 activeSlide === index ? "active" : ""
               }`}
               style={{
@@ -64,7 +58,7 @@ const Gallery = () => {
                 zIndex: activeSlide === index ? 10 : 1,
               }}
             >
-              <div className="img-wrapper">
+              <div className="gallery-img-wrapper">
                 <img
                   src={img}
                   alt={`Student work ${index + 1}`}
@@ -76,10 +70,9 @@ const Gallery = () => {
           ))}
         </div>
 
-        {/* Carousel Navigation */}
-        <div className="carousel-nav">
+        <div className="gallery-carousel-nav mt-2">
           <button
-            className="carousel-control prev"
+            className="gallery-carousel-control prev"
             onClick={() =>
               goToSlide((activeSlide - 1 + images.length) % images.length)
             }
@@ -89,19 +82,13 @@ const Gallery = () => {
           </button>
 
           <button
-            className="carousel-control next"
+            className="gallery-carousel-control next"
             onClick={() => goToSlide((activeSlide + 1) % images.length)}
             aria-label="Next Slide"
           >
             <span>&rsaquo;</span>
           </button>
         </div>
-      </div>
-
-      <div className="footer">
-        <p>
-          All works displayed are original creations by our talented students
-        </p>
       </div>
     </div>
   );
