@@ -226,22 +226,22 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 8px 15px;
-  border-radius: 8px;
+  padding: 8px 16px;
+  margin: 5px 0;
+  border-radius: 6px;
   color: white;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-size: 0.85rem;
+  width: 100%;
+  transition: all 0.3s ease;
 }
 
 .resource-link-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1) !important;
-  color: white;
-  filter: brightness(1.1);
+  transform: translateY(-3px);
+  filter: brightness(110%);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) !important;
+  color: white;  
+  text-decoration: none;  
 }
 
 .resource-link-btn:active {
@@ -249,6 +249,7 @@ body {
 }
 
 .resource-link-btn i {
+  margin-right: 8px;
   font-size: 1.1rem;
 }
 
