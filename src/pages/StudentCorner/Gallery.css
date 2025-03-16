@@ -1,17 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Poppins", sans-serif;
-  overflow-x: hidden;
-  background-color: #f8f9fa;
-}
-
 .student-showcase-container {
   position: relative;
   min-height: 100vh;
@@ -82,14 +68,14 @@ body {
   }
 }
 
-.banner-container {
+.gallery-banner-container {
   padding: 3rem 1rem;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
-.banner {
+.gallery-banner {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   padding: 2rem;
@@ -99,10 +85,10 @@ body {
   transition: transform 0.5s ease;
   position: relative;
   z-index: 1;
-  animation: bannerEntrance 1s ease-out forwards;
+  animation: gallery-bannerEntrance 1s ease-out forwards;
 }
 
-.banner-title {
+.gallery-banner-title {
   font-size: 3rem;
   font-weight: 700;
   color: #333;
@@ -112,31 +98,31 @@ body {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.banner-decoration {
+.gallery-banner-decoration {
   display: flex;
   justify-content: center;
   margin: 1rem 0;
 }
 
-.banner-decoration span {
+.gallery-banner-decoration span {
   height: 5px;
   border-radius: 5px;
   margin: 0 5px;
 }
 
-.banner-decoration span:nth-child(1) {
+.gallery-banner-decoration span:nth-child(1) {
   width: 30px;
   background: #6a11cb;
   animation: pulse 2s infinite;
 }
 
-.banner-decoration span:nth-child(2) {
+.gallery-banner-decoration span:nth-child(2) {
   width: 60px;
   background: #2575fc;
   animation: pulse 2s infinite 0.3s;
 }
 
-.banner-decoration span:nth-child(3) {
+.gallery-banner-decoration span:nth-child(3) {
   width: 30px;
   background: #6a11cb;
   animation: pulse 2s infinite 0.6s;
@@ -154,7 +140,7 @@ body {
   }
 }
 
-.banner-subtitle {
+.gallery-banner-subtitle {
   font-size: 1.2rem;
   color: #666;
   margin-top: 1rem;
@@ -163,8 +149,8 @@ body {
   margin: 0 auto;
 }
 
-/* Carousel Styles */
-.carousel-container {
+/* gallery-Carousel Styles */
+.gallery-carousel-container {
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
@@ -173,14 +159,13 @@ body {
   overflow: hidden;
 }
 
-.carousel-inner {
+.gallery-carousel-inner {
   display: flex;
   position: relative;
   height: 500px;
-  margin-bottom: 2rem;
 }
 
-.carousel-item {
+.gallery-carousel-item {
   width: 100%;
   position: absolute;
   top: 0;
@@ -191,7 +176,7 @@ body {
   padding: 0 5%;
 }
 
-.carousel-item.active {
+.gallery-carousel-item.active {
   opacity: 1;
 }
 
@@ -204,6 +189,7 @@ body {
   border-radius: 15px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
   transition: transform 0.5s ease, box-shadow 0.5s ease;
+  /* margin-bottom: 2rem; */
 }
 
 /* .img-wrapper:hover {
@@ -218,16 +204,17 @@ body {
   transition: transform 0.5s ease;
 }
 
-/* Carousel Navigation */
-.carousel-nav {
+/* gallery-Carousel Navigation */
+.gallery-carousel-nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 2rem;
   gap: 1rem;
+  z-index: 1000;
 }
 
-.carousel-control {
+.gallery-carousel-control {
   background: rgba(255, 255, 255, 0.8);
   border: none;
   width: 50px;
@@ -243,14 +230,14 @@ body {
   transition: all 0.3s ease;
 }
 
-.carousel-control:hover {
+.gallery-carousel-control:hover {
   background: #6a11cb;
   color: white;
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.carousel-indicators {
+.gallery-carousel-gallery-indicators {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -258,7 +245,7 @@ body {
   max-width: 70%;
 }
 
-.indicator {
+.gallery-gallery-indicator {
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -268,62 +255,54 @@ body {
   transition: all 0.3s ease;
 }
 
-.indicator.active {
+.gallery-indicator.active {
   background: #6a11cb;
   transform: scale(1.3);
 }
 
-.indicator:hover {
+.gallery-indicator:hover {
   background: rgba(106, 17, 203, 0.7);
-}
-
-/* Footer */
-.footer {
-  text-align: center;
-  padding: 2rem 0;
-  color: #666;
-  font-size: 0.9rem;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .banner-title {
+  .gallery-banner-title {
     font-size: 2rem;
   }
 
-  .carousel-inner {
+  .gallery-carousel-inner {
     height: 350px;
   }
 
-  .carousel-indicators {
+  .gallery-carousel-gallery-indicators {
     max-width: 60%;
   }
 }
 
 @media (max-width: 576px) {
-  .banner-title {
+  .gallery-banner-title {
     font-size: 1.5rem;
   }
 
-  .banner-subtitle {
+  .gallery-banner-subtitle {
     font-size: 1rem;
   }
 
-  .carousel-inner {
+  .gallery-carousel-inner {
     height: 250px;
   }
 
-  .carousel-control {
+  .gallery-carousel-control {
     width: 40px;
     height: 40px;
     font-size: 1.5rem;
   }
 
-  .carousel-indicators {
+  .gallery-carousel-gallery-indicators {
     gap: 5px;
   }
 
-  .indicator {
+  .gallery-indicator {
     width: 8px;
     height: 8px;
   }
