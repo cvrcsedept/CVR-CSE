@@ -59,8 +59,8 @@ const Home = () => {
 
         const normalizeDesignationForCounting = (designation) => {
           return designation
-            .replace(/[^a-zA-Z. ]/g, "") // Remove unwanted symbols (&, ,)
-            .replace(/\s+/g, " ") // Normalize spaces
+            .replace(/[^a-zA-Z. ]/g, "")
+            .replace(/\s+/g, " ")
             .trim()
             .toLowerCase();
         };
@@ -70,7 +70,7 @@ const Home = () => {
             let designation = normalizeDesignationForCounting(
               faculty.designation
             );
-            
+
             if (designation.includes("emeritus professor")) {
               acc.EmeritusprofCount += 1;
             } else if (designation.includes("professor")) {
@@ -349,7 +349,14 @@ const Home = () => {
         <section className="deptStrengthSection" ref={deptStrengthRef}>
           <div className="deptStrengthSectionDivs">
             <div className="sHeading">
-              <p>Department Strength (Total:{counts.ProfCount+counts.AssistantProfCount+counts.AssociateProfCount+counts.AssistantProfCount})</p>
+              <p>
+                Department Strength (Total:
+                {counts.ProfCount +
+                  counts.AssistantProfCount +
+                  counts.AssociateProfCount +
+                  counts.AssistantProfCount}
+                )
+              </p>
             </div>
             <div className="deptStrengthContainer">
               <div className="deptStrengthItem">
