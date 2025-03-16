@@ -1,0 +1,71 @@
+.offcanvas-menu {
+  position: fixed;
+  top: 0;
+  right: -17vw;
+  width: 17vw;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  transition: right 0.3s ease-in-out;
+  color: white;
+  padding: 20px;
+  z-index: 1050;
+}
+
+.offcanvas-menu.show {
+  right: 0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+}
+
+.dropdown-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.dropdown-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+  opacity: 0;
+  padding-left: 15px;
+}
+
+.dropdown-container.expanded {
+  max-height: 300px;
+
+  opacity: 1;
+}
+
+.dropdown-container ul {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  margin: 0;
+}
+
+.dropdown-container ul li {
+  padding: 5px 0;
+}
+
+.vertical-line {
+  width: 2px;
+
+  height: 50px;
+
+  background-color: white;
+
+  margin: 0 20px;
+
+  margin-top: 15px;
+}
