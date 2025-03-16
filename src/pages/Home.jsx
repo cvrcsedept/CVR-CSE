@@ -15,6 +15,7 @@ const Home = () => {
   const [filteredFaculty, setFilteredFaculty] = useState([]);
   const [counts, setCounts] = useState({
     ProfCount: 0,
+    EmeritusprofCount: 0,
     AssistantProfCount: 0,
     SrAsstProfCount: 0,
     AssociateProfCount: 0,
@@ -69,10 +70,10 @@ const Home = () => {
             let designation = normalizeDesignationForCounting(
               faculty.designation
             );
-            if (
-              designation.includes("professor") ||
-              designation.includes("emeritus")
-            ) {
+            
+            if (designation.includes("emeritus professor")) {
+              acc.EmeritusprofCount += 1;
+            } else if (designation.includes("professor")) {
               acc.ProfCount += 1;
             } else if (designation.includes("assoc.prof")) {
               acc.AssociateProfCount += 1;
@@ -86,6 +87,7 @@ const Home = () => {
           },
           {
             ProfCount: 0,
+            EmeritusprofCount: 0,
             AssociateProfCount: 0,
             SrAsstProfCount: 0,
             AssistantProfCount: 0,
@@ -347,7 +349,7 @@ const Home = () => {
         <section className="deptStrengthSection" ref={deptStrengthRef}>
           <div className="deptStrengthSectionDivs">
             <div className="sHeading">
-              <p>Department Strength</p>
+              <p>Department Strength (Total:{counts.ProfCount+counts.AssistantProfCount+counts.AssociateProfCount+counts.AssistantProfCount})</p>
             </div>
             <div className="deptStrengthContainer">
               <div className="deptStrengthItem">
@@ -357,6 +359,15 @@ const Home = () => {
                     shouldLoad={shouldLoadNumbers}
                   />
                   <p>Professors</p>
+                </span>
+              </div>
+              <div className="deptStrengthItem">
+                <span style={{ textAlign: "center" }}>
+                  <NumberLoader
+                    number={counts.EmeritusprofCount}
+                    shouldLoad={shouldLoadNumbers}
+                  />
+                  <p> Emeritus Professors</p>
                 </span>
               </div>
               <div className="deptStrengthItem">
