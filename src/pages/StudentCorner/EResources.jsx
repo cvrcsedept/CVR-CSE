@@ -47,7 +47,7 @@ const EResources = () => {
         {
           name: "Computer Oriented Statistical Methods",
           links: [
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=5Ql_wyqQG_k" },
+            { name: "YouTube", url: "https://www.youtube.com/watch?v=NJimKoLfWro&list=PLJxcBJ9ifFLam67Tj9A-cCjLyAeNH2YbZ" },
             { name: "NPTEL", url: "https://archive.nptel.ac.in/courses/111/105/111105077/" }
           ],
         },
@@ -55,14 +55,14 @@ const EResources = () => {
           name: "Digital Electronics",
           links: [
             { name: "GFG", url: "https://www.geeksforgeeks.org/digital-electronics-logic-design-tutorials/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=upxugEuj4go" },
+            { name: "YouTube", url: "https://www.youtube.com/watch?v=XLrNRKsfXt4&list=PLXj4XH7LcRfBQXAd8FPZXmMzxZY-rViLP" },
             { name: "NPTEL", url: "https://archive.nptel.ac.in/courses/108/105/108105132/" }
           ],
         },
         {
           name: "Basic Electrical And Electronics Engineering",
           links: [
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=WaJxkIXzS5A" },
+            { name: "YouTube", url: "https://www.youtube.com/watch?v=hYv113KcelU&list=PLgwJf8NK-2e76qHT4VOu9uTw8wj0i4blS" },
             { name: "NPTEL", url: "https://archive.nptel.ac.in/courses/108/105/108105053/" }
           ],
         },
@@ -75,7 +75,7 @@ const EResources = () => {
           name: "Advanced Data Structures Through Java",
           links: [
             { name: "Nptel", url: "https://archive.nptel.ac.in/courses/106/105/106105225/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=rZ41y93P2Qo" },
+            { name: "YouTube", url: "https://www.youtube.com/watch?v=6iCHf7OZn6c&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d" },
             { name: "GFG", url: "https://www.geeksforgeeks.org/advanced-data-structures/" }
           ],
         },
@@ -83,7 +83,7 @@ const EResources = () => {
           name: "Computer Organization And Architecture",
           links: [
             { name: "Nptel", url: "https://archive.nptel.ac.in/courses/106/105/106105163/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=NgShP1B8jcc" },
+            { name: "YouTube", url: "https://www.youtube.com/watch?v=kTdvOlA2ko0&list=PLXj4XH7LcRfDXDRzSLv1FfZ-SSA38SiC0" },
             { name: "GFG", url: "https://www.geeksforgeeks.org/computer-organization-and-architecture-tutorials/" }
           ],
         },
@@ -91,7 +91,7 @@ const EResources = () => {
           name: "Database Management Systems",
           links: [
             { name: "Nptel", url: "https://archive.nptel.ac.in/courses/106/105/106105175/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=Z5B2Mxn5lJY" },
+            { name: "YouTube", url: "https://www.youtube.com/watch?v=kBdlM6hNDAE&list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y" },
             { name: "GFG", url: "https://www.geeksforgeeks.org/dbms/" }
           ],
         },
@@ -99,7 +99,7 @@ const EResources = () => {
           name: "Operating Systems",
           links: [
             { name: "Nptel", url: "https://archive.nptel.ac.in/courses/106/105/106105214/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=26QPDBe-NB8" },
+            { name: "YouTube", url: "https://www.youtube.com/watch?v=bkSWJJZNgf8&list=PLxCzCOWd7aiGz9donHRrE9I3Mwn6XdP8p" },
             { name: "GFG", url: "https://www.geeksforgeeks.org/operating-systems/" }
           ],
         },
@@ -107,7 +107,7 @@ const EResources = () => {
           name: "Software Engineering",
           links: [
             { name: "Nptel", url: "https://archive.nptel.ac.in/courses/106/105/106105182/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=PdUKE8hElNA" },
+            { name: "YouTube", url: "https://www.youtube.com/watch?v=Ln_LP7c23WM&list=PLbRMhDVUMngf8oZR3DpKMvYhZKga90JVt" },
             { name: "GFG", url: "https://www.geeksforgeeks.org/software-engineering/" }
           ],
         }
@@ -278,6 +278,33 @@ const EResources = () => {
       ],
     },
   ];
+  const getLinkIcon = (linkName) => {
+    const name = linkName.toLowerCase();
+    if (name.includes("youtube")) {
+      return "fab fa-youtube";
+    } else if (name.includes("gfg") || name.includes("geeks")) {
+      return "fas fa-code";
+    } else if (name.includes("nptel")) {
+      return "fas fa-graduation-cap";
+    } else {
+      return "fas fa-link";
+    }
+  };
+
+  const getLinkColor = (linkName) => {
+    const name = linkName.toLowerCase();
+    if (name.includes("youtube")) {
+      return "#FF0000";
+    } else if (name.includes("gfg") || name.includes("geeks")) {
+      return "#2F8D46"; 
+    } else if (name.includes("nptel")) {
+      return "#007BFF"; 
+    } else {
+      return "#6c757d"; 
+    }
+  };
+
+  
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -344,20 +371,25 @@ const EResources = () => {
                         <div className="resource-links">
                           <h4 className="mb-3">Available Resources</h4>
                           {subject.links.length > 0 ? (
-                            <ul className="list-unstyled">
+                            <div className="link-container">
                               {subject.links.map((link, linkIndex) => (
-                                <li key={linkIndex}>
-                                  <a
-                                    href={link.url}
-                                    className="resource-link"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    {link.name}
-                                  </a>
-                                </li>
+                                <a
+                                  key={linkIndex}
+                                  href={link.url}
+                                  className="resource-link-btn"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  style={{
+                                    backgroundColor: getLinkColor(link.name),
+                                    boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)`,
+                                    transition: "all 0.3s ease"
+                                  }}
+                                >
+                                  <i className={getLinkIcon(link.name)} aria-hidden="true"></i>
+                                  <span>{link.name.toUpperCase()}</span>
+                                </a>
                               ))}
-                            </ul>
+                            </div>
                           ) : (
                             <p className="text-muted">No resources available</p>
                           )}
