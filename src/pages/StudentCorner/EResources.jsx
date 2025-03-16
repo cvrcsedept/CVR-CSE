@@ -13,7 +13,8 @@ const EResources = () => {
           name: "Problem Solving Through C",
           links: [{name:"gfg",url:"https://www.geeksforgeeks.org/c-programming-language/"},
             {name:"youtube",url:"https://www.youtube.com/watch?v=LfaMVlDaQ24&pp=ygUZYyBwcm9ncmFtbWluZyBmdWxsIGNvdXJzZQ%3D%3D"},
-            {name:"nptel",url:"https://onlinecourses.nptel.ac.in/noc24_cs42/preview"}
+            {name:"nptel",url:"https://onlinecourses.nptel.ac.in/noc24_cs42/preview"},
+            {name:"notes",url:"https://drive.google.com/drive/folders/1jHUN5ltBATEctFuI0D-yPbzJcAiYAQg0?usp=drive_link"}
           ],
         },
       ],
@@ -33,7 +34,8 @@ const EResources = () => {
           links: [
             { name: "GFG", url: "https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/" },
             { name: "YouTube", url: "https://www.youtube.com/watch?v=eIrMbAQSU34" },
-            { name: "NPTEL", url: "https://archive.nptel.ac.in/courses/106/105/106105224/" }
+            { name: "NPTEL", url: "https://archive.nptel.ac.in/courses/106/105/106105224/" },
+            {name:"notes",url:"https://drive.google.com/drive/folders/12NukdAgTHH2HT9ajlwje4p3HBDM0m-H6?usp=drive_link"}
           ],
         },
         {
@@ -41,7 +43,8 @@ const EResources = () => {
           links: [
             { name: "GFG", url: "https://www.geeksforgeeks.org/discrete-mathematics-tutorial/" },
             { name: "YouTube", url: "https://www.youtube.com/watch?v=0NSWsD6cJFI" },
-            { name: "NPTEL", url: "https://archive.nptel.ac.in/courses/111/106/111106086/" }
+            { name: "NPTEL", url: "https://archive.nptel.ac.in/courses/111/106/111106086/" },
+            {name:"notes",url:"https://drive.google.com/drive/folders/1cnFoMBfrqv4rW4JrSPYpgGSSDpyCW_MM?usp=drive_link"}
           ],
         },
         {
@@ -76,7 +79,8 @@ const EResources = () => {
           links: [
             { name: "Nptel", url: "https://archive.nptel.ac.in/courses/106/105/106105225/" },
             { name: "YouTube", url: "https://www.youtube.com/watch?v=6iCHf7OZn6c&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d" },
-            { name: "GFG", url: "https://www.geeksforgeeks.org/advanced-data-structures/" }
+            { name: "GFG", url: "https://www.geeksforgeeks.org/advanced-data-structures/" },
+            { name: "notes", url: "https://drive.google.com/drive/folders/1IuFBU8ALVltxn_jmd7vsJOLoNNmGlBnJ?usp=drive_link" }
           ],
         },
         {
@@ -92,7 +96,8 @@ const EResources = () => {
           links: [
             { name: "Nptel", url: "https://archive.nptel.ac.in/courses/106/105/106105175/" },
             { name: "YouTube", url: "https://www.youtube.com/watch?v=kBdlM6hNDAE&list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y" },
-            { name: "GFG", url: "https://www.geeksforgeeks.org/dbms/" }
+            { name: "GFG", url: "https://www.geeksforgeeks.org/dbms/" },
+            {name:"notes",url:"https://drive.google.com/drive/folders/14vS-idnh0t3uRB4a0r_m3bSVGS20GkNL?usp=drive_link"}
           ],
         },
         {
@@ -121,7 +126,8 @@ const EResources = () => {
           links: [
             { name: "GFG", url: "https://www.geeksforgeeks.org/web-technology/" },
             { name: "YouTube", url: "https://www.youtube.com/watch?v=Oh93xiKv-Jg&list=PLrjkTql3jnm8d1ddpVKifXO_fPjSKATCp" },
-            { name: "NPTEL", url: "https://onlinecourses.swayam2.ac.in/nou24_cs09/preview" }
+            { name: "NPTEL", url: "https://onlinecourses.swayam2.ac.in/nou24_cs09/preview" },
+            {name:"notes",url:"https://drive.google.com/drive/folders/1_CuUevkVsTL24iB-u5vOhe6BCVwLbU_7?usp=drive_link"}
           ],
         },
         {
@@ -143,7 +149,8 @@ const EResources = () => {
           name: "Data Science",
           links: [{name:"Nptel", url:"https://onlinecourses.nptel.ac.in/noc21_cs69/preview"},
             { name: "GeeksforGeeks", url: "https://www.geeksforgeeks.org/data-science-tutorial/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=gDZ6czwuQ18&pp=ygUYZGF0YSBzY2llbmNlIGZ1bGwgY291cnNl" }
+            { name: "YouTube", url: "https://www.youtube.com/watch?v=gDZ6czwuQ18&pp=ygUYZGF0YSBzY2llbmNlIGZ1bGwgY291cnNl" },
+            {name:"notes",url:"https://drive.google.com/drive/folders/1AbXTR_bvTA8ZOyr_nMtyhx21vnzYqS2K?usp=drive_link"}
           ],
         },
         {
@@ -202,7 +209,9 @@ const EResources = () => {
           name: "Automata Theory and Compiler Design",
           links: [{name:"Nptel",url:"https://archive.nptel.ac.in/courses/106/106/106106049/"},
             {name:"GFG",url:"https://www.geeksforgeeks.org/compiler-design-tutorials/"},
-            {name:"Youtube",url:"https://www.youtube.com/watch?v=XUsw5igq4DM&list=PLxCzCOWd7aiEKtKSIHYusizkESC42diyc"}
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=XUsw5igq4DM&list=PLxCzCOWd7aiEKtKSIHYusizkESC42diyc"},
+            {name:"notes",url:"https://drive.google.com/drive/folders/1RRY9HyKGz4ToSO3U0PTV6HpmTuHANz5L?usp=drive_link"}
+
           ],
         },
         { name: "Crytography and Essentials of Network Security(PE-II)", 
@@ -243,7 +252,8 @@ const EResources = () => {
           name: "Data Warehousing and Data Mining",
           links: [{name:"Nptel",url:"https://onlinecourses.nptel.ac.in/noc21_cs06/preview"},
             {name:"GFG",url:"https://www.geeksforgeeks.org/data-warehousing/"},
-            {name:"Youtube",url:"https://www.youtube.com/watch?v=xEmrFePGjEg&list=PLmAmHQ-_5ySxFoIGmY1MJao-XYvYGxxgj"}
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=xEmrFePGjEg&list=PLmAmHQ-_5ySxFoIGmY1MJao-XYvYGxxgj"},
+            {name:"notes",url:"https://drive.google.com/drive/folders/1FKdSO5YttpFB94vyAtKdhcAc4nat_pVy?usp=drive_link"}
           ],
         },
         { name: "DEEP LEARNING (DL) (PROFESSIONAL ELECTIVE II)", links: [{name:"Nptel",url:"https://archive.nptel.ac.in/courses/106/106/106106184/"},
@@ -256,7 +266,8 @@ const EResources = () => {
         ] },
         { name: "VISUAL PROGRAMMING (PROFESSIONAL ELECTIVE II)", links: [{name:"Youtube",url:"https://www.youtube.com/watch?v=Y8c1IHZs5qc&list=PLTd6ceoshpremSFQxYM4L0p4Q6hR-4e4J"},
           {name:"GFG",url:"https://www.geeksforgeeks.org/introduction-to-visual-programming-language/"},
-            {name:"Youtube",url:"https://www.youtube.com/watch?v=DcON0hgiLrY&list=PLXuDFs_RQFwIi3WooZmGFIJMe9OIqQAT-"}
+            {name:"Youtube",url:"https://www.youtube.com/watch?v=DcON0hgiLrY&list=PLXuDFs_RQFwIi3WooZmGFIJMe9OIqQAT-"},
+            {name:"notes",url:"https://drive.google.com/drive/folders/1wqRcLk2PT-bQEiin0SUieJlBzNzG2f_j?usp=drive_link"}
         ] },
       ],
     },
