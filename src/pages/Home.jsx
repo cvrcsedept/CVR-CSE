@@ -233,7 +233,6 @@ const Home = () => {
   return (
     <>
       <main>
-        <TopRightAlert />
         <div className="container-fluid p-0">
           <section className="carouselSection">
             <div
