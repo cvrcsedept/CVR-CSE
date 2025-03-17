@@ -19,6 +19,7 @@ const Home = () => {
     AssistantProfCount: 0,
     SrAsstProfCount: 0,
     AssociateProfCount: 0,
+    TechnicalStaff: 0,
   });
 
   const normalizeDesignation = (designation) => {
@@ -28,23 +29,26 @@ const Home = () => {
   useEffect(() => {
     const fetchAndProcessExcelData = async () => {
       try {
+        // Fetch faculty data
         const response = await fetch("/Data/faculty.xlsx");
         if (!response.ok) {
-          throw new Error(`Failed to load Excel file: HTTP ${response.status}`);
+          throw new Error(
+            `Failed to load faculty Excel file: HTTP ${response.status}`
+          );
         }
 
         const data = await response.arrayBuffer();
         const workbook = XLSX.read(data, { type: "array", cellDates: true });
 
         if (!workbook.SheetNames.length) {
-          throw new Error("No sheets found in Excel file.");
+          throw new Error("No sheets found in faculty Excel file.");
         }
 
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
 
         const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-        if (!jsonData.length) throw new Error("Excel sheet is empty.");
+        if (!jsonData.length) throw new Error("Faculty Excel sheet is empty.");
 
         const formattedData = jsonData.slice(1).map((row) => ({
           empId: row[1] || "N/A",
@@ -91,8 +95,58 @@ const Home = () => {
             AssociateProfCount: 0,
             SrAsstProfCount: 0,
             AssistantProfCount: 0,
+            TechnicalStaff: 0,
           }
         );
+
+        // Fetch and process non-faculty data for technical staff count
+        try {
+          const nonFacultyResponse = await fetch("/Data/non-faculty.xlsx");
+          if (!nonFacultyResponse.ok) {
+            throw new Error(
+              `Failed to load non-faculty Excel file: HTTP ${nonFacultyResponse.status}`
+            );
+          }
+
+          const nonFacultyData = await nonFacultyResponse.arrayBuffer();
+          const nonFacultyWorkbook = XLSX.read(nonFacultyData, {
+            type: "array",
+            cellDates: true,
+          });
+
+          if (!nonFacultyWorkbook.SheetNames.length) {
+            throw new Error("No sheets found in non-faculty Excel file.");
+          }
+
+          const nonFacultySheetName = nonFacultyWorkbook.SheetNames[0];
+          const nonFacultySheet =
+            nonFacultyWorkbook.Sheets[nonFacultySheetName];
+
+          const nonFacultyJsonData = XLSX.utils.sheet_to_json(nonFacultySheet);
+
+          // Count technical staff excluding DTP operators
+          const technicalStaffCount = nonFacultyJsonData.reduce(
+            (count, staff) => {
+              const designation = (staff.Designation || "")
+                .toString()
+                .toLowerCase();
+              if (!designation.includes("dtp operator")) {
+                return count + 1;
+              }
+              return count;
+            },
+            0
+          );
+
+          // Update the count with technical staff data
+          countData.TechnicalStaff = technicalStaffCount;
+        } catch (error) {
+          console.error(
+            "Error processing non-faculty Excel data:",
+            error.message
+          );
+          // Continue with other counts even if technical staff count fails
+        }
 
         setCounts(countData);
       } catch (error) {
@@ -399,7 +453,7 @@ const Home = () => {
               </div>
               <div className="deptStrengthItem">
                 <span style={{ textAlign: "center" }}>
-                  <NumberLoader number={23} shouldLoad={shouldLoadNumbers} />
+                  <NumberLoader number={26} shouldLoad={shouldLoadNumbers} />
                   <p>Programmers and Admins</p>
                 </span>
               </div>
