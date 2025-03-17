@@ -669,7 +669,6 @@ const About = () => {
         /* Hero Section */
         .hero-section {
           min-height: 80vh;
-          background-color: var(--primary);
           position: relative;
         }
 
