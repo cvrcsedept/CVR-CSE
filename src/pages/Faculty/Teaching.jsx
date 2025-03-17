@@ -10,6 +10,7 @@ const Teaching = () => {
   const [activeDesignation, setActiveDesignation] = useState("All");
   const [selectedYear, setSelectedYear] = useState("2024-25");
   const [yearlyData, setYearlyData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const academicYears = ["2022-23", "2023-24", "2024-25"];
 
@@ -37,48 +38,63 @@ const Teaching = () => {
       }));
 
       setFaculty(formattedData);
-      filterFaculty("All", formattedData);
+      filterFaculty("All", formattedData, searchTerm);
     } catch (error) {
       console.error("Error loading faculty data:", error);
     }
   };
 
-  const filterFaculty = (designation, data = faculty) => {
+  const filterFaculty = (designation, data = faculty, search = searchTerm) => {
     setActiveDesignation(designation);
-
-    if (designation === "All") {
-      setFilteredFaculty(data);
-      return;
+    
+    let filtered = data;
+    
+    // Filter by designation
+    if (designation !== "All") {
+      filtered = filtered.filter((faculty) => {
+        const normDesignation = faculty.normalizedDesignation;
+        switch (designation) {
+          case "Professor":
+            return (
+              normDesignation.includes("professor") &&
+              !normDesignation.includes("assoc")
+            );
+          case "Associate Professor":
+            return normDesignation.includes("assoc.prof");
+          case "Senior Assistant Professor":
+            return normDesignation.includes("sr.asst.prof.");
+          case "Assistant Professor":
+            return (
+              normDesignation.includes("asst.prof.") &&
+              !normDesignation.includes("sr.asst.prof.")
+            );
+          default:
+            return true;
+        }
+      });
     }
-
-    const filtered = data.filter((faculty) => {
-      const normDesignation = faculty.normalizedDesignation;
-      switch (designation) {
-        case "Professor":
-          return (
-            normDesignation.includes("professor") &&
-            !normDesignation.includes("assoc")
-          );
-        case "Associate Professor":
-          return normDesignation.includes("assoc.prof");
-        case "Senior Assistant Professor":
-          return normDesignation.includes("sr.asst.prof.");
-        case "Assistant Professor":
-          return (
-            normDesignation.includes("asst.prof.") &&
-            !normDesignation.includes("sr.asst.prof.")
-          );
-
-        default:
-          return true;
-      }
-    });
-
+    
+    // Filter by search term
+    if (search.trim() !== "") {
+      filtered = filtered.filter((faculty) => {
+        const facultyName = faculty["Name of the Staff Member "]?.toLowerCase() || "";
+        return facultyName.includes(search.toLowerCase());
+      });
+    }
+    
     setFilteredFaculty(filtered);
+  };
+
+  // Handle search input changes
+  const handleSearchChange = (event) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+    filterFaculty(activeDesignation, faculty, value);
   };
 
   const handleYearChange = async (year) => {
     setSelectedYear(year);
+    setSearchTerm(""); // Clear search when changing year
 
     try {
       const response = await fetch("/Data/Faculty-List-3 years.xlsx");
@@ -100,22 +116,16 @@ const Teaching = () => {
   ];
 
   const formatDate = (dateString) => {
-
     if (!dateString) return "N/A";
     
     try {
-    
       let date;
       
-      
       if (!isNaN(dateString) && dateString > 0) {
-        
         date = new Date((dateString - 25569) * 86400 * 1000);
       } else {
-        
         date = new Date(dateString);
       }
-      
       
       if (isNaN(date.getTime())) {
         return dateString; 
@@ -129,7 +139,8 @@ const Teaching = () => {
     } catch (error) {
       console.error("Error formatting date:", error);
       return dateString; 
-    }}
+    }
+  };
 
   const getTableHeaders = () => {
     if (yearlyData.length === 0) return [];
@@ -218,6 +229,44 @@ const Teaching = () => {
             )}
           </div>
         </div>
+        {isCurrentYear && (
+          <div className="row mb-4">
+            <div className="col-md-6 mx-auto">
+              <div className="input-group">
+                <span className="input-group-text">
+                  <i className="bi bi-search"></i>
+                </span>
+                <input
+                  type="text"
+                  className="form-control form-control-lg"
+                  placeholder="Search faculty by name..."
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  aria-label="Search faculty"
+                />
+                {searchTerm && (
+                  <button
+                    className="btn btn-outline-secondary"
+                    type="button"
+                    onClick={() => {
+                      setSearchTerm("");
+                      filterFaculty(activeDesignation, faculty, "");
+                    }}
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+              {searchTerm && (
+                <div className="text-center mt-2">
+                  <small className="text-muted">
+                    Found {filteredFaculty.length} faculty members
+                  </small>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Faculty Cards Section - Only display for current year */}
         {isCurrentYear && (

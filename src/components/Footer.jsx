@@ -176,14 +176,7 @@ const Footer = () => {
                   E-Resources
                 </Link>
               </li>
-              <li className="mb-2">
-                <Link
-                  to="/studentcorner/student-work"
-                  className="text-decoration-none text-light"
-                >
-                  Student Work
-                </Link>
-              </li>
+
               <li className="mb-2">
                 <Link
                   to="/studentcorner/gallery"

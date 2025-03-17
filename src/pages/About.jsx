@@ -1087,11 +1087,11 @@ const About = () => {
         }
 
         .social-link.linkedin:hover {
-          color: #0077b5;
+          color: rgb(16, 91, 132);
         }
 
         .social-link.github:hover {
-          color: #f0f0f0;
+          color: rgb(0, 0, 0);
         }
 
         .social-link::after {
