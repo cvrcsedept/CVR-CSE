@@ -311,7 +311,7 @@ body {
 }
 
 .deptStrengthItem:hover {
-  box-shadow: 0px 3px 5px red;
+  box-shadow: 0px 3px 5px rgb(29, 21, 21);
   transform: scale(1.05);
 }
 

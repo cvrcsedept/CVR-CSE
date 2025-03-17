@@ -205,49 +205,6 @@ const Objectives = () => {
                   </h5>
                   <p className={`card-text ${textColor}`}>{item.description}</p>
                 </div>
-                <button
-                  className={`btn btn-outline-${colorClass.replace(
-                    "text-",
-                    ""
-                  )} w-100 transition-all duration-300 hover:bg-opacity-90`}
-                  style={{ transition: "all 0.2s ease" }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "scale(1.05)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "scale(1)";
-                  }}
-                  data-bs-toggle="modal"
-                  data-bs-target={`#modal-${title
-                    .replace(/\s+/g, "-")
-                    .toLowerCase()}-${item.id}`}
-                >
-                  Learn More
-                </button>
-              </div>
-
-              <div
-                className="modal fade"
-                id={`modal-${title.replace(/\s+/g, "-").toLowerCase()}-${
-                  item.id
-                }`}
-                tabIndex="-1"
-              >
-                <div className="modal-dialog modal-dialog-centered">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h5 className="modal-title">{item.title}</h5>
-                      <button
-                        type="button"
-                        className="btn-close"
-                        data-bs-dismiss="modal"
-                      ></button>
-                    </div>
-                    <div className="modal-body">
-                      <p>{item.description}</p>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           ))}
