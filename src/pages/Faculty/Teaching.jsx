@@ -46,9 +46,9 @@ const Teaching = () => {
 
   const filterFaculty = (designation, data = faculty, search = searchTerm) => {
     setActiveDesignation(designation);
-    
+
     let filtered = data;
-    
+
     // Filter by designation
     if (designation !== "All") {
       filtered = filtered.filter((faculty) => {
@@ -73,15 +73,16 @@ const Teaching = () => {
         }
       });
     }
-    
+
     // Filter by search term
     if (search.trim() !== "") {
       filtered = filtered.filter((faculty) => {
-        const facultyName = faculty["Name of the Staff Member "]?.toLowerCase() || "";
+        const facultyName =
+          faculty["Name of the Staff Member "]?.toLowerCase() || "";
         return facultyName.includes(search.toLowerCase());
       });
     }
-    
+
     setFilteredFaculty(filtered);
   };
 
@@ -117,28 +118,28 @@ const Teaching = () => {
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
-    
+
     try {
       let date;
-      
+
       if (!isNaN(dateString) && dateString > 0) {
         date = new Date((dateString - 25569) * 86400 * 1000);
       } else {
         date = new Date(dateString);
       }
-      
+
       if (isNaN(date.getTime())) {
-        return dateString; 
+        return dateString;
       }
-      
-      const day = date.getDate().toString().padStart(2, '0');
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+
+      const day = date.getDate().toString().padStart(2, "0");
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
       const year = date.getFullYear();
-      
+
       return `${day}-${month}-${year}`;
     } catch (error) {
       console.error("Error formatting date:", error);
-      return dateString; 
+      return dateString;
     }
   };
 
@@ -302,7 +303,7 @@ const Teaching = () => {
                           {member.Designation}
                         </p>
                         <p className="faculty-join-date">
-                        Joined: {formatDate(member.DOJ)}
+                          Joined: {formatDate(member.DOJ)}
                         </p>
                       </div>
                     </div>

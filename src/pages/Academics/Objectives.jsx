@@ -178,7 +178,22 @@ const Objectives = () => {
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
           {data.map((item) => (
             <div key={item.id} className="col">
-              <div className={`card h-100 border-0 shadow-lg ${colorClass}`}>
+              <div
+                className={`card h-100 border-0 shadow-lg ${colorClass} transition-all duration-300 hover:translate-y-[-10px] hover:shadow-2xl`}
+                style={{
+                  transition: "all 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-10px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 25px 50px -12px rgba(0, 0, 0, 0.25)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow =
+                    "0 10px 15px -3px rgba(0, 0, 0, 0.1)";
+                }}
+              >
                 <div className="card-header text-white d-flex justify-content-between align-items-center">
                   <h5 className="card-title mb-0">
                     {item.shortcut} {item.id}
@@ -192,9 +207,16 @@ const Objectives = () => {
                 </div>
                 <button
                   className={`btn btn-outline-${colorClass.replace(
-                    "bg-",
+                    "text-",
                     ""
-                  )} w-100`}
+                  )} w-100 transition-all duration-300 hover:bg-opacity-90`}
+                  style={{ transition: "all 0.2s ease" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "scale(1.05)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
                   data-bs-toggle="modal"
                   data-bs-target={`#modal-${title
                     .replace(/\s+/g, "-")

@@ -269,7 +269,9 @@ body {
   border: 1px solid #203764;
   padding: 25px;
   background-color: rgb(207, 230, 245);
+  /* background-color: rgba(10, 149, 255, 0.302); */
   border-bottom: 1px solid #dde2ec;
+  /* margin-bottom: 10px; */
 }
 
 .deptStrengthSectionDivs {
@@ -280,11 +282,11 @@ body {
 }
 
 .sHeading {
-  color: #27127c;
+  color: #000000;
   font-size: 2rem;
   text-transform: uppercase;
   font-weight: 600;
-  text-decoration: underline;
+  /* text-decoration: underline; */
   text-align: center;
 }
 

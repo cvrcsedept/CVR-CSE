@@ -6,7 +6,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./styles.css";
 import App from "./App.jsx";
 
-document.addEventListener("contextmenu", (event) => event.preventDefault());
+// document.addEventListener("contextmenu", (event) => event.preventDefault());
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
