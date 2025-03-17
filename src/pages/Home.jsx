@@ -3,6 +3,7 @@ import * as XLSX from "xlsx";
 import NumberLoader from "../components/NumberLoader";
 import BackToTopButton from "../components/BackToTopButton";
 import "../styles.css";
+import TopRightAlert from "../components/TopRightAlert";
 
 const Home = () => {
   useEffect(() => {
@@ -232,6 +233,7 @@ const Home = () => {
   return (
     <>
       <main>
+        <TopRightAlert />
         <div className="container-fluid p-0">
           <section className="carouselSection">
             <div
