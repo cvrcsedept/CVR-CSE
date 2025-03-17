@@ -349,25 +349,9 @@ const Home = () => {
         <section className="deptStrengthSection" ref={deptStrengthRef}>
           <div className="deptStrengthSectionDivs">
             <div className="sHeading">
-              <p>
-                Department Strength (Total:
-                {counts.ProfCount +
-                  counts.AssistantProfCount +
-                  counts.AssociateProfCount +
-                  counts.AssistantProfCount}
-                )
-              </p>
+              <p>Department Strength</p>
             </div>
             <div className="deptStrengthContainer">
-              <div className="deptStrengthItem">
-                <span style={{ textAlign: "center" }}>
-                  <NumberLoader
-                    number={counts.ProfCount}
-                    shouldLoad={shouldLoadNumbers}
-                  />
-                  <p>Professors</p>
-                </span>
-              </div>
               <div className="deptStrengthItem">
                 <span style={{ textAlign: "center" }}>
                   <NumberLoader
@@ -375,6 +359,15 @@ const Home = () => {
                     shouldLoad={shouldLoadNumbers}
                   />
                   <p> Emeritus Professors</p>
+                </span>
+              </div>
+              <div className="deptStrengthItem">
+                <span style={{ textAlign: "center" }}>
+                  <NumberLoader
+                    number={counts.ProfCount}
+                    shouldLoad={shouldLoadNumbers}
+                  />
+                  <p>Professors</p>
                 </span>
               </div>
               <div className="deptStrengthItem">

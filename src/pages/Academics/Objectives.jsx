@@ -165,7 +165,7 @@ const Objectives = () => {
         "Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change.",
     },
   ];
-  const renderSection = (title, data, colorClass) => {
+  const renderSection = (title, data, colorClass, textColor) => {
     return (
       <div className="container pt-3 pb-5">
         <div className="row">
@@ -185,8 +185,10 @@ const Objectives = () => {
                   </h5>
                 </div>
                 <div className="card-body">
-                  <h5 className="card-title mb-3">{item.title}</h5>
-                  <p className="card-text text-muted">{item.description}</p>
+                  <h5 className={`card-title ${textColor} mb-3`}>
+                    {item.title}
+                  </h5>
+                  <p className={`card-text ${textColor}`}>{item.description}</p>
                 </div>
                 <button
                   className={`btn btn-outline-${colorClass.replace(
@@ -235,13 +237,33 @@ const Objectives = () => {
   return (
     <div className="bg-light">
       <main>
-        {renderSection("Program Educational Objectives", peoData, "bg-success")}
-        {renderSection("Program Outcomes", programOutcomes, "bg-warning")}
+        {renderSection(
+          "Program Educational Objectives",
+          peoData,
+          "bg-purple",
+          "text-white"
+        )}
+        {renderSection(
+          "Program Outcomes",
+          programOutcomes,
+          "bg-warning",
+          "text-black"
+        )}
 
-        {renderSection("Program Specific Outcomes", psoData, "bg-info")}
+        {renderSection(
+          "Program Specific Outcomes",
+          psoData,
+          "bg-info",
+          "text-black"
+        )}
       </main>
 
       <BackToTopButton />
+      <style jsx>{`
+        .bg-purple {
+          background-color: rgb(153, 29, 255) !important;
+        }
+      `}</style>
     </div>
   );
 };
