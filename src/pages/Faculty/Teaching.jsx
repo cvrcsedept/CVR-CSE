@@ -99,6 +99,38 @@ const Teaching = () => {
     "Assistant Professor",
   ];
 
+  const formatDate = (dateString) => {
+
+    if (!dateString) return "N/A";
+    
+    try {
+    
+      let date;
+      
+      
+      if (!isNaN(dateString) && dateString > 0) {
+        
+        date = new Date((dateString - 25569) * 86400 * 1000);
+      } else {
+        
+        date = new Date(dateString);
+      }
+      
+      
+      if (isNaN(date.getTime())) {
+        return dateString; 
+      }
+      
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+      
+      return `${day}-${month}-${year}`;
+    } catch (error) {
+      console.error("Error formatting date:", error);
+      return dateString; 
+    }}
+
   const getTableHeaders = () => {
     if (yearlyData.length === 0) return [];
     return Object.keys(yearlyData[0]);
@@ -221,7 +253,7 @@ const Teaching = () => {
                           {member.Designation}
                         </p>
                         <p className="faculty-join-date">
-                          Joined: {member.DOJ}
+                        Joined: {formatDate(member.DOJ)}
                         </p>
                       </div>
                     </div>
