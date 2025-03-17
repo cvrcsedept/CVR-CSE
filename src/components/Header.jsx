@@ -75,10 +75,6 @@ const Navbar = () => {
       type: "dropdown",
       items: [
         { label: "E-Resources", path: "/studentcorner/e-resources" },
-<<<<<<< HEAD
-=======
-        { label: "Student Work", path: "/studentcorner/student-work" },
->>>>>>> master
         { label: "Gallery", path: "/studentcorner/gallery" },
       ],
     },
@@ -111,18 +107,10 @@ const Navbar = () => {
             alt="CVR LOGO"
             style={{ maxWidth: "100%", height: "70px" }}
           />
-<<<<<<< HEAD
         </Link>
 
         <div className="d-flex flex-column align-items-end">
           <span
-=======
-          
-        </Link>
-
-        <div className="d-flex flex-column align-items-end">
-        <span
->>>>>>> master
             className="navbar-text text-white mb-1 "
             style={{
               fontSize: "1.7rem",
