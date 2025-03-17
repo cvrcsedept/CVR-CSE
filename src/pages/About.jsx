@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-import BackToTopButton from "../components/BackToTopButton";
 // Enhanced animation variants
 const slideUp = {
   hidden: { opacity: 0, y: 50 },
@@ -108,7 +107,7 @@ const About = () => {
       title: "Industry Collaboration",
       description:
         "We maintain strong partnerships with leading technology companies.",
-      icon: "bi-people",
+      icon: "bi-handshake",
       color: "#7209b7",
     },
     {
@@ -517,7 +516,6 @@ const About = () => {
           </div>
         </motion.div>
 
-        {/* Quote Section */}
         <motion.div
           className="row justify-content-center"
           initial="hidden"
@@ -656,8 +654,6 @@ const About = () => {
             </div>
           </div>
         </section>
-
-        <BackToTopButton />
       </div>
       <style jsx>{`
         .about-page {
@@ -692,6 +688,7 @@ const About = () => {
           );
           background-size: 400% 400%;
           animation: gradient 15s ease infinite;
+          z-index: 0;
         }
 
         @keyframes gradient {
@@ -1087,11 +1084,11 @@ const About = () => {
         }
 
         .social-link.linkedin:hover {
-          color: rgb(16, 91, 132);
+          color: #0077b5;
         }
 
         .social-link.github:hover {
-          color: rgb(0, 0, 0);
+          color: #f0f0f0;
         }
 
         .social-link::after {
