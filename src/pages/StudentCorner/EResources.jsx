@@ -33,7 +33,7 @@ const EResources = () => {
           name: "Object Oriented Programming Through Java",
           links: [
             { name: "GFG", url: "https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=eIrMbAQSU34" },
+            { name: "YouTube", url: "https://www.youtube.com/watch?v=ntLJmHOJ0ME&list=PLu0W_9lII9agS67Uits0UnJyrYiXhDS6q" },
             { name: "NPTEL", url: "https://archive.nptel.ac.in/courses/106/105/106105224/" },
             {name:"notes",url:"https://drive.google.com/drive/folders/12NukdAgTHH2HT9ajlwje4p3HBDM0m-H6?usp=drive_link"}
           ],
@@ -42,7 +42,7 @@ const EResources = () => {
           name: "Discrete Mathematics",
           links: [
             { name: "GFG", url: "https://www.geeksforgeeks.org/discrete-mathematics-tutorial/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=0NSWsD6cJFI" },
+            { name: "YouTube", url: "https://www.youtube.com/watch?v=spEjNcd37IQ&list=PLl-gb0E4MII0sGLCJeqDB3y63HZ6lM5LJ&pp=0gcJCXcEOCosWNin" },
             { name: "NPTEL", url: "https://archive.nptel.ac.in/courses/111/106/111106086/" },
             {name:"notes",url:"https://drive.google.com/drive/folders/1cnFoMBfrqv4rW4JrSPYpgGSSDpyCW_MM?usp=drive_link"}
           ],
@@ -50,8 +50,8 @@ const EResources = () => {
         {
           name: "Computer Oriented Statistical Methods",
           links: [
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=NJimKoLfWro&list=PLJxcBJ9ifFLam67Tj9A-cCjLyAeNH2YbZ" },
-            { name: "NPTEL", url: "https://archive.nptel.ac.in/courses/111/105/111105077/" }
+            { name: "NPTEL", url: "https://archive.nptel.ac.in/courses/111/105/111105077/" },
+            { name: "YouTube", url:"https://www.youtube.com/watch?v=NJimKoLfWro&list=PLJxcBJ9ifFLam67Tj9A-cCjLyAeNH2YbZ" },
           ],
         },
         {
@@ -72,13 +72,14 @@ const EResources = () => {
       ],
     },
     {
+      
       year: "Second Year II-Semester",
       subjects: [
         {
           name: "Advanced Data Structures Through Java",
           links: [
             { name: "Nptel", url: "https://archive.nptel.ac.in/courses/106/105/106105225/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=6iCHf7OZn6c&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d" },
+            { name: "YouTube", url: "https://www.youtube.com/playlist?list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d" },
             { name: "GFG", url: "https://www.geeksforgeeks.org/advanced-data-structures/" },
             { name: "notes", url: "https://drive.google.com/drive/folders/1IuFBU8ALVltxn_jmd7vsJOLoNNmGlBnJ?usp=drive_link" }
           ],
@@ -87,7 +88,7 @@ const EResources = () => {
           name: "Computer Organization And Architecture",
           links: [
             { name: "Nptel", url: "https://archive.nptel.ac.in/courses/106/105/106105163/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=kTdvOlA2ko0&list=PLXj4XH7LcRfDXDRzSLv1FfZ-SSA38SiC0" },
+            { name: "YouTube", url: "https://www.youtube.com/playlist?list=PLXj4XH7LcRfDXDRzSLv1FfZ-SSA38SiC0" },
             { name: "GFG", url: "https://www.geeksforgeeks.org/computer-organization-and-architecture-tutorials/" }
           ],
         },
@@ -95,7 +96,7 @@ const EResources = () => {
           name: "Database Management Systems",
           links: [
             { name: "Nptel", url: "https://archive.nptel.ac.in/courses/106/105/106105175/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=kBdlM6hNDAE&list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y" },
+            { name: "YouTube", url: "https://www.youtube.com/playlist?list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y" },
             { name: "GFG", url: "https://www.geeksforgeeks.org/dbms/" },
             {name:"notes",url:"https://drive.google.com/drive/folders/14vS-idnh0t3uRB4a0r_m3bSVGS20GkNL?usp=drive_link"}
           ],
@@ -104,7 +105,7 @@ const EResources = () => {
           name: "Operating Systems",
           links: [
             { name: "Nptel", url: "https://archive.nptel.ac.in/courses/106/105/106105214/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=bkSWJJZNgf8&list=PLxCzCOWd7aiGz9donHRrE9I3Mwn6XdP8p" },
+            { name: "YouTube", url: "https://www.youtube.com/playlist?list=PLxCzCOWd7aiGz9donHRrE9I3Mwn6XdP8p" },
             { name: "GFG", url: "https://www.geeksforgeeks.org/operating-systems/" }
           ],
         },
@@ -112,7 +113,7 @@ const EResources = () => {
           name: "Software Engineering",
           links: [
             { name: "Nptel", url: "https://archive.nptel.ac.in/courses/106/105/106105182/" },
-            { name: "YouTube", url: "https://www.youtube.com/watch?v=Ln_LP7c23WM&list=PLbRMhDVUMngf8oZR3DpKMvYhZKga90JVt" },
+            { name: "YouTube", url: "https://www.youtube.com/playlist?list=PLbRMhDVUMngf8oZR3DpKMvYhZKga90JVt" },
             { name: "GFG", url: "https://www.geeksforgeeks.org/software-engineering/" }
           ],
         }
@@ -367,7 +368,7 @@ const EResources = () => {
             <div className="row g-4">
               {yearData.subjects.map((subject, subjectIndex) => (
                 <div key={subjectIndex} className="col-12 col-md-4 col-lg-3">
-                  <div className="resource-card">
+                  <div className="resource-card" style={{cursor:"pointer"}}>
                     <div className="resource-card-inner">
                       <div className="resource-card-front">
                         <h3 className="resource-title">{subject.name}</h3>
@@ -379,33 +380,47 @@ const EResources = () => {
                       </div>
 
                       <div className="resource-card-back">
-                        <div className="resource-links">
-                          <h4 className="mb-3">Available Resources</h4>
-                          {subject.links.length > 0 ? (
-                            <div className="link-container">
-                              {subject.links.map((link, linkIndex) => (
-                                <a
-                                  key={linkIndex}
-                                  href={link.url}
-                                  className="resource-link-btn"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  style={{
-                                    backgroundColor: getLinkColor(link.name),
-                                    boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)`,
-                                    transition: "all 0.3s ease"
-                                  }}
-                                >
-                                  <i className={getLinkIcon(link.name)} aria-hidden="true"></i>
-                                  <span>{link.name.toUpperCase()}</span>
-                                </a>
-                              ))}
-                            </div>
-                          ) : (
-                            <p className="text-muted">No resources available</p>
-                          )}
-                        </div>
-                      </div>
+  <div className="resource-links">
+    <h4 className="mb-2">Available Resources</h4>
+    {subject.links.length > 0 ? (
+      <div className="link-container">
+        {subject.links.map((link, linkIndex) => (
+          <button
+            key={linkIndex}
+            className="resource-btn"
+            style={{
+              backgroundColor: getLinkColor(link.name),
+              boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)`,
+              transition: "all 0.3s ease",
+              cursor: "pointer",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "0.5rem 1rem",
+              borderRadius: "0.25rem",
+              margin: "0.25rem",
+              color: "#fff",
+              textDecoration: "none",
+              fontWeight: "500",
+              border: "none"
+            }}
+            onClick={(e) => {e.stopPropagation();
+              window.open(link.url, '_blank')}}
+          >
+            <i 
+              className={getLinkIcon(link.name)} 
+              aria-hidden="true"
+              style={{ marginRight: "0.5rem" }}
+            ></i>
+            <span style={{cursor:"pointer"}}>{link.name.toUpperCase()}</span>
+          </button>
+        ))}
+      </div>
+    ) : (
+      <p className="text-muted">No resources available</p>
+    )}
+  </div>
+</div>
                     </div>
                   </div>
                 </div>
