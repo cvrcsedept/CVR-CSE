@@ -120,7 +120,7 @@ const Footer = () => {
               </li>
               <li className="mb-2">
                 <Link
-                  to="/faculty/techincalstaff"
+                  to="/faculty/technicalstaff"
                   className="text-decoration-none text-light"
                 >
                   Non - Teaching
