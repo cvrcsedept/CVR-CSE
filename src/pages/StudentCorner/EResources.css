@@ -166,6 +166,7 @@ body {
 .resource-links a {
   display: block;
   margin-bottom: 10px;
+  z-index: 2;
   color: #6a11cb;
   text-decoration: none;
   transition: color 0.3s ease;
@@ -291,6 +292,7 @@ body {
   background: linear-gradient(135deg, #6e8efb, #a777e3);
   color: white;
   text-align: center;
+  z-index: 1;
 }
 
 .resource-card-back {
@@ -316,14 +318,4 @@ body {
   opacity: 0.8;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .resource-link-btn {
-    padding: 6px 12px;
-    font-size: 0.75rem;
-  }
 
-  .resource-link-btn i {
-    font-size: 1rem;
-  }
-}

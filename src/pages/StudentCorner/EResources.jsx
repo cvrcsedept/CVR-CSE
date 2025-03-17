@@ -293,13 +293,15 @@ const EResources = () => {
   const getLinkIcon = (linkName) => {
     const name = linkName.toLowerCase();
     if (name.includes("youtube")) {
-      return "fab fa-youtube";
+      return "fab fa-youtube"; 
     } else if (name.includes("gfg") || name.includes("geeks")) {
-      return "fas fa-code";
+      return "fas fa-code"; 
     } else if (name.includes("nptel")) {
-      return "fas fa-graduation-cap";
+      return "fas fa-graduation-cap"; 
+    } else if (name.includes("drive")) {
+      return "fas fa-cloud"; 
     } else {
-      return "fas fa-link";
+      return "fas fa-link"; 
     }
   };
 
@@ -314,6 +316,14 @@ const EResources = () => {
     } else {
       return "#6c757d"; 
     }
+  };
+
+  const openLink = (url, event) => {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    window.open(url, '_blank');
   };
 
   
@@ -368,7 +378,7 @@ const EResources = () => {
             <div className="row g-4">
               {yearData.subjects.map((subject, subjectIndex) => (
                 <div key={subjectIndex} className="col-12 col-md-4 col-lg-3">
-                  <div className="resource-card" style={{cursor:"pointer"}}>
+                  <div className="resource-card">
                     <div className="resource-card-inner">
                       <div className="resource-card-front">
                         <h3 className="resource-title">{subject.name}</h3>
@@ -380,47 +390,51 @@ const EResources = () => {
                       </div>
 
                       <div className="resource-card-back">
-  <div className="resource-links">
-    <h4 className="mb-2">Available Resources</h4>
-    {subject.links.length > 0 ? (
-      <div className="link-container">
-        {subject.links.map((link, linkIndex) => (
-          <button
-            key={linkIndex}
-            className="resource-btn"
-            style={{
-              backgroundColor: getLinkColor(link.name),
-              boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)`,
-              transition: "all 0.3s ease",
-              cursor: "pointer",
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "0.5rem 1rem",
-              borderRadius: "0.25rem",
-              margin: "0.25rem",
-              color: "#fff",
-              textDecoration: "none",
-              fontWeight: "500",
-              border: "none"
-            }}
-            onClick={(e) => {e.stopPropagation();
-              window.open(link.url, '_blank')}}
-          >
-            <i 
-              className={getLinkIcon(link.name)} 
-              aria-hidden="true"
-              style={{ marginRight: "0.5rem" }}
-            ></i>
-            <span style={{cursor:"pointer"}}>{link.name.toUpperCase()}</span>
-          </button>
-        ))}
-      </div>
-    ) : (
-      <p className="text-muted">No resources available</p>
-    )}
-  </div>
-</div>
+                        <div className="resource-links">
+                          <h4 className="mb-2">Available Resources</h4>
+                          {subject.links.length > 0 ? (
+                            <div className="link-container">
+                              {subject.links.map((link, linkIndex) => (
+                                <a
+                                  key={linkIndex}
+                                  href={link.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="resource-btn"
+                                  onClick={(e) => openLink(link.url, e)}
+                                  style={{
+                                    backgroundColor: getLinkColor(link.name),
+                                    boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)`,
+                                    transition: "all 0.3s ease",
+                                    cursor: "pointer",
+                                    display: "inline-flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    padding: "0.5rem 1rem",
+                                    borderRadius: "0.25rem",
+                                    margin: "0.25rem",
+                                    color: "#fff",
+                                    textDecoration: "none",
+                                    fontWeight: "500",
+                                    border: "none",
+                                    position: "relative",
+                                    zIndex: 100
+                                  }}
+                                >
+                                  <i 
+                                    className={getLinkIcon(link.name)} 
+                                    aria-hidden="true"
+                                    style={{ marginRight: "0.5rem" }}
+                                  ></i>
+                                  <span>{link.name.toUpperCase()}</span>
+                                </a>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="text-muted">No resources available</p>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
