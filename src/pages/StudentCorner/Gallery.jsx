@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Gallery.css"; // Custom CSS
+import "./Gallery.css"; 
 
 const Gallery = () => {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -13,10 +13,6 @@ const Gallery = () => {
 
   useEffect(() => {
     setIsLoaded(true);
-    const interval = setInterval(() => {
-      setActiveSlide((prevSlide) => (prevSlide + 1) % images.length);
-    }, 3000);
-    return () => clearInterval(interval);
   }, []);
 
   const goToSlide = (index) => {
@@ -69,26 +65,26 @@ const Gallery = () => {
             </div>
           ))}
         </div>
+      </div>
 
-        <div className="gallery-carousel-nav mt-2">
-          <button
-            className="gallery-carousel-control prev"
-            onClick={() =>
-              goToSlide((activeSlide - 1 + images.length) % images.length)
-            }
-            aria-label="Previous Slide"
-          >
-            <span>&lsaquo;</span>
-          </button>
+      <div className="gallery-carousel-nav mt-2">
+        <button
+          className="gallery-carousel-control prev"
+          onClick={() =>
+            goToSlide((activeSlide - 1 + images.length) % images.length)
+          }
+          aria-label="Previous Slide"
+        >
+          <span>&lsaquo;</span>
+        </button>
 
-          <button
-            className="gallery-carousel-control next"
-            onClick={() => goToSlide((activeSlide + 1) % images.length)}
-            aria-label="Next Slide"
-          >
-            <span>&rsaquo;</span>
-          </button>
-        </div>
+        <button
+          className="gallery-carousel-control next"
+          onClick={() => goToSlide((activeSlide + 1) % images.length)}
+          aria-label="Next Slide"
+        >
+          <span>&rsaquo;</span>
+        </button>
       </div>
     </div>
   );
