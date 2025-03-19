@@ -8,7 +8,7 @@ const Gallery = () => {
 
   const images = Array.from(
     { length: 25 },
-    (_, i) => `/images/StudentCorner/IMG-${i + 1}.png`
+    (_, i) => `/images/StudentCorner/IMG-${i + 1}.webp`
   );
 
   useEffect(() => {
