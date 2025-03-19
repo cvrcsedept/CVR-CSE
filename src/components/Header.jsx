@@ -79,6 +79,15 @@ const Navbar = () => {
       ],
     },
     {
+      label: "Publications Hub",
+      type: "dropdown",
+      items: [
+        { label: "Technical", path: "/publicationsHub/Technical" },
+        { label: "Non Technical", path: "/publicationsHub/NonTechnical" },
+        { label: "News Letter", path: "/publicationsHub/NewsLetter" },
+      ],
+    },
+    {
       label: "Research",
       type: "dropdown",
       items: [
@@ -138,7 +147,11 @@ const Navbar = () => {
                   className={`nav-item ${
                     menu.type === "dropdown" ? "dropdown" : ""
                   } marlin`}
-                  style={{ fontSize: "1.15rem", marginBottom: ".5rem" }}
+                  style={{
+                    fontSize: "1.07rem",
+                    marginBottom: ".5rem",
+                    fontWeight: "500",
+                  }}
                 >
                   {menu.type === "link" ? (
                     <Link className="nav-link" to={menu.path}>

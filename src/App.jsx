@@ -28,6 +28,9 @@ import {
   ResearchProjects,
   Workshops,
 } from "./pages/Research";
+import Technical from "./pages/Publications Hub/Technical";
+import NonTechnical from "./pages/Publications Hub/NonTechnical";
+import NewsLetter from "./pages/Publications Hub/NewsLetter";
 
 const App = () => {
   return (
@@ -50,6 +53,12 @@ const App = () => {
         <Route path="/infrastructure/library" element={<Library />} />
         <Route path="/studentcorner/e-resources" element={<EResources />} />
         <Route path="/studentcorner/gallery" element={<Gallery />} />
+        <Route path="/publicationsHub/Technical" element={<Technical />} />
+        <Route
+          path="/publicationsHub/NonTechnical"
+          element={<NonTechnical />}
+        />
+        <Route path="/publicationsHub/NewsLetter" element={<NewsLetter />} />
         <Route path="/research/conferences" element={<Conferences />} />
         <Route path="/research/publications" element={<Publications />} />
         <Route
@@ -61,8 +70,7 @@ const App = () => {
           element={<ResearchProjects />}
         />
         <Route path="/research/workshops" element={<Workshops />} />
-        {/* <Route path="/faculty/admin" element={<Admin />} /> */}
-        {/* <Route path="/faculty/non-teaching" element={<NonTeaching />} /> */}
+
         <Route path="/faculty/teaching" element={<Teaching />} />
         <Route path="/faculty/technicalstaff" element={<TechnicalStaff />} />
 
