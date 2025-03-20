@@ -5,56 +5,78 @@ import BackToTopButton from "../../components/BackToTopButton";
 
 const NewsLetter = () => {
   const [selectedDocument, setSelectedDocument] = useState(null);
+  const [imageLoadErrors, setImageLoadErrors] = useState({});
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+
+  const extractFileId = (url) => {
+
+    const fileRegex = /\/d\/([^\/]+)/;
+    const viewRegex = /id=([^&]+)/;
+    
+    let match = url.match(fileRegex);
+    if (match && match[1]) return match[1];
+    
+    match = url.match(viewRegex);
+    return match ? match[1] : null;
+  };
+
+  const imageExists = (url) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = url;
+    });
+  };
+
   const documents = [
     {
       id: 1,
-      title: "Likha - 2024",
-      url: "https://drive.google.com/file/d/1y1tRjF9JvN3iZENDRD5ke-QjkEHE0A_W/view?usp=sharing",
-      img: "/images/browcse jan 2024",
+      title: "BrowCse Jan 2024",
+      url: "https://drive.google.com/file/d/1y1tRjF9JvN3iZENDRD5ke-QjkEHE0A_W/view",
+      img: "/images/browcse jan 2024.png", 
     },
     {
       id: 2,
-      title: "Likha - 2023",
-      url: "https://drive.google.com/file/d/1bO_6i9M7_4skihwW6qlLJ202M-yRX7xo/view",
-      img: "/images/likha23.png",
+      title: "BrowCse Apr 2024",
+      url: "https://drive.google.com/file/d/12PSWuc6dWy6FGP5n-DFHFsd28_S8SD4S/view",
+      img: "/images/browcse apr 2024.png", 
     },
     {
       id: 3,
-      title: "Likha - 2022",
-      url: "https://drive.google.com/file/d/1XjALyjY31_k4p2m0sH3IjBh_KWuK_dNv/view",
-      img: "/images/likha22.png",
+      title: "BrowCse Jul 2024",
+      url: "https://drive.google.com/file/d/1pPIxRmxjcpeWF0SdprmNsRvqXTuM3Pd9/view",
+      img: "/images/browcse jul 2024.png", 
     },
     {
-      id: 1,
-      title: "Likha - 2024",
-      url: "https://drive.google.com/file/d/1gUl66iXWvYDPnwrzI0p9RjPJaOm_KxPA/view?usp=drive_link",
-      img: "/images/likha24.png",
+      id: 4,
+      title: "BrowCse Oct 2024",
+      url: "https://drive.google.com/file/d/1FO0J6MBOu0vlwbE_3F2xk59bae4E_V6l/view",
+      img: "/images/browcse oct 2024.png", 
     },
     {
       id: 2,
-      title: "Likha - 2023",
-      url: "https://drive.google.com/file/d/1bO_6i9M7_4skihwW6qlLJ202M-yRX7xo/view",
-      img: "/images/likha23.png",
+      title: "BrowCse Oct 2023",
+      url: "https://drive.google.com/file/d/1g6jMRuHTYimHkvxgWJfa8tqnK7__eTYa/view",
+      img: "/images/browcse oct 2023.png", 
     },
     {
       id: 3,
-      title: "Likha - 2022",
-      url: "https://drive.google.com/file/d/1XjALyjY31_k4p2m0sH3IjBh_KWuK_dNv/view",
-      img: "/images/likha22.png",
+      title: "BrowCse Jul 2023",
+      url: "https://drive.google.com/file/d/1cpL739vx39MNvjuJcNEf9vzr5g3gF-eT/view",
+      img: "/images/browcse  jul 2023.png", 
     },
   ].map((doc) => {
     const displayName = doc.name || doc.title.split(" - ")[0];
-
-    const description =
-      doc.description || `Detailed ${displayName.toLowerCase()} documentation.`;
-
+    const description = doc.description || `Detailed ${displayName.toLowerCase()} documentation.`;
     const icon = doc.icon || "bi-file-earmark-pdf";
     const color = doc.color || ["primary", "success", "danger"][doc.id % 3];
+    const fileId = extractFileId(doc.url);
+    
     return {
       ...doc,
       name: displayName,
@@ -62,6 +84,7 @@ const NewsLetter = () => {
       icon,
       color,
       previewImage: doc.img,
+      fileId: fileId
     };
   });
 
@@ -70,11 +93,17 @@ const NewsLetter = () => {
   };
 
   const getDirectDownloadLink = (fileId) => {
+    if (!fileId) return null;
     return `https://drive.google.com/uc?export=download&id=${fileId}`;
   };
 
   const getEmbedPreviewLink = (fileId) => {
+    if (!fileId) return null;
     return `https://drive.google.com/file/d/${fileId}/preview`;
+  };
+
+  const handleImageError = (docId) => {
+    setImageLoadErrors(prev => ({...prev, [docId]: true}));
   };
 
   return (
@@ -84,10 +113,10 @@ const NewsLetter = () => {
           <div className="row align-items-center">
             <div className="col-lg-8">
               <h1 className="display-4 fw-bold mb-2 text-white">
-                Non Technical Documentation
+                NewsLetter
               </h1>
               <p className="mx-3 col-log-6">
-                Beyond Tech – Explore Ideas, Insights & Inspiration!
+              Pioneering Research - Achieving Milestones & Excellence!
               </p>
             </div>
             <div className="col-lg-4 text-end d-none d-lg-block">
@@ -114,15 +143,19 @@ const NewsLetter = () => {
               >
                 <div className="position-relative">
                   <div className="pdf-preview" style={{ height: "300px" }}>
-                    <img
-                      src={doc.previewImage}
-                      alt={doc.title}
-                      className="w-100 h-100 object-fit-cover"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "/images/default-pdf.jpg";
-                      }}
-                    />
+                    {imageLoadErrors[doc.id] ? (
+                      // Default image when the specified image fails to load
+                      <div className="w-100 h-100 d-flex align-items-center justify-content-center bg-light">
+                        <i className={`bi ${doc.icon} text-${doc.color} fs-1`}></i>
+                      </div>
+                    ) : (
+                      <img
+                        src={doc.previewImage}
+                        alt={doc.title}
+                        className="w-100 h-100 object-fit-cover"
+                        onError={() => handleImageError(doc.id)}
+                      />
+                    )}
                   </div>
                 </div>
                 <div className="card-body">
@@ -136,15 +169,27 @@ const NewsLetter = () => {
                   </div>
                   <p className="text-muted">{doc.description}</p>
                   <div className="d-flex justify-content-end mt-3">
-                    <a
-                      href={getDirectDownloadLink(doc.fileId)}
-                      className="btn btn-sm btn-outline-primary"
-                      onClick={(e) => e.stopPropagation()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className="bi bi-download me-2"></i>Download
-                    </a>
+                    {doc.fileId ? (
+                      <a
+                        href={getDirectDownloadLink(doc.fileId)}
+                        className="btn btn-sm btn-outline-primary"
+                        onClick={(e) => e.stopPropagation()}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i className="bi bi-download me-2"></i>Download
+                      </a>
+                    ) : (
+                      <a
+                        href={doc.url}
+                        className="btn btn-sm btn-outline-primary"
+                        onClick={(e) => e.stopPropagation()}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i className="bi bi-link me-2"></i>Open
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -172,15 +217,24 @@ const NewsLetter = () => {
                 <div className="row">
                   <div className="col-md-12 mb-4">
                     <div className="pdf-embed-container">
-                      <iframe
-                        src={getEmbedPreviewLink(selectedDocument.fileId)}
-                        width="100%"
-                        height="400"
-                        className="border-0 rounded"
-                        title={selectedDocument.title}
-                        allow="autoplay"
-                        allowFullScreen={true}
-                      ></iframe>
+                      {selectedDocument.fileId ? (
+                        <iframe
+                          src={getEmbedPreviewLink(selectedDocument.fileId)}
+                          width="100%"
+                          height="400"
+                          className="border-0 rounded"
+                          title={selectedDocument.title}
+                          allow="autoplay"
+                          allowFullScreen={true}
+                        ></iframe>
+                      ) : (
+                        <div className="alert alert-warning">
+                          Could not extract file ID from URL. Please try opening the file directly:
+                          <a href={selectedDocument.url} target="_blank" rel="noopener noreferrer" className="d-block mt-2">
+                            Open file directly
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="col-md-12">
@@ -191,14 +245,25 @@ const NewsLetter = () => {
                         </span>
                         <h4 className="mb-0">{selectedDocument.title}</h4>
                       </div>
-                      <a
-                        href={getDirectDownloadLink(selectedDocument.fileId)}
-                        className="btn btn-primary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <i className="bi bi-download me-2"></i>Download PDF
-                      </a>
+                      {selectedDocument.fileId ? (
+                        <a
+                          href={getDirectDownloadLink(selectedDocument.fileId)}
+                          className="btn btn-primary"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <i className="bi bi-download me-2"></i>Download PDF
+                        </a>
+                      ) : (
+                        <a
+                          href={selectedDocument.url}
+                          className="btn btn-primary"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <i className="bi bi-link me-2"></i>Open File
+                        </a>
+                      )}
                     </div>
                     <p className="text-muted">{selectedDocument.description}</p>
                   </div>
