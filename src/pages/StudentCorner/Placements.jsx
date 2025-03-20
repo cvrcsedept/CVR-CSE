@@ -3,40 +3,44 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import BackToTopButton from "../../components/BackToTopButton";
 
-const NonTechnical = () => {
+const Placements = () => {
   const [selectedDocument, setSelectedDocument] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const extractFileId = (url) => {
+    const regex = /\/d\/([^\/]+)/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+  };
 
   const documents = [
     {
       id: 1,
-      title: "Likha - 2024",
-      url: "https://drive.google.com/file/d/1gUl66iXWvYDPnwrzI0p9RjPJaOm_KxPA/view?usp=drive_link",
-      img: "/images/likha24.png",
+      title: "Placements - 2024",
+      url: "https://drive.google.com/file/d/16fGjog_JFxYbu5n43rjadhxwiryIxePE/view",
+      img: "/images/placements 2024.png",
     },
     {
       id: 2,
-      title: "Likha - 2023",
-      url: "https://drive.google.com/file/d/1bO_6i9M7_4skihwW6qlLJ202M-yRX7xo/view",
-      img: "/images/likha23.png",
+      title: "Placements - 2023",
+      url: "https://drive.google.com/file/d/1KRoPGYfE7PqcXbdTqCThsaBY1aO4JapZ/view",
+      img: "/images/placements 2023.png",
     },
     {
       id: 3,
-      title: "Likha - 2022",
-      url: "https://drive.google.com/file/d/1XjALyjY31_k4p2m0sH3IjBh_KWuK_dNv/view",
-      img: "/images/likha22.png",
+      title: "Placements - 2022",
+      url: "https://drive.google.com/file/d/1kq8hcwzzTy3NeiLojdjzVLn6up62YW9r/view",
+      img: "/images/placements 2022.png",
     },
   ].map((doc) => {
     const displayName = doc.name || doc.title.split(" - ")[0];
-
-    const description =
-      doc.description || `Detailed ${displayName.toLowerCase()} documentation.`;
-
+    const description = doc.description || `Detailed ${displayName.toLowerCase()} documentation.`;
     const icon = doc.icon || "bi-file-earmark-pdf";
     const color = doc.color || ["primary", "success", "danger"][doc.id % 3];
+    const fileId = extractFileId(doc.url);
+    
     return {
       ...doc,
       name: displayName,
@@ -44,6 +48,7 @@ const NonTechnical = () => {
       icon,
       color,
       previewImage: doc.img,
+      fileId: fileId
     };
   });
 
@@ -66,10 +71,10 @@ const NonTechnical = () => {
           <div className="row align-items-center">
             <div className="col-lg-8">
               <h1 className="display-4 fw-bold mb-2 text-white">
-                Non Technical Documentation
+                Placements
               </h1>
               <p className="mx-3 col-log-6">
-                Beyond Tech – Explore Ideas, Insights & Inspiration!
+              Empowering Careers – Unlock Opportunities & Success!
               </p>
             </div>
             <div className="col-lg-4 text-end d-none d-lg-block">
@@ -119,7 +124,7 @@ const NonTechnical = () => {
                   <p className="text-muted">{doc.description}</p>
                   <div className="d-flex justify-content-end mt-3">
                     <a
-                      href={getDirectDownloadLink(doc.fileId)}
+                      href={doc.fileId ? getDirectDownloadLink(doc.fileId) : doc.url}
                       className="btn btn-sm btn-outline-primary"
                       onClick={(e) => e.stopPropagation()}
                       target="_blank"
@@ -154,15 +159,24 @@ const NonTechnical = () => {
                 <div className="row">
                   <div className="col-md-12 mb-4">
                     <div className="pdf-embed-container">
-                      <iframe
-                        src={getEmbedPreviewLink(selectedDocument.fileId)}
-                        width="100%"
-                        height="400"
-                        className="border-0 rounded"
-                        title={selectedDocument.title}
-                        allow="autoplay"
-                        allowFullScreen={true}
-                      ></iframe>
+                      {selectedDocument.fileId ? (
+                        <iframe
+                          src={getEmbedPreviewLink(selectedDocument.fileId)}
+                          width="100%"
+                          height="400"
+                          className="border-0 rounded"
+                          title={selectedDocument.title}
+                          allow="autoplay"
+                          allowFullScreen={true}
+                        ></iframe>
+                      ) : (
+                        <div className="alert alert-warning">
+                          Could not extract file ID from URL. Please try opening the file directly:
+                          <a href={selectedDocument.url} target="_blank" rel="noopener noreferrer" className="d-block mt-2">
+                            Open file directly
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="col-md-12">
@@ -174,7 +188,7 @@ const NonTechnical = () => {
                         <h4 className="mb-0">{selectedDocument.title}</h4>
                       </div>
                       <a
-                        href={getDirectDownloadLink(selectedDocument.fileId)}
+                        href={selectedDocument.fileId ? getDirectDownloadLink(selectedDocument.fileId) : selectedDocument.url}
                         className="btn btn-primary"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -285,4 +299,4 @@ const NonTechnical = () => {
   );
 };
 
-export default NonTechnical;
+export default Placements;

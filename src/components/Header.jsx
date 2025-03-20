@@ -76,6 +76,7 @@ const Navbar = () => {
       items: [
         { label: "E-Resources", path: "/studentcorner/e-resources" },
         { label: "Gallery", path: "/studentcorner/gallery" },
+        { label: "Placements", path: "/studentcorner/Placements" },
       ],
     },
     {
