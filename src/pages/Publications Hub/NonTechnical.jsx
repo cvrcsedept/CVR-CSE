@@ -14,7 +14,7 @@ const NonTechnical = () => {
     {
       id: 1,
       title: "Likha - 2024",
-      url: "https://drive.google.com/file/d/1gUl66iXWvYDPnwrzI0p9RjPJaOm_KxPA/view?usp=drive_link",
+      url: "https://drive.google.com/file/d/1Uy0AoVaCy94v2PLXeQSyHx2zRt8OF2ES/view",
       img: "/images/likha24.png",
     },
     {

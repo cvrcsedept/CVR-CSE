@@ -36,36 +36,36 @@ const NewsLetter = () => {
   const documents = [
     {
       id: 1,
-      title: "BrowCse Jan 2024",
-      url: "https://drive.google.com/file/d/1y1tRjF9JvN3iZENDRD5ke-QjkEHE0A_W/view",
-      img: "/images/browcse jan 2024.png", 
-    },
-    {
-      id: 2,
-      title: "BrowCse Apr 2024",
-      url: "https://drive.google.com/file/d/12PSWuc6dWy6FGP5n-DFHFsd28_S8SD4S/view",
-      img: "/images/browcse apr 2024.png", 
-    },
-    {
-      id: 3,
-      title: "BrowCse Jul 2024",
-      url: "https://drive.google.com/file/d/1pPIxRmxjcpeWF0SdprmNsRvqXTuM3Pd9/view",
-      img: "/images/browcse jul 2024.png", 
-    },
-    {
-      id: 4,
       title: "BrowCse Oct 2024",
       url: "https://drive.google.com/file/d/1FO0J6MBOu0vlwbE_3F2xk59bae4E_V6l/view",
       img: "/images/browcse oct 2024.png", 
     },
     {
       id: 2,
+      title: "BrowCse Jul 2024",
+      url: "https://drive.google.com/file/d/1pPIxRmxjcpeWF0SdprmNsRvqXTuM3Pd9/view",
+      img: "/images/browcse jul 2024.png", 
+    },
+    {
+      id: 3,
+      title: "BrowCse Apr 2024",
+      url: "https://drive.google.com/file/d/12PSWuc6dWy6FGP5n-DFHFsd28_S8SD4S/view",
+      img: "/images/browcse apr 2024.png", 
+    },
+    {
+      id: 4,
+      title: "BrowCse Jan 2024",
+      url: "https://drive.google.com/file/d/1y1tRjF9JvN3iZENDRD5ke-QjkEHE0A_W/view",
+      img: "/images/browcse jan 2024.png", 
+    },
+    {
+      id: 5,
       title: "BrowCse Oct 2023",
       url: "https://drive.google.com/file/d/1g6jMRuHTYimHkvxgWJfa8tqnK7__eTYa/view",
       img: "/images/browcse oct 2023.png", 
     },
     {
-      id: 3,
+      id: 6,
       title: "BrowCse Jul 2023",
       url: "https://drive.google.com/file/d/1cpL739vx39MNvjuJcNEf9vzr5g3gF-eT/view",
       img: "/images/browcse  jul 2023.png", 
