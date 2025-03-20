@@ -153,7 +153,7 @@ const Contact = () => {
     {
       icon: "bi-envelope",
       title: "Email Us",
-      content: "csedept@gmail.com",
+      content: "cse@cvr.ac.in",
       color: "#7209b7",
     },
     {
