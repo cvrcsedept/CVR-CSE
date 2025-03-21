@@ -105,7 +105,7 @@ const Laboratories = () => {
       image: "/images/civil/cbc2a-inside.jpg",
       title: "Data Visualization lab",
       description:
-        "Advanced Java development envThe system with 8GB RAM, 1TB HDD, and an 18.5 Acer monitor is well-suited for data visualization tasks, paired with Acer keyboard and mouse.",
+        "The system with 8GB RAM, 1TB HDD, and an 18.5 Acer monitor is well-suited for data visualization tasks, paired with Acer keyboard and mouse.",
       icon: "bi-bar-chart-line-fill",
       color: "primary",
       location: "CBC2A",
