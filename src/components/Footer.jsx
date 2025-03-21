@@ -185,8 +185,48 @@ const Footer = () => {
                   Gallery
                 </Link>
               </li>
+              <li className="mb-2">
+                <Link
+                  to="/studentcorner/Placements"
+                  className="text-decoration-none text-light"
+                >
+                  Placements
+                </Link>
+              </li>
             </ul>
           </div>
+
+          <div className="col-12 col-md-4 col-lg-2">
+            <h4 className="mb-3 text-light">Publications Hub</h4>
+            <ul className="list-unstyled">
+              <li className="mb-2">
+                <Link
+                  to="/publicationsHub/Technical"
+                  className="text-decoration-none text-light"
+                >
+                  Technical
+                </Link>
+              </li>
+
+              <li className="mb-2">
+                <Link
+                  to="/publicationsHub/NonTechnical"
+                  className="text-decoration-none text-light"
+                >
+                  Non Technical
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link
+                  to="/publicationsHub/NewsLette"
+                  className="text-decoration-none text-light"
+                >
+                  News Letter
+                </Link>
+              </li>
+            </ul>
+          </div>
+          
           <div className="col-12 text-center">
             <h4 className="mb-3 text-light">Follow Us</h4>
             <div className="d-flex justify-content-center gap-3 mb-4">

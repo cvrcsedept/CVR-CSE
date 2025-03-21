@@ -245,14 +245,14 @@ const SyllabusBooks = () => {
     {
       title: "M.Tech",
       year: "I Year - 2024-25 - R22",
-      url: "/Data/Syllabus-Copy/m-tech-1-1.pdf",
+      url: "/Data/Syllabus-Copy/M.tech 1st year.pdf",
       icon: "fa-solid fa-microchip",
       color: "#36b9cc",
     },
     {
       title: "M.Tech",
       year: "II Year - 2024-25 - R22",
-      url: "/Data/Syllabus-Copy/mtech-2-2.pdf",
+      url: "/Data/Syllabus-Copy/M.tech 2nd year.pdf",
       icon: "fa-solid fa-microscope",
       color: "#6f42c1",
     },

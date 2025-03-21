@@ -9,12 +9,23 @@ const NonTechnical = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const extractFileId = (url) => {
+
+    const fileRegex = /\/d\/([^\/]+)/;
+    const viewRegex = /id=([^&]+)/;
+    
+    let match = url.match(fileRegex);
+    if (match && match[1]) return match[1];
+    
+    match = url.match(viewRegex);
+    return match ? match[1] : null;
+  };
 
   const documents = [
     {
       id: 1,
       title: "Likha - 2024",
-      url: "https://drive.google.com/file/d/1bO_6i9M7_4skihwW6qlLJ202M-yRX7xo/view?usp=drive_link",
+      url: "https://drive.google.com/file/d/1Uy0AoVaCy94v2PLXeQSyHx2zRt8OF2ES/view",
       img: "/images/likha24.png",
     },
     {
@@ -37,6 +48,7 @@ const NonTechnical = () => {
 
     const icon = doc.icon || "bi-file-earmark-pdf";
     const color = doc.color || ["primary", "success", "danger"][doc.id % 3];
+    const fileId = extractFileId(doc.url);
     return {
       ...doc,
       name: displayName,
@@ -44,6 +56,7 @@ const NonTechnical = () => {
       icon,
       color,
       previewImage: doc.img,
+      fileId,
     };
   });
 

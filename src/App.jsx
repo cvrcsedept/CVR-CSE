@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NothingFoundPage from "./pages/NothingFoundPage";
 import Publications from "./pages/Research/publications";
+import Placements from "./pages/StudentCorner/Placements";
 
 import {
   AcademicCalender,
@@ -53,6 +54,7 @@ const App = () => {
         <Route path="/infrastructure/library" element={<Library />} />
         <Route path="/studentcorner/e-resources" element={<EResources />} />
         <Route path="/studentcorner/gallery" element={<Gallery />} />
+        <Route path="/studentcorner/Placements" element={<Placements />} />
         <Route path="/publicationsHub/Technical" element={<Technical />} />
         <Route
           path="/publicationsHub/NonTechnical"

@@ -209,7 +209,7 @@ const Teaching = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  {activeDesignation} Faculty
+                  {activeDesignation} 
                 </button>
                 <ul
                   className="dropdown-menu"
@@ -221,7 +221,7 @@ const Teaching = () => {
                         className="dropdown-item"
                         onClick={() => filterFaculty(designation)}
                       >
-                        {designation} Faculty
+                        {designation} 
                       </button>
                     </li>
                   ))}

@@ -77,7 +77,7 @@ const Classrooms = () => {
           <div className="col-lg-6">
             <div className="position-relative classroom-image-wrapper">
               <img
-                src="/images/classroom.jpg"
+                src="/images/classroom_new.jpg"
                 alt="Professional Classroom"
                 className="img-fluid rounded-4 shadow-lg classroom-image"
               />
