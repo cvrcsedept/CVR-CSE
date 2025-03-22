@@ -1087,7 +1087,7 @@ const About = () => {
         }
 
         .social-link.github:hover {
-          color: #f0f0f0;
+          color: black;
         }
 
         .social-link::after {
