@@ -37,37 +37,37 @@ const NewsLetter = () => {
     {
       id: 1,
       title: "BrowCse Oct 2024",
-      url: "https://drive.google.com/file/d/1FO0J6MBOu0vlwbE_3F2xk59bae4E_V6l/view",
+      url: "https://drive.google.com/file/d/1n0mpvu9WGp-l_WlQ-g1zTh6Y38EfEXZr/view",
       img: "/images/browcse oct 2024.png", 
     },
     {
       id: 2,
       title: "BrowCse Jul 2024",
-      url: "https://drive.google.com/file/d/1pPIxRmxjcpeWF0SdprmNsRvqXTuM3Pd9/view",
+      url: "https://drive.google.com/file/d/1cNg0LbluE-Hh5__ULeCX_5XtiLMYSkPW/view",
       img: "/images/browcse jul 2024.png", 
     },
     {
       id: 3,
       title: "BrowCse Apr 2024",
-      url: "https://drive.google.com/file/d/12PSWuc6dWy6FGP5n-DFHFsd28_S8SD4S/view",
+      url: "https://drive.google.com/file/d/1Yp3SZnyDIB9CNvHL6xxmHDbHDQk7taYK/view",
       img: "/images/browcse apr 2024.png", 
     },
     {
       id: 4,
       title: "BrowCse Jan 2024",
-      url: "https://drive.google.com/file/d/1y1tRjF9JvN3iZENDRD5ke-QjkEHE0A_W/view",
+      url: "https://drive.google.com/file/d/1Boo960usLLe4NI7QqCwJJKq7mHEZLyE2/view",
       img: "/images/browcse jan 2024.png", 
     },
     {
       id: 5,
       title: "BrowCse Oct 2023",
-      url: "https://drive.google.com/file/d/1g6jMRuHTYimHkvxgWJfa8tqnK7__eTYa/view",
+      url: "https://drive.google.com/file/d/1uS0EAIaOrQv06w7PiLXbQjeHEHeOptAM/view",
       img: "/images/browcse oct 2023.png", 
     },
     {
       id: 6,
       title: "BrowCse Jul 2023",
-      url: "https://drive.google.com/file/d/1cpL739vx39MNvjuJcNEf9vzr5g3gF-eT/view",
+      url: "https://drive.google.com/file/d/1ajbQwr8xUltf9AAny1zgT9JTuIRsYZpM/view",
       img: "/images/browcse  jul 2023.png", 
     },
   ].map((doc) => {
