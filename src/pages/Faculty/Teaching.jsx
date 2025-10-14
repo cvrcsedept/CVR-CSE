@@ -8,11 +8,12 @@ const Teaching = () => {
   const [faculty, setFaculty] = useState([]);
   const [filteredFaculty, setFilteredFaculty] = useState([]);
   const [activeDesignation, setActiveDesignation] = useState("All");
-  const [selectedYear, setSelectedYear] = useState("2024-25");
+  const [selectedYear, setSelectedYear] = useState("2025-2026");
   const [yearlyData, setYearlyData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [tableHeaders, setTableHeaders] = useState([]);
 
-  const academicYears = ["2022-23", "2023-24", "2024-25"];
+  const academicYears = ["2025-2026", "2024-2025", "2023-2024", "2022-2023"];
 
   const normalizeDesignation = (designation) => {
     return designation?.toLowerCase().trim().replace(/\s+/g, ".") || "";
@@ -20,29 +21,8 @@ const Teaching = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    loadFacultyData();
-    handleYearChange("2024-25");
+    handleYearChange("2025-2026");
   }, []);
-
-  const loadFacultyData = async () => {
-    try {
-      const response = await fetch("/Data/faculty.xlsx");
-      const arrayBuffer = await response.arrayBuffer();
-      const workbook = XLSX.read(arrayBuffer, { type: "array" });
-      const sheetName = workbook.SheetNames[0];
-      const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-
-      const formattedData = jsonData.map((faculty) => ({
-        ...faculty,
-        normalizedDesignation: normalizeDesignation(faculty.Designation),
-      }));
-
-      setFaculty(formattedData);
-      filterFaculty("All", formattedData, searchTerm);
-    } catch (error) {
-      console.error("Error loading faculty data:", error);
-    }
-  };
 
   const filterFaculty = (designation, data = faculty, search = searchTerm) => {
     setActiveDesignation(designation);
@@ -78,7 +58,8 @@ const Teaching = () => {
     if (search.trim() !== "") {
       filtered = filtered.filter((faculty) => {
         const facultyName =
-          faculty["Name of the Staff Member "]?.toLowerCase() || "";
+          (faculty["Name of the Faculty"] || 
+           faculty["Name of the Staff Member "] || "").toLowerCase();
         return facultyName.includes(search.toLowerCase());
       });
     }
@@ -86,7 +67,6 @@ const Teaching = () => {
     setFilteredFaculty(filtered);
   };
 
-  // Handle search input changes
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchTerm(value);
@@ -95,16 +75,125 @@ const Teaching = () => {
 
   const handleYearChange = async (year) => {
     setSelectedYear(year);
-    setSearchTerm(""); // Clear search when changing year
+    setSearchTerm("");
+    setActiveDesignation("All");
 
     try {
+      console.log("Attempting to fetch: /Data/Faculty-List-3 years.xlsx");
       const response = await fetch("/Data/Faculty-List-3 years.xlsx");
+      
+      if (!response.ok) {
+        console.error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const arrayBuffer = await response.arrayBuffer();
+      console.log("File fetched successfully, size:", arrayBuffer.byteLength);
+      
       const workbook = XLSX.read(arrayBuffer, { type: "array" });
-      const sheetData = XLSX.utils.sheet_to_json(workbook.Sheets[year]);
-      setYearlyData(sheetData);
+      console.log("Available sheets:", workbook.SheetNames);
+      
+      // Find the sheet matching the selected year
+      let sheetName = workbook.SheetNames.find(name => 
+        name.includes(year) || name === year || name.toLowerCase() === year.toLowerCase()
+      );
+      
+      if (sheetName) {
+        console.log("Loading sheet:", sheetName);
+        const worksheet = workbook.Sheets[sheetName];
+        
+        // Convert to array of arrays to find the header row
+        const rawData = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
+        console.log("Raw data rows:", rawData.length);
+        console.log("First 5 rows:", rawData.slice(0, 5));
+        
+        // Find the row that contains "S.NO" or "Name of the Faculty" - this is the header row
+        let headerRowIndex = -1;
+        for (let i = 0; i < Math.min(15, rawData.length); i++) {
+          const row = rawData[i];
+          const rowStr = row.map(cell => String(cell).toLowerCase()).join(" ");
+          if (rowStr.includes("s.no") || rowStr.includes("name of the faculty") || rowStr.includes("name of the staff") || rowStr.includes("designation") || rowStr.includes("qualification")) {
+            headerRowIndex = i;
+            console.log("Found header row at index:", i, "Row content:", row);
+            break;
+          }
+        }
+        
+        if (headerRowIndex === -1) {
+          console.error("Could not find header row");
+          console.log("All rows:", rawData);
+          setYearlyData([]);
+          setFaculty([]);
+          setTableHeaders([]);
+          return;
+        }
+        
+        // Parse with the correct header row
+        const sheetData = XLSX.utils.sheet_to_json(worksheet, { 
+          range: headerRowIndex,
+          defval: "",
+          raw: false
+        });
+        
+        console.log("Sheet data loaded, records:", sheetData.length);
+        console.log("First 3 records:", sheetData.slice(0, 3));
+        console.log("All keys from first record:", sheetData.length > 0 ? Object.keys(sheetData[0]) : []);
+        const validData = sheetData.filter((row, index) => {
+          const values = Object.values(row);
+          const nonEmptyValues = values.filter(val => val && String(val).trim() !== "");
+          
+          if (nonEmptyValues.length === 0) return false;
+          const allNumbers = nonEmptyValues.every(val => !isNaN(val) && String(val).trim() !== "");
+          if (allNumbers && nonEmptyValues.length <= 2) return false;
+          const rowStr = String(values.join(" ")).toLowerCase();
+          if (rowStr.includes("cvr college") || 
+              rowStr.includes("teaching staff list") || 
+              rowStr.includes("computer science and engineering")) {
+            return false;
+          }
+          
+          console.log(`Row ${index} validation:`, { row, nonEmptyValues: nonEmptyValues.length, allNumbers });
+          return true;
+        });
+        
+        console.log("Valid data records after filtering:", validData.length);
+        if (validData.length > 0) {
+          console.log("First valid record:", validData[0]);
+        }
+        const formattedData = validData.map((faculty) => ({
+          ...faculty,
+          normalizedDesignation: normalizeDesignation(faculty.Designation || faculty.designation),
+        }));
+
+        if (formattedData.length > 0) {
+          const allKeys = Object.keys(formattedData[0]);
+          console.log("All keys before filtering:", allKeys);
+          
+          const headers = allKeys.filter(h => 
+            h !== "normalizedDesignation" && 
+            h.toLowerCase() !== "s.no" && 
+            h.toLowerCase() !== "s.no." &&
+            h.toLowerCase() !== "sno"
+          );
+          
+          setTableHeaders(headers);
+          console.log("Final table headers:", headers);
+        }
+        
+        setYearlyData(formattedData);
+        setFaculty(formattedData);
+        filterFaculty("All", formattedData, "");
+      } else {
+        console.error(`Sheet for year ${year} not found. Available sheets:`, workbook.SheetNames);
+        setYearlyData([]);
+        setFaculty([]);
+        setTableHeaders([]);
+      }
     } catch (error) {
       console.error(`Error loading data for year ${year}:`, error);
+      setYearlyData([]);
+      setFaculty([]);
+      setTableHeaders([]);
     }
   };
 
@@ -143,12 +232,36 @@ const Teaching = () => {
     }
   };
 
-  const getTableHeaders = () => {
-    if (yearlyData.length === 0) return [];
-    return Object.keys(yearlyData[0]);
-  };
+  const renderCellValue = (header, value) => {
+  if (header === "Photo" || header === "Image") {
+    return (
+      <div className="text-center">
+        <a
+          href="#"
+          className="btn btn-link p-0"
+          style={{
+            textDecoration: "none",
+            color: "#0d6efd",
+            fontWeight: "500"
+          }}
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo(0, 0);
+          }}
+        >
+          View Profile
+        </a>
+      </div>
+    );
+  }
 
-  const isCurrentYear = selectedYear === "2024-25";
+
+    if (header === "DOJ" || header.includes("Date")) {
+      return formatDate(value);
+    }
+
+    return value || "N/A";
+  };
 
   return (
     <div className="teaching-faculty-wrapper">
@@ -171,7 +284,7 @@ const Teaching = () => {
         {/* Centered dropdowns in a single row */}
         <div className="row mb-4">
           <div className="col-12 d-flex justify-content-center gap-3">
-            {/* Always display year dropdown */}
+            {/* Year dropdown */}
             <div className="dropdown">
               <button
                 className="btn btn-primary dropdown-toggle"
@@ -199,127 +312,76 @@ const Teaching = () => {
               </ul>
             </div>
 
-            {/* Only display designation dropdown for current year */}
-            {isCurrentYear && (
-              <div className="dropdown">
-                <button
-                  className="btn btn-primary dropdown-toggle"
-                  type="button"
-                  id="facultyDesignationDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  {activeDesignation} 
-                </button>
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="facultyDesignationDropdown"
-                >
-                  {designationOptions.map((designation, index) => (
-                    <li key={index}>
-                      <button
-                        className="dropdown-item"
-                        onClick={() => filterFaculty(designation)}
-                      >
-                        {designation} 
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            {/* Designation dropdown
+            <div className="dropdown">
+              <button
+                className="btn btn-primary dropdown-toggle"
+                type="button"
+                id="facultyDesignationDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {activeDesignation}
+              </button>
+              <ul
+                className="dropdown-menu"
+                aria-labelledby="facultyDesignationDropdown"
+              >
+                {designationOptions.map((designation, index) => (
+                  <li key={index}>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => filterFaculty(designation)}
+                    >
+                      {designation}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div> */}
           </div>
         </div>
-        {isCurrentYear && (
-          <div className="row mb-4">
-            <div className="col-md-6 mx-auto">
-              <div className="input-group">
-                <span className="input-group-text">
-                  <i className="bi bi-search"></i>
-                </span>
-                <input
-                  type="text"
-                  className="form-control form-control-lg"
-                  placeholder="Search faculty by name..."
-                  value={searchTerm}
-                  onChange={handleSearchChange}
-                  aria-label="Search faculty"
-                />
-                {searchTerm && (
-                  <button
-                    className="btn btn-outline-secondary"
-                    type="button"
-                    onClick={() => {
-                      setSearchTerm("");
-                      filterFaculty(activeDesignation, faculty, "");
-                    }}
-                  >
-                    Clear
-                  </button>
-                )}
-              </div>
+
+        {/* Search bar */}
+        {/* <div className="row mb-4">
+          <div className="col-md-6 mx-auto">
+            <div className="input-group">
+              <span className="input-group-text">
+                <i className="bi bi-search"></i>
+              </span>
+              <input
+                type="text"
+                className="form-control form-control-lg"
+                placeholder="Search faculty by name..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+                aria-label="Search faculty"
+              />
               {searchTerm && (
-                <div className="text-center mt-2">
-                  <small className="text-muted">
-                    Found {filteredFaculty.length} faculty members
-                  </small>
-                </div>
+                <button
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  onClick={() => {
+                    setSearchTerm("");
+                    filterFaculty(activeDesignation, faculty, "");
+                  }}
+                >
+                  Clear
+                </button>
               )}
             </div>
-          </div>
-        )}
-
-        {/* Faculty Cards Section - Only display for current year */}
-        {isCurrentYear && (
-          <div className="row g-4 mb-5">
-            {filteredFaculty.length > 0 ? (
-              filteredFaculty.map((member, index) => (
-                <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3">
-                  <div className="faculty-card">
-                    <div className="faculty-card-inner">
-                      <div className="faculty-image-wrapper">
-                        <img
-                          src={`/images/TeachingFacultyImages/${member.Image}.jpg`}
-                          onError={(e) => {
-                            e.target.onerror = null;
-                            if (e.target.src.endsWith(".jpg")) {
-                              e.target.src = `/images/TeachingFacultyImages/${member.Image}.jpeg`;
-                            } else if (e.target.src.endsWith(".jpeg")) {
-                              e.target.src = `/images/TeachingFacultyImages/${member.Image}.png`;
-                            } else {
-                              e.target.src =
-                                "/images/TeachingFacultyImages/CVR Logo.png";
-                            }
-                          }}
-                          alt={member["Name of the Staff Member "]}
-                          className="faculty-image"
-                        />
-                      </div>
-                      <div className="faculty-details">
-                        <h4 className="faculty-name">
-                          {member["Name of the Staff Member "]}
-                        </h4>
-                        <p className="faculty-designation">
-                          {member.Designation}
-                        </p>
-                        <p className="faculty-join-date">
-                          Joined: {formatDate(member.DOJ)}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="col-12 text-center">
-                <p className="text-muted">No faculty members found.</p>
+            {searchTerm && (
+              <div className="text-center mt-2">
+                <small className="text-muted">
+                  Found {filteredFaculty.length} faculty members
+                </small>
               </div>
             )}
           </div>
-        )}
+        </div> */}
 
-        {/* Enhanced Academic Year Data Table - Only display for previous years */}
-        {!isCurrentYear && yearlyData.length > 0 && (
+        {/* Faculty Table - Displays all columns dynamically */}
+        {filteredFaculty.length > 0 && (
           <div className="row mt-4">
             <div className="col-12">
               <div className="card shadow-sm">
@@ -333,25 +395,37 @@ const Teaching = () => {
                     <table className="table table-hover mb-0">
                       <thead className="table-dark">
                         <tr>
-                          {getTableHeaders().map((header, index) => (
-                            <th key={index} className="text-center">
+                          <th className="text-center" style={{ minWidth: "50px" }}>S.NO</th>
+                          {tableHeaders.map((header, index) => (
+                            <th 
+                              key={index} 
+                              className="text-center"
+                              style={{ 
+                                minWidth: header === "Photo" || header === "Image" ? "80px" : "150px",
+                                whiteSpace: "nowrap"
+                              }}
+                            >
                               {header}
                             </th>
                           ))}
                         </tr>
                       </thead>
                       <tbody>
-                        {yearlyData.map((row, rowIndex) => (
+                        {filteredFaculty.map((member, rowIndex) => (
                           <tr
                             key={rowIndex}
                             className={rowIndex % 2 === 0 ? "table-light" : ""}
                           >
-                            {getTableHeaders().map((header, colIndex) => (
+                            <td className="text-center align-middle" style={{ minWidth: "50px" }}>
+                              {rowIndex + 1}
+                            </td>
+                            {tableHeaders.map((header, colIndex) => (
                               <td
                                 key={colIndex}
                                 className="text-center align-middle"
+                                style={{ minWidth: "150px" }}
                               >
-                                {row[header]}
+                                {renderCellValue(header, member[header])}
                               </td>
                             ))}
                           </tr>
@@ -362,11 +436,25 @@ const Teaching = () => {
                 </div>
                 <div className="card-footer bg-light">
                   <p className="text-muted text-center mb-0">
-                    <small>Total Records: {yearlyData.length}</small>
+                    <small>Total Records: {filteredFaculty.length}</small>
                   </p>
                 </div>
               </div>
             </div>
+          </div>
+        )}
+
+        {/* No results message */}
+        {filteredFaculty.length === 0 && yearlyData.length === 0 && (
+          <div className="col-12 text-center">
+            <p className="text-muted">No faculty members found for the selected year.</p>
+          </div>
+        )}
+
+        {/* No filter results message */}
+        {filteredFaculty.length === 0 && yearlyData.length > 0 && (
+          <div className="col-12 text-center">
+            <p className="text-muted">No faculty members match your search or filter criteria.</p>
           </div>
         )}
       </div>
