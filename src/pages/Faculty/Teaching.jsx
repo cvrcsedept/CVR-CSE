@@ -269,7 +269,7 @@ const Teaching = () => {
                 <div className="card shadow-sm mb-4">
                   <div className="card-header bg-primary text-white">
                     <h5 className="text-center mb-0">
-                      Faculty List - {section.title || "General"}
+                      Faculty List  {section.title}
                     </h5>
                   </div>
                   <div className="card-body p-0">
@@ -298,13 +298,13 @@ const Teaching = () => {
                               key={rowIndex}
                               className={rowIndex % 2 === 0 ? "table-light" : ""}
                             >
-                              <td className="text-center align-middle" style={{ minWidth: "50px" }}>
+                              <td className="text-start align-middle" style={{ minWidth: "50px" }}>
                                 {rowIndex + 1}
                               </td>
                               {tableHeaders.map((header, colIndex) => (
                                 <td
                                   key={colIndex}
-                                  className="text-center align-middle"
+                                  className="text-start align-middle"
                                   style={{ minWidth: "120px" }}
                                 >
                                   {renderCellValue(header, member[header])}
