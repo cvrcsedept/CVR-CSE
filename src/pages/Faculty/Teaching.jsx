@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./TeachingFaculty.css";
-import BackToTopButton from "../../components/BackToTopButton";
 
 const Teaching = () => {
-  const [faculty, setFaculty] = useState([]);
-  const [filteredFaculty, setFilteredFaculty] = useState([]);
-  const [activeDesignation, setActiveDesignation] = useState("All");
+  const [sections, setSections] = useState([]);
   const [selectedYear, setSelectedYear] = useState("2025-2026");
-  const [yearlyData, setYearlyData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
   const [tableHeaders, setTableHeaders] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const academicYears = ["2025-2026", "2024-2025", "2023-2024", "2022-2023"];
 
@@ -19,207 +14,158 @@ const Teaching = () => {
     return designation?.toLowerCase().trim().replace(/\s+/g, ".") || "";
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    handleYearChange("2025-2026");
-  }, []);
-
-  const filterFaculty = (designation, data = faculty, search = searchTerm) => {
-    setActiveDesignation(designation);
-
-    let filtered = data;
-
-    // Filter by designation
-    if (designation !== "All") {
-      filtered = filtered.filter((faculty) => {
-        const normDesignation = faculty.normalizedDesignation;
-        switch (designation) {
-          case "Professor":
-            return (
-              normDesignation.includes("professor") &&
-              !normDesignation.includes("assoc")
-            );
-          case "Associate Professor":
-            return normDesignation.includes("assoc.prof");
-          case "Senior Assistant Professor":
-            return normDesignation.includes("sr.asst.prof.");
-          case "Assistant Professor":
-            return (
-              normDesignation.includes("asst.prof.") &&
-              !normDesignation.includes("sr.asst.prof.")
-            );
-          default:
-            return true;
-        }
-      });
-    }
-
-    // Filter by search term
-    if (search.trim() !== "") {
-      filtered = filtered.filter((faculty) => {
-        const facultyName =
-          (faculty["Name of the Faculty"] || 
-           faculty["Name of the Staff Member "] || "").toLowerCase();
-        return facultyName.includes(search.toLowerCase());
-      });
-    }
-
-    setFilteredFaculty(filtered);
-  };
-
-  const handleSearchChange = (event) => {
-    const value = event.target.value;
-    setSearchTerm(value);
-    filterFaculty(activeDesignation, faculty, value);
+  const isHeadingRow = (row) => {
+    const values = Object.values(row);
+    const nonEmptyValues = values.filter(val => val && String(val).trim() !== "");
+    
+    if (nonEmptyValues.length === 0) return false;
+    
+    const allNumbers = nonEmptyValues.every(val => !isNaN(val) && String(val).trim() !== "");
+    if (allNumbers && nonEmptyValues.length <= 2) return false;
+    
+    const rowStr = String(values.join(" ")).toLowerCase();
+    if (rowStr.includes("cvr college") || rowStr.includes("teaching staff list")) return false;
+    
+    const firstCol = String(values[0] || "").toLowerCase();
+    
+    // Check if it's a numerical row (S.NO with single digit)
+    const isNumericRow = !isNaN(firstCol) && firstCol.trim() !== "";
+    if (isNumericRow) return false;
+    
+    // Check if it looks like a faculty name (has "Dr" or "Mr" or "Ms")
+    if (firstCol.includes("dr ") || firstCol.includes("mr ") || firstCol.includes("ms ")) return false;
+    
+    // If only one non-empty value and it's not a number, it's likely a heading
+    const isHeading = 
+      (nonEmptyValues.length === 1 && !firstCol.match(/^[\d\s]*$/) && firstCol.length > 5) ||
+      firstCol.includes("computer science") ||
+      firstCol.includes("engineering") ||
+      firstCol.includes("artificial intelligence") ||
+      firstCol.includes("tech") ||
+      firstCol.includes("m.tech");
+    
+    return isHeading;
   };
 
   const handleYearChange = async (year) => {
     setSelectedYear(year);
-    setSearchTerm("");
-    setActiveDesignation("All");
+    setLoading(true);
 
     try {
-      console.log("Attempting to fetch: /Data/Faculty-List-3 years.xlsx");
       const response = await fetch("/Data/Faculty-List-3 years.xlsx");
       
       if (!response.ok) {
-        console.error(`HTTP error! status: ${response.status}`);
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const arrayBuffer = await response.arrayBuffer();
-      console.log("File fetched successfully, size:", arrayBuffer.byteLength);
-      
       const workbook = XLSX.read(arrayBuffer, { type: "array" });
-      console.log("Available sheets:", workbook.SheetNames);
       
-      // Find the sheet matching the selected year
       let sheetName = workbook.SheetNames.find(name => 
         name.includes(year) || name === year || name.toLowerCase() === year.toLowerCase()
       );
       
       if (sheetName) {
-        console.log("Loading sheet:", sheetName);
         const worksheet = workbook.Sheets[sheetName];
-        
-        // Convert to array of arrays to find the header row
         const rawData = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
-        console.log("Raw data rows:", rawData.length);
-        console.log("First 5 rows:", rawData.slice(0, 5));
         
-        // Find the row that contains "S.NO" or "Name of the Faculty" - this is the header row
         let headerRowIndex = -1;
         for (let i = 0; i < Math.min(15, rawData.length); i++) {
           const row = rawData[i];
           const rowStr = row.map(cell => String(cell).toLowerCase()).join(" ");
-          if (rowStr.includes("s.no") || rowStr.includes("name of the faculty") || rowStr.includes("name of the staff") || rowStr.includes("designation") || rowStr.includes("qualification")) {
+          if (rowStr.includes("s.no") || rowStr.includes("name of the") || rowStr.includes("designation")) {
             headerRowIndex = i;
-            console.log("Found header row at index:", i, "Row content:", row);
             break;
           }
         }
         
         if (headerRowIndex === -1) {
-          console.error("Could not find header row");
-          console.log("All rows:", rawData);
-          setYearlyData([]);
-          setFaculty([]);
+          setSections([]);
           setTableHeaders([]);
+          setLoading(false);
           return;
         }
         
-        // Parse with the correct header row
         const sheetData = XLSX.utils.sheet_to_json(worksheet, { 
           range: headerRowIndex,
           defval: "",
           raw: false
         });
         
-        console.log("Sheet data loaded, records:", sheetData.length);
-        console.log("First 3 records:", sheetData.slice(0, 3));
-        console.log("All keys from first record:", sheetData.length > 0 ? Object.keys(sheetData[0]) : []);
-        const validData = sheetData.filter((row, index) => {
-          const values = Object.values(row);
-          const nonEmptyValues = values.filter(val => val && String(val).trim() !== "");
-          
-          if (nonEmptyValues.length === 0) return false;
-          const allNumbers = nonEmptyValues.every(val => !isNaN(val) && String(val).trim() !== "");
-          if (allNumbers && nonEmptyValues.length <= 2) return false;
-          const rowStr = String(values.join(" ")).toLowerCase();
-          if (rowStr.includes("cvr college") || 
-              rowStr.includes("teaching staff list") || 
-              rowStr.includes("computer science and engineering")) {
-            return false;
-          }
-          
-          console.log(`Row ${index} validation:`, { row, nonEmptyValues: nonEmptyValues.length, allNumbers });
-          return true;
-        });
-        
-        console.log("Valid data records after filtering:", validData.length);
-        if (validData.length > 0) {
-          console.log("First valid record:", validData[0]);
-        }
-        const formattedData = validData.map((faculty) => ({
-          ...faculty,
-          normalizedDesignation: normalizeDesignation(faculty.Designation || faculty.designation),
-        }));
-
-        if (formattedData.length > 0) {
-          const allKeys = Object.keys(formattedData[0]);
-          console.log("All keys before filtering:", allKeys);
-          
+        if (sheetData.length > 0) {
+          const allKeys = Object.keys(sheetData[0]);
           const headers = allKeys.filter(h => 
             h !== "normalizedDesignation" && 
             h.toLowerCase() !== "s.no" && 
             h.toLowerCase() !== "s.no." &&
             h.toLowerCase() !== "sno"
           );
-          
           setTableHeaders(headers);
-          console.log("Final table headers:", headers);
         }
-        
-        setYearlyData(formattedData);
-        setFaculty(formattedData);
-        filterFaculty("All", formattedData, "");
-      } else {
-        console.error(`Sheet for year ${year} not found. Available sheets:`, workbook.SheetNames);
-        setYearlyData([]);
-        setFaculty([]);
-        setTableHeaders([]);
+
+        const groupedSections = [];
+        let currentSection = null;
+        let sectionData = [];
+
+        sheetData.forEach((row) => {
+          const values = Object.values(row);
+          const nonEmptyValues = values.filter(val => val && String(val).trim() !== "");
+          
+          if (nonEmptyValues.length === 0) return;
+          
+          if (isHeadingRow(row)) {
+            if (sectionData.length > 0) {
+              groupedSections.push({
+                title: currentSection,
+                data: sectionData
+              });
+              sectionData = [];
+            }
+            const firstCol = Object.values(row)[0] || "";
+            currentSection = String(firstCol).trim();
+          } else {
+            sectionData.push({
+              ...row,
+              normalizedDesignation: normalizeDesignation(row.Designation || row.designation),
+            });
+          }
+        });
+
+        if (sectionData.length > 0) {
+          groupedSections.push({
+            title: currentSection,
+            data: sectionData
+          });
+        }
+
+        setSections(groupedSections);
       }
+      setLoading(false);
     } catch (error) {
       console.error(`Error loading data for year ${year}:`, error);
-      setYearlyData([]);
-      setFaculty([]);
+      setSections([]);
       setTableHeaders([]);
+      setLoading(false);
     }
   };
 
-  const designationOptions = [
-    "All",
-    "Professor",
-    "Associate Professor",
-    "Senior Assistant Professor",
-    "Assistant Professor",
-  ];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    handleYearChange("2025-2026");
+  }, []);
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
 
     try {
       let date;
-
       if (!isNaN(dateString) && dateString > 0) {
         date = new Date((dateString - 25569) * 86400 * 1000);
       } else {
         date = new Date(dateString);
       }
 
-      if (isNaN(date.getTime())) {
-        return dateString;
-      }
+      if (isNaN(date.getTime())) return dateString;
 
       const day = date.getDate().toString().padStart(2, "0");
       const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -227,40 +173,26 @@ const Teaching = () => {
 
       return `${day}-${month}-${year}`;
     } catch (error) {
-      console.error("Error formatting date:", error);
       return dateString;
     }
   };
 
   const renderCellValue = (header, value) => {
-  if (header === "Photo" || header === "Image") {
-    return (
-      <div className="text-center">
-        <a
-          href="#"
-          className="btn btn-link p-0"
-          style={{
-            textDecoration: "none",
-            color: "#0d6efd",
-            fontWeight: "500"
-          }}
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo(0, 0);
-          }}
-        >
-          View Profile
-        </a>
-      </div>
-    );
-  }
-
+    if (header === "Photo" || header === "Image") {
+      return (
+        <div className="text-center">
+          <span className="badge bg-primary">View</span>
+        </div>
+      );
+    }
 
     if (header === "DOJ" || header.includes("Date")) {
       return formatDate(value);
     }
 
-    return value || "N/A";
+
+    const cleanValue = String(value || "").replace(/\s*\([^)]*\)/g, "");
+    return cleanValue || "N/A";
   };
 
   return (
@@ -281,10 +213,9 @@ const Teaching = () => {
       </div>
 
       <div className="faculty-content container py-5">
-        {/* Centered dropdowns in a single row */}
+        {/* Year Selector */}
         <div className="row mb-4">
-          <div className="col-12 d-flex justify-content-center gap-3">
-            {/* Year dropdown */}
+          <div className="col-12 d-flex justify-content-center">
             <div className="dropdown">
               <button
                 className="btn btn-primary dropdown-toggle"
@@ -295,12 +226,9 @@ const Teaching = () => {
               >
                 {selectedYear || "Select Academic Year"}
               </button>
-              <ul
-                className="dropdown-menu"
-                aria-labelledby="academicYearDropdown"
-              >
-                {academicYears.map((year, index) => (
-                  <li key={index}>
+              <ul className="dropdown-menu" aria-labelledby="academicYearDropdown">
+                {academicYears.map((year) => (
+                  <li key={year}>
                     <button
                       className="dropdown-item"
                       onClick={() => handleYearChange(year)}
@@ -311,155 +239,102 @@ const Teaching = () => {
                 ))}
               </ul>
             </div>
-
-            {/* Designation dropdown
-            <div className="dropdown">
-              <button
-                className="btn btn-primary dropdown-toggle"
-                type="button"
-                id="facultyDesignationDropdown"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                {activeDesignation}
-              </button>
-              <ul
-                className="dropdown-menu"
-                aria-labelledby="facultyDesignationDropdown"
-              >
-                {designationOptions.map((designation, index) => (
-                  <li key={index}>
-                    <button
-                      className="dropdown-item"
-                      onClick={() => filterFaculty(designation)}
-                    >
-                      {designation}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div> */}
           </div>
         </div>
 
-        {/* Search bar */}
-        {/* <div className="row mb-4">
-          <div className="col-md-6 mx-auto">
-            <div className="input-group">
-              <span className="input-group-text">
-                <i className="bi bi-search"></i>
-              </span>
-              <input
-                type="text"
-                className="form-control form-control-lg"
-                placeholder="Search faculty by name..."
-                value={searchTerm}
-                onChange={handleSearchChange}
-                aria-label="Search faculty"
-              />
-              {searchTerm && (
-                <button
-                  className="btn btn-outline-secondary"
-                  type="button"
-                  onClick={() => {
-                    setSearchTerm("");
-                    filterFaculty(activeDesignation, faculty, "");
-                  }}
-                >
-                  Clear
-                </button>
-              )}
-            </div>
-            {searchTerm && (
-              <div className="text-center mt-2">
-                <small className="text-muted">
-                  Found {filteredFaculty.length} faculty members
-                </small>
+        {loading && (
+          <div className="row">
+            <div className="col-12 text-center py-5">
+              <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
               </div>
-            )}
+            </div>
           </div>
-        </div> */}
+        )}
 
-        {/* Faculty Table - Displays all columns dynamically */}
-        {filteredFaculty.length > 0 && (
-          <div className="row mt-4">
-            <div className="col-12">
-              <div className="card shadow-sm">
-                <div className="card-header bg-primary text-white">
-                  <h4 className="text-center mb-0">
-                    Faculty List for Academic Year {selectedYear}
-                  </h4>
-                </div>
-                <div className="card-body p-0">
-                  <div className="table-responsive">
-                    <table className="table table-hover mb-0">
-                      <thead className="table-dark">
-                        <tr>
-                          <th className="text-center" style={{ minWidth: "50px" }}>S.NO</th>
-                          {tableHeaders.map((header, index) => (
-                            <th 
-                              key={index} 
-                              className="text-center"
-                              style={{ 
-                                minWidth: header === "Photo" || header === "Image" ? "80px" : "150px",
-                                whiteSpace: "nowrap"
-                              }}
-                            >
-                              {header}
-                            </th>
-                          ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {filteredFaculty.map((member, rowIndex) => (
-                          <tr
-                            key={rowIndex}
-                            className={rowIndex % 2 === 0 ? "table-light" : ""}
-                          >
-                            <td className="text-center align-middle" style={{ minWidth: "50px" }}>
-                              {rowIndex + 1}
-                            </td>
-                            {tableHeaders.map((header, colIndex) => (
-                              <td
-                                key={colIndex}
-                                className="text-center align-middle"
-                                style={{ minWidth: "150px" }}
+        {!loading && sections.length > 0 && (
+          <div>
+            {sections.map((section, sectionIndex) => (
+              <div key={sectionIndex} className="mb-5">
+                {/* Section Heading - Only display if it has a title */}
+                {/* {section.title && (
+                  <div className="mb-3">
+                    <h5 className="text-primary mb-0" style={{ fontWeight: "600" }}>
+                      {section.title}
+                    </h5>
+                  </div>
+                )} */}
+
+                {/* Section Table */}
+                <div className="card shadow-sm mb-4">
+                  <div className="card-header bg-primary text-white">
+                    <h5 className="text-center mb-0">
+                      Faculty List - {section.title || "General"}
+                    </h5>
+                  </div>
+                  <div className="card-body p-0">
+                    <div className="table-responsive">
+                      <table className="table table-hover mb-0">
+                        <thead className="table-dark">
+                          <tr>
+                            <th className="text-center" style={{ minWidth: "50px" }}>S.NO</th>
+                            {tableHeaders.map((header, idx) => (
+                              <th 
+                                key={idx}
+                                className="text-center"
+                                style={{ 
+                                  minWidth: "120px",
+                                  whiteSpace: "nowrap"
+                                }}
                               >
-                                {renderCellValue(header, member[header])}
-                              </td>
+                                {header}
+                              </th>
                             ))}
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody>
+                          {section.data.map((member, rowIndex) => (
+                            <tr
+                              key={rowIndex}
+                              className={rowIndex % 2 === 0 ? "table-light" : ""}
+                            >
+                              <td className="text-center align-middle" style={{ minWidth: "50px" }}>
+                                {rowIndex + 1}
+                              </td>
+                              {tableHeaders.map((header, colIndex) => (
+                                <td
+                                  key={colIndex}
+                                  className="text-center align-middle"
+                                  style={{ minWidth: "120px" }}
+                                >
+                                  {renderCellValue(header, member[header])}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div className="card-footer bg-light">
+                    <p className="text-muted text-center mb-0">
+                      <small>Total Records: {section.data.length}</small>
+                    </p>
                   </div>
                 </div>
-                <div className="card-footer bg-light">
-                  <p className="text-muted text-center mb-0">
-                    <small>Total Records: {filteredFaculty.length}</small>
-                  </p>
-                </div>
               </div>
+            ))}
+          </div>
+        )}
+
+        {!loading && sections.length === 0 && (
+          <div className="row">
+            <div className="col-12 text-center">
+              <p className="text-muted">No faculty members found for the selected year.</p>
             </div>
-          </div>
-        )}
-
-        {/* No results message */}
-        {filteredFaculty.length === 0 && yearlyData.length === 0 && (
-          <div className="col-12 text-center">
-            <p className="text-muted">No faculty members found for the selected year.</p>
-          </div>
-        )}
-
-        {/* No filter results message */}
-        {filteredFaculty.length === 0 && yearlyData.length > 0 && (
-          <div className="col-12 text-center">
-            <p className="text-muted">No faculty members match your search or filter criteria.</p>
           </div>
         )}
       </div>
-
-      <BackToTopButton />
     </div>
   );
 };
