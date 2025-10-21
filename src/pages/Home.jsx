@@ -24,14 +24,23 @@ const Home = () => {
   });
 
   const normalizeDesignation = (designation) => {
+    if (!designation) return "";
     return designation.toLowerCase().trim().replace(/\s+/g, ".");
+  };
+
+  const normalizeDesignationForCounting = (designation) => {
+    if (!designation) return "";
+    return designation
+      .replace(/[^a-zA-Z. ]/g, "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase();
   };
 
   useEffect(() => {
     const fetchAndProcessExcelData = async () => {
       try {
-        // Fetch faculty data
-        const response = await fetch("/Data/faculty.xlsx");
+        const response = await fetch("/Data/Faculty-List-3 years.xlsx");
         if (!response.ok) {
           throw new Error(
             `Failed to load faculty Excel file: HTTP ${response.status}`
@@ -45,46 +54,61 @@ const Home = () => {
           throw new Error("No sheets found in faculty Excel file.");
         }
 
-        const sheetName = workbook.SheetNames[0];
+        let sheetName = workbook.SheetNames.find(name => 
+          name.includes("2025-2026") || name === "2025-2026"
+        );
+
+        if (!sheetName) {
+          sheetName = workbook.SheetNames[0];
+        }
+
         const sheet = workbook.Sheets[sheetName];
 
-        const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+        const rawData = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: "" });
+        let headerRowIndex = -1;
+        for (let i = 0; i < Math.min(15, rawData.length); i++) {
+          const row = rawData[i];
+          const rowStr = row.map(cell => String(cell).toLowerCase()).join(" ");
+          if (rowStr.includes("s.no") || rowStr.includes("name of the") || rowStr.includes("designation")) {
+            headerRowIndex = i;
+            break;
+          }
+        }
+
+        if (headerRowIndex === -1) {
+          console.error("Could not find header row");
+          return;
+        }
+
+        const jsonData = XLSX.utils.sheet_to_json(sheet, { 
+          range: headerRowIndex,
+          defval: "",
+          raw: false
+        });
+
         if (!jsonData.length) throw new Error("Faculty Excel sheet is empty.");
 
-        const formattedData = jsonData.slice(1).map((row) => ({
-          empId: row[1] || "N/A",
-          name: row[2]?.trim() || "Unknown",
-          designation: row[3]?.trim() || "Unknown",
-          email: row[4] || "N/A",
-          doj:
-            row[5] instanceof Date
-              ? row[5].toLocaleDateString("en-GB")
-              : row[5] || "N/A",
-        }));
-
-        const normalizeDesignationForCounting = (designation) => {
-          return designation
-            .replace(/[^a-zA-Z. ]/g, "")
-            .replace(/\s+/g, " ")
-            .trim()
-            .toLowerCase();
-        };
-
-        const countData = formattedData.reduce(
+        const countData = jsonData.reduce(
           (acc, faculty) => {
-            let designation = normalizeDesignationForCounting(
-              faculty.designation
+            const designationKey = Object.keys(faculty).find(key => 
+              key.toLowerCase().includes("designation")
             );
+            
+            if (!designationKey) return acc;
 
-            if (designation.includes("emeritus professor")) {
+            let designation = normalizeDesignationForCounting(faculty[designationKey]);
+
+            if (!designation || designation.length < 3) return acc;
+
+            if (designation.includes("emeritus professor") || designation.includes("emeritus prof")) {
               acc.EmeritusprofCount += 1;
-            } else if (designation.includes("professor")) {
+            } else if (designation.includes("professor") && !designation.includes("asst") && !designation.includes("assoc")) {
               acc.ProfCount += 1;
-            } else if (designation.includes("assoc.prof")) {
+            } else if (designation.includes("assoc") || designation.includes("associate")) {
               acc.AssociateProfCount += 1;
-            } else if (designation.includes("sr.asst.prof.")) {
+            } else if (designation.includes("sr") && (designation.includes("asst") || designation.includes("assistant"))) {
               acc.SrAsstProfCount += 1;
-            } else if (designation.includes("asst.prof.")) {
+            } else if (designation.includes("asst") || designation.includes("assistant")) {
               acc.AssistantProfCount += 1;
             }
 
@@ -100,59 +124,47 @@ const Home = () => {
           }
         );
 
-        // Fetch and process non-faculty data for technical staff count
         try {
           const nonFacultyResponse = await fetch("/Data/non-faculty.xlsx");
-          if (!nonFacultyResponse.ok) {
-            throw new Error(
-              `Failed to load non-faculty Excel file: HTTP ${nonFacultyResponse.status}`
-            );
+          if (nonFacultyResponse.ok) {
+            const nonFacultyData = await nonFacultyResponse.arrayBuffer();
+            const nonFacultyWorkbook = XLSX.read(nonFacultyData, {
+              type: "array",
+              cellDates: true,
+            });
+
+            if (nonFacultyWorkbook.SheetNames.length) {
+              const nonFacultySheetName = nonFacultyWorkbook.SheetNames[0];
+              const nonFacultySheet = nonFacultyWorkbook.Sheets[nonFacultySheetName];
+              const nonFacultyJsonData = XLSX.utils.sheet_to_json(nonFacultySheet);
+
+              const technicalStaffCount = nonFacultyJsonData.reduce(
+                (count, staff) => {
+                  const designation = (staff.Designation || "")
+                    .toString()
+                    .toLowerCase();
+                  if (!designation.includes("dtp operator")) {
+                    return count + 1;
+                  }
+                  return count;
+                },
+                0
+              );
+
+              countData.TechnicalStaff = technicalStaffCount;
+            }
           }
-
-          const nonFacultyData = await nonFacultyResponse.arrayBuffer();
-          const nonFacultyWorkbook = XLSX.read(nonFacultyData, {
-            type: "array",
-            cellDates: true,
-          });
-
-          if (!nonFacultyWorkbook.SheetNames.length) {
-            throw new Error("No sheets found in non-faculty Excel file.");
-          }
-
-          const nonFacultySheetName = nonFacultyWorkbook.SheetNames[0];
-          const nonFacultySheet =
-            nonFacultyWorkbook.Sheets[nonFacultySheetName];
-
-          const nonFacultyJsonData = XLSX.utils.sheet_to_json(nonFacultySheet);
-
-          // Count technical staff excluding DTP operators
-          const technicalStaffCount = nonFacultyJsonData.reduce(
-            (count, staff) => {
-              const designation = (staff.Designation || "")
-                .toString()
-                .toLowerCase();
-              if (!designation.includes("dtp operator")) {
-                return count + 1;
-              }
-              return count;
-            },
-            0
-          );
-
-          // Update the count with technical staff data
-          countData.TechnicalStaff = technicalStaffCount;
         } catch (error) {
           console.error(
             "Error processing non-faculty Excel data:",
             error.message
           );
-          // Continue with other counts even if technical staff count fails
         }
 
         setCounts(countData);
+        console.log("Faculty counts:", countData);
       } catch (error) {
         console.error("Error processing Excel data:", error.message);
-        return null;
       }
     };
     fetchAndProcessExcelData();
@@ -164,17 +176,70 @@ const Home = () => {
 
   const loadExcelData = async () => {
     try {
-      const response = await fetch("/Data/faculty.xlsx");
+      const response = await fetch("/Data/Faculty-List-3 years.xlsx");
       const arrayBuffer = await response.arrayBuffer();
       const workbook = XLSX.read(arrayBuffer, { type: "array" });
-      const sheetName = workbook.SheetNames[0];
-      const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
 
-      const formattedData = jsonData.map((faculty) => ({
-        ...faculty,
-        normalizedDesignation: normalizeDesignation(faculty.Designation),
-        image: faculty.Name?.split(" ").join("").toLowerCase() || "default",
-      }));
+      let sheetName = workbook.SheetNames.find(name => 
+        name.includes("2025-2026") || name === "2025-2026"
+      );
+      
+      if (!sheetName) {
+        sheetName = workbook.SheetNames[0];
+      }
+
+      const sheet = workbook.Sheets[sheetName];
+
+      const rawData = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: "" });
+      let headerRowIndex = -1;
+      for (let i = 0; i < Math.min(15, rawData.length); i++) {
+        const row = rawData[i];
+        const rowStr = row.map(cell => String(cell).toLowerCase()).join(" ");
+        if (rowStr.includes("s.no") || rowStr.includes("name of the") || rowStr.includes("designation")) {
+          headerRowIndex = i;
+          break;
+        }
+      }
+
+      const jsonData = XLSX.utils.sheet_to_json(sheet, {
+        range: headerRowIndex,
+        defval: "",
+        raw: false
+      });
+
+      const formattedData = jsonData
+        .filter(faculty => {
+          const values = Object.values(faculty);
+          const nonEmptyValues = values.filter(val => val && String(val).trim() !== "");
+          if (nonEmptyValues.length === 0) return false;
+          const nameKey = Object.keys(faculty).find(key => 
+            key.toLowerCase().includes("name")
+          );
+          return nameKey && faculty[nameKey] && String(faculty[nameKey]).trim().length > 0;
+        })
+        .map((faculty) => {
+          const nameKey = Object.keys(faculty).find(key => 
+            key.toLowerCase().includes("name")
+          );
+          const designationKey = Object.keys(faculty).find(key => 
+            key.toLowerCase().includes("designation")
+          );
+          const imageKey = Object.keys(faculty).find(key => 
+            key.toLowerCase().includes("image") || key.toLowerCase().includes("photo")
+          );
+          const dojKey = Object.keys(faculty).find(key => 
+            key.toLowerCase().includes("doj") || key.toLowerCase().includes("date")
+          );
+
+          return {
+            ...faculty,
+            "Name of the Staff Member ": faculty[nameKey] || "Unknown",
+            Designation: faculty[designationKey] || "Unknown",
+            Image: faculty[imageKey] || faculty[nameKey]?.split(" ").join("").toLowerCase() || "default",
+            DOJ: faculty[dojKey] || "N/A",
+            normalizedDesignation: normalizeDesignation(faculty[designationKey])
+          };
+        });
 
       setFaculty(formattedData);
       setFilteredFaculty(formattedData.slice(0, 15));
@@ -355,21 +420,7 @@ const Home = () => {
                     Dr. A Vani Vathsala (Professor and HOD)
                   </p>
                   <p className="msghodp">
-                    The Computer Science and Engineering department was started
-                    in the year 2001 with an intake of 60 B.Tech. students and
-                    current intake is 600. Our department offers B.Tech in
-                    Computer Science and Engineering (CSE), B.Tech in Computer
-                    Science and Business Systems (CSBS), and M.Tech in
-                    Artificial Intelligence (AI), equipping students with
-                    industry-relevant skills and advanced knowledge for the
-                    evolving tech landscape. The department is serving as
-                    research center under JNTUH and offering Ph.D. programme in
-                    Image Processing. Department is constantly striving for
-                    capacity building and quality improvement in
-                    teaching-learning, research, and contributions through
-                    industry collaborations. Department organizes the FDPs,
-                    technical workshops and conferences at National and
-                    International level periodically.
+                    The Computer Science and Engineering department was started in the year 2001 with an intake of 60 B.Tech. students and current intake is 660. Our department offers B.Tech in Computer Science and Engineering (CSE), B.Tech in Computer Science and Business Systems (CSBS), and M.Tech in Artificial Intelligence (AI), equipping students with industry-relevant skills and advanced knowledge for the evolving tech landscape. The department is serving as research center under JNTUH and offering Ph.D. programme in Image Processing and Machine Learning . Department is constantly striving for capacity building and quality improvement in teaching-learning, research, and contributions through industry collaborations. Department organizes the FDPs, technical workshops and conferences at National and International level periodically.
                   </p>
                 </div>
               </div>
@@ -468,7 +519,7 @@ const Home = () => {
           </div>
         </section>
 
-        <section className="facStrength faculty-content py-5">
+        {/* <section className="facStrength faculty-content py-5">
           <div className="container mt-5">
             <div className="row mb-4">
               <div className="col-sm-12">
@@ -579,11 +630,10 @@ const Home = () => {
               </button>
             </div>
           </div>
-        </section>
+        </section> */}
       </main>
       <BackToTopButton />
 
-      {/* Add this style tag to include mobile-specific CSS */}
       <style jsx>{`
         @media (max-width: 768px) {
           .carousel-caption {
