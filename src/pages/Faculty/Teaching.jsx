@@ -14,38 +14,52 @@ const Teaching = () => {
     return designation?.toLowerCase().trim().replace(/\s+/g, ".") || "";
   };
 
-  const isHeadingRow = (row) => {
-    const values = Object.values(row);
-    const nonEmptyValues = values.filter(val => val && String(val).trim() !== "");
-    
-    if (nonEmptyValues.length === 0) return false;
-    
-    const allNumbers = nonEmptyValues.every(val => !isNaN(val) && String(val).trim() !== "");
-    if (allNumbers && nonEmptyValues.length <= 2) return false;
-    
-    const rowStr = String(values.join(" ")).toLowerCase();
-    if (rowStr.includes("cvr college") || rowStr.includes("teaching staff list")) return false;
-    
-    const firstCol = String(values[0] || "").toLowerCase();
-    
-    // Check if it's a numerical row (S.NO with single digit)
-    const isNumericRow = !isNaN(firstCol) && firstCol.trim() !== "";
-    if (isNumericRow) return false;
-    
-    // Check if it looks like a faculty name (has "Dr" or "Mr" or "Ms")
-    if (firstCol.includes("dr ") || firstCol.includes("mr ") || firstCol.includes("ms ")) return false;
-    
-    // If only one non-empty value and it's not a number, it's likely a heading
-    const isHeading = 
-      (nonEmptyValues.length === 1 && !firstCol.match(/^[\d\s]*$/) && firstCol.length > 5) ||
-      firstCol.includes("computer science") ||
-      firstCol.includes("engineering") ||
-      firstCol.includes("artificial intelligence") ||
-      firstCol.includes("tech") ||
-      firstCol.includes("m.tech");
-    
-    return isHeading;
-  };
+ const isHeadingRow = (row) => {
+  const values = Object.values(row);
+  const nonEmptyValues = values.filter(val => val && String(val).trim() !== "");
+
+  if (nonEmptyValues.length === 0) return false;
+
+  if (nonEmptyValues.length === 1) {
+    const first = String(nonEmptyValues[0]).trim().toLowerCase();
+    if (
+      first.length > 2 && 
+      !first.match(/^[0-9]+$/) &&
+      !first.includes("dr") &&
+      !first.includes("mr") &&
+      !first.includes("ms") &&
+      !first.includes("@")
+    ) {
+      return true;
+    }
+  }
+
+  const allNumbers = nonEmptyValues.every(val => !isNaN(val) && String(val).trim() !== "");
+  if (allNumbers && nonEmptyValues.length <= 2) return false;
+
+  const rowStr = String(values.join(" ")).toLowerCase();
+  if (rowStr.includes("cvr college") || rowStr.includes("teaching staff list")) return false;
+
+  const firstCol = String(values[0] || "").toLowerCase();
+
+  const isNumericRow = !isNaN(firstCol) && firstCol.trim() !== "";
+  if (isNumericRow) return false;
+
+  if (firstCol.includes("dr ") || firstCol.includes("mr ") || firstCol.includes("ms ")) return false;
+
+  if (
+    (nonEmptyValues.length === 1 && !firstCol.match(/^[\d\s]*$/) && firstCol.length > 5) ||
+    firstCol.includes("computer science") ||
+    firstCol.includes("engineering") ||
+    firstCol.includes("artificial intelligence") ||
+    firstCol.includes("tech")
+  ) {
+    return true;
+  }
+
+  return false;
+};
+
 
   const handleYearChange = async (year) => {
     setSelectedYear(year);
